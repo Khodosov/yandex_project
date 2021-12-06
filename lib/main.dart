@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/presentation/routes/router.gr.dart';
 import 'application/preferences/preferences_bloc.dart';
-import 'package:yandex_project/presentation/screens/splash_screen.dart';
 
 void main() {
   runApp(App());
@@ -31,7 +30,7 @@ class App extends StatelessWidget {
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           builder: (context, child) {
-            return SplashScreen();
+            return child!;
           },
         );
       }),

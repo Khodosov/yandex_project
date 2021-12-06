@@ -9,12 +9,14 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PreferencesBloc, PreferencesState>(
       builder: (context, state){
-        return Center(
-          child: IconButton(
-            onPressed: (){
-              BlocProvider.of<PreferencesBloc>(context).add(const PreferencesEvent.changeTheme());
-            },
-            icon: Icon(state.darkMode ? Icons.dark_mode : Icons.light_mode),
+        return Scaffold(
+          body: Center(
+            child: IconButton(
+              onPressed: (){
+                BlocProvider.of<PreferencesBloc>(context).add(const PreferencesEvent.changeTheme());
+              },
+              icon: Icon(state.darkMode ? Icons.dark_mode : Icons.light_mode),
+            ),
           ),
         );
       },
