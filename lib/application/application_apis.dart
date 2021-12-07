@@ -25,6 +25,7 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
+      print(data['drinks']);
       return data['drinks'];
 
     } catch (err) {

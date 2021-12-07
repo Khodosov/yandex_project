@@ -13,6 +13,10 @@ class SettingsScreen extends StatelessWidget {
       },
       builder: (context, state){
         return Scaffold(
+          appBar: AppBar(
+            title: const Text('Settings'),
+            elevation: 0,
+          ),
           body: Center(
             child: IconButton(
               onPressed: (){
