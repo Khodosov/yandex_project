@@ -21,6 +21,7 @@ class SearchBar extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             decoration: const InputDecoration(
+              icon: Icon(Icons.search),
               focusColor: Colors.white,
               fillColor: Colors.white,
               hoverColor: Colors.white,

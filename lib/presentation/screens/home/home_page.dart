@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yandex_project/presentation/widgets/results.dart';
-import 'package:yandex_project/presentation/widgets/search_bar.dart';
+import 'package:yandex_project/presentation/screens/home/widgets/bottom_bar.dart';
+import 'package:yandex_project/presentation/screens/home/widgets/results.dart';
+import 'package:yandex_project/presentation/screens/home/widgets/search_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
@@ -27,28 +29,7 @@ class HomePage extends StatelessWidget {
           Results(),
         ],
       ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.favorite),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.favorite),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.favorite),
-              ),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: const CustomBottomBar(),
     );
   }
 }
