@@ -20,20 +20,23 @@ class App extends StatelessWidget {
           create: (_) => PreferencesBloc(),
         ),
       ],
-      child: BlocBuilder<PreferencesBloc, PreferencesState>(buildWhen: (previous, current) {
-        return previous.darkMode != current.darkMode;
-      }, builder: (context, state) {
-        return MaterialApp.router(
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          themeMode: state.darkMode ? ThemeMode.dark : ThemeMode.light,
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          builder: (context, child) {
-            return child!;
-          },
-        );
-      }),
+      child: BlocBuilder<PreferencesBloc, PreferencesState>(
+        buildWhen: (previous, current) {
+          return previous.darkMode != current.darkMode;
+        },
+        builder: (context, state) {
+          return MaterialApp.router(
+            routerDelegate: _appRouter.delegate(),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+            themeMode: state.darkMode ? ThemeMode.dark : ThemeMode.light,
+            theme: ThemeData(),
+            darkTheme: ThemeData.dark(),
+            builder: (context, child) {
+              return child!;
+            },
+          );
+        },
+      ),
     );
   }
 }

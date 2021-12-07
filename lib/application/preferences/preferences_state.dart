@@ -1,16 +1,15 @@
 part of 'preferences_bloc.dart';
 
-
 class PreferencesState with EquatableMixin {
   final bool darkMode;
-  
+
   const PreferencesState({
     required this.darkMode,
   });
 
   factory PreferencesState.initial() => const PreferencesState(
-    darkMode: false,
-  );
+        darkMode: false,
+      );
 
   PreferencesState copyWith({
     bool? darkMode,
@@ -22,6 +21,6 @@ class PreferencesState with EquatableMixin {
 
   @override
   List<Object?> get props => [
-    darkMode,
-  ];
+        darkMode,
+      ];
 }
