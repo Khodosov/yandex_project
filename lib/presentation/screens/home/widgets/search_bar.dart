@@ -7,19 +7,18 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-        ),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.width / 7,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        margin: const EdgeInsets.all(8),
+        color: Colors.white,
+        elevation: 5,
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
           child: TextFormField(
-            controller: controller,
             decoration: const InputDecoration(
               icon: Icon(Icons.search),
               focusColor: Colors.white,
@@ -28,7 +27,7 @@ class SearchBar extends StatelessWidget {
               border: InputBorder.none
             ),
             onFieldSubmitted: (text) {
-              BlocProvider.of<SearchBloc>(context).add(SearchEvent.searchByName(name: controller.text));
+              BlocProvider.of<SearchBloc>(context).add(SearchEvent.searchByName(name: text));
             },
           ),
         ),
