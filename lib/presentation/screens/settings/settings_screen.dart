@@ -8,6 +8,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PreferencesBloc, PreferencesState>(
+      buildWhen: (previous, current){
+        return previous.darkMode != current.darkMode;
+      },
       builder: (context, state){
         return Scaffold(
           body: Center(
