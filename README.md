@@ -107,13 +107,7 @@ Firebase на текущий момент не используется, но в
 	ответственный: Александр Ходосов
 	
 	
-Приложения 
 
-YaBuhlishko
-Another round
-Шафе
-Shot 
-Tipsy 
-
+ЯБухлишко(Another round на международном рынке)
 
 ## A4 studios ®
