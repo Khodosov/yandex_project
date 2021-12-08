@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yandex_project/application/search/search_bloc.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({Key? key}) : super(key: key);
@@ -14,23 +16,27 @@ class CustomBottomBar extends StatelessWidget {
           elevation: 5,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           margin: const EdgeInsets.all(8),
-          color: Colors.white,
+          // color: Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                color: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+
+                },
                 icon: const Icon(Icons.favorite),
               ),
               IconButton(
-                color: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+
+                },
                 icon: const Icon(Icons.menu),
               ),
               IconButton(
-                color: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
+                  // Navigator.pushNamed(context, '/random');
+                },
                 icon: const Icon(Icons.casino),
               ),
               IconButton(

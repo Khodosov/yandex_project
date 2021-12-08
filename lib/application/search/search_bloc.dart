@@ -24,6 +24,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           drinks: newDrinks,
         );
       },
+      randomCocktail: (e) async* {
+        AppApisService().randomCocktail();
+        yield state.copyWith();
+
+      },
     );
   }
 }

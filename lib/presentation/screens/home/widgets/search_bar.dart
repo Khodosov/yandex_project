@@ -14,21 +14,21 @@ class SearchBar extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         margin: const EdgeInsets.all(8),
-        color: Colors.white,
         elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
-          child: TextFormField(
-            decoration: const InputDecoration(
-              icon: Icon(Icons.search),
-              focusColor: Colors.white,
-              fillColor: Colors.white,
-              hoverColor: Colors.white,
-              border: InputBorder.none
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: TextFormField(
+              cursorHeight: 15,
+              cursorColor: Theme.of(context).iconTheme.color,
+              decoration:  InputDecoration(
+                icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color,),
+                border: InputBorder.none
+              ),
+              onFieldSubmitted: (text) {
+                BlocProvider.of<SearchBloc>(context).add(SearchEvent.searchByName(name: text));
+              },
             ),
-            onFieldSubmitted: (text) {
-              BlocProvider.of<SearchBloc>(context).add(SearchEvent.searchByName(name: text));
-            },
           ),
         ),
       ),
