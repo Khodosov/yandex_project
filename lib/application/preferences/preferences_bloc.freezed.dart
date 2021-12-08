@@ -17,8 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PreferencesEventTearOff {
   const _$PreferencesEventTearOff();
 
-  _ChangeTheme changeTheme() {
-    return const _ChangeTheme();
+  _ChangeTheme changeTheme({required ThemeMode themeMode}) {
+    return _ChangeTheme(
+      themeMode: themeMode,
+    );
   }
 }
 
@@ -27,19 +29,21 @@ const $PreferencesEvent = _$PreferencesEventTearOff();
 
 /// @nodoc
 mixin _$PreferencesEvent {
+  ThemeMode get themeMode => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() changeTheme,
+    required TResult Function(ThemeMode themeMode) changeTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? changeTheme,
+    TResult Function(ThemeMode themeMode)? changeTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? changeTheme,
+    TResult Function(ThemeMode themeMode)? changeTheme,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +63,10 @@ mixin _$PreferencesEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PreferencesEventCopyWith<PreferencesEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -66,6 +74,7 @@ abstract class $PreferencesEventCopyWith<$Res> {
   factory $PreferencesEventCopyWith(
           PreferencesEvent value, $Res Function(PreferencesEvent) then) =
       _$PreferencesEventCopyWithImpl<$Res>;
+  $Res call({ThemeMode themeMode});
 }
 
 /// @nodoc
@@ -76,13 +85,28 @@ class _$PreferencesEventCopyWithImpl<$Res>
   final PreferencesEvent _value;
   // ignore: unused_field
   final $Res Function(PreferencesEvent) _then;
+
+  @override
+  $Res call({
+    Object? themeMode = freezed,
+  }) {
+    return _then(_value.copyWith(
+      themeMode: themeMode == freezed
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$ChangeThemeCopyWith<$Res> {
+abstract class _$ChangeThemeCopyWith<$Res>
+    implements $PreferencesEventCopyWith<$Res> {
   factory _$ChangeThemeCopyWith(
           _ChangeTheme value, $Res Function(_ChangeTheme) then) =
       __$ChangeThemeCopyWithImpl<$Res>;
+  @override
+  $Res call({ThemeMode themeMode});
 }
 
 /// @nodoc
@@ -95,51 +119,74 @@ class __$ChangeThemeCopyWithImpl<$Res>
 
   @override
   _ChangeTheme get _value => super._value as _ChangeTheme;
+
+  @override
+  $Res call({
+    Object? themeMode = freezed,
+  }) {
+    return _then(_ChangeTheme(
+      themeMode: themeMode == freezed
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_ChangeTheme implements _ChangeTheme {
-  const _$_ChangeTheme();
+  const _$_ChangeTheme({required this.themeMode});
+
+  @override
+  final ThemeMode themeMode;
 
   @override
   String toString() {
-    return 'PreferencesEvent.changeTheme()';
+    return 'PreferencesEvent.changeTheme(themeMode: $themeMode)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ChangeTheme);
+        (other.runtimeType == runtimeType &&
+            other is _ChangeTheme &&
+            (identical(other.themeMode, themeMode) ||
+                other.themeMode == themeMode));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, themeMode);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChangeThemeCopyWith<_ChangeTheme> get copyWith =>
+      __$ChangeThemeCopyWithImpl<_ChangeTheme>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() changeTheme,
+    required TResult Function(ThemeMode themeMode) changeTheme,
   }) {
-    return changeTheme();
+    return changeTheme(themeMode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? changeTheme,
+    TResult Function(ThemeMode themeMode)? changeTheme,
   }) {
-    return changeTheme?.call();
+    return changeTheme?.call(themeMode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? changeTheme,
+    TResult Function(ThemeMode themeMode)? changeTheme,
     required TResult orElse(),
   }) {
     if (changeTheme != null) {
-      return changeTheme();
+      return changeTheme(themeMode);
     }
     return orElse();
   }
@@ -174,5 +221,12 @@ class _$_ChangeTheme implements _ChangeTheme {
 }
 
 abstract class _ChangeTheme implements PreferencesEvent {
-  const factory _ChangeTheme() = _$_ChangeTheme;
+  const factory _ChangeTheme({required ThemeMode themeMode}) = _$_ChangeTheme;
+
+  @override
+  ThemeMode get themeMode;
+  @override
+  @JsonKey(ignore: true)
+  _$ChangeThemeCopyWith<_ChangeTheme> get copyWith =>
+      throw _privateConstructorUsedError;
 }

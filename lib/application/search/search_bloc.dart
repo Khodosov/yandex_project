@@ -15,19 +15,22 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   @override
   Stream<SearchState> mapEventToState(
-      SearchEvent event,
-      ) async* {
+    SearchEvent event,
+  ) async* {
     yield* event.map(
       searchByName: (e) async* {
+        yield state.copyWith(
+          isRefreshing: true,
+        );
         final newDrinks = await AppApisService().cocktailByName(e.name);
         yield state.copyWith(
           drinks: newDrinks,
+          isRefreshing: false,
         );
       },
       randomCocktail: (e) async* {
         AppApisService().randomCocktail();
         yield state.copyWith();
-
       },
     );
   }

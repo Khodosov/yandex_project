@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
 
 part 'preferences_event.dart';
 
@@ -18,7 +19,7 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
     yield* event.map(
       changeTheme: (e) async* {
         yield state.copyWith(
-          darkMode: !state.darkMode,
+          themeMode: e.themeMode,
         );
       },
     );

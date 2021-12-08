@@ -25,15 +25,16 @@ class App extends StatelessWidget {
       ],
       child: BlocBuilder<PreferencesBloc, PreferencesState>(
         buildWhen: (previous, current) {
-          return previous.darkMode != current.darkMode;
+          return previous.themeMode != current.themeMode;
         },
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            themeMode: state.darkMode ? ThemeMode.dark : ThemeMode.light,
+            themeMode: state.themeMode,
             theme: ThemeData(
               primarySwatch: Colors.amber,
               scaffoldBackgroundColor: Colors.amber,
+              progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.black),
             ),
             darkTheme: ThemeData.dark(),
             routes: <String, WidgetBuilder>{
