@@ -2,7 +2,7 @@ part of 'search_bloc.dart';
 
 
 class SearchState with EquatableMixin {
-  final List<String> drinks;
+  final List<Drink> drinks;
 
   const SearchState({
     required this.drinks,
@@ -13,7 +13,7 @@ class SearchState with EquatableMixin {
   );
 
   SearchState copyWith({
-    List<String>? drinks,
+    List<Drink>? drinks,
   }) {
     return SearchState(
       drinks: drinks ?? this.drinks,

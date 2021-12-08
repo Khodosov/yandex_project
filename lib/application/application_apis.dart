@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -14,7 +11,7 @@ class AppApisService {
 
   ///drinks
 
-  Future<dynamic> cocktailByName(String cocktailName) async {
+  Future<List<Drink>> cocktailByName(String cocktailName) async {
     try {
       var url = Uri.parse(baseUrl + 'search.php?s=' + cocktailName);
 
@@ -25,10 +22,9 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      final list = List.of(data['drinks']).map((e) => Drink.fromJson(e));
-      return list;
+      return List.of(data['drinks']).map((e) => Drink.fromJson(e)).toList();
     } catch (err) {
-      return null;
+      return <Drink>[];
     }
   }
 

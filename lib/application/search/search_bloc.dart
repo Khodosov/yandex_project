@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:yandex_project/application/application_apis.dart';
+import 'package:yandex_project/domain/models/drink.dart';
 
 part 'search_event.dart';
 
@@ -18,9 +19,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       ) async* {
     yield* event.map(
       searchByName: (e) async* {
-        AppApisService().cocktailByName(e.name);
-
-        yield state.copyWith();
+        final newDrinks = await AppApisService().cocktailByName(e.name);
+        yield state.copyWith(
+          drinks: newDrinks,
+        );
       },
     );
   }
