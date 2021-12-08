@@ -1,14 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class AppApisService {
+import 'package:yandex_project/domain/models/drink.dart';
 
+class AppApisService {
   var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
   //Список всех коктейлей по первой букве - не писал
   //используйте cocktailByName - отрабатывает лучше
-
 
   ///drinks
 
@@ -18,16 +20,13 @@ class AppApisService {
 
       var response = await http.post(
         url,
-        headers: {
-        },
-        body: {
-        },
+        headers: {},
+        body: {},
       );
 
       var data = json.decode(response.body);
-      print(data['drinks']);
-      return data['drinks'];
-
+      final list = List.of(data['drinks']).map((e) => Drink.fromJson(e));
+      return list;
     } catch (err) {
       return null;
     }
@@ -39,15 +38,12 @@ class AppApisService {
 
       var response = await http.post(
         url,
-        headers: {
-        },
-        body: {
-        },
+        headers: {},
+        body: {},
       );
 
       var data = json.decode(response.body);
       return data['drinks'];
-
     } catch (err) {
       return null;
     }
@@ -59,15 +55,14 @@ class AppApisService {
 
       var response = await http.post(
         url,
-        headers: {
-        },
-        body: {
-        },
+        headers: {},
+        body: {},
       );
 
       var data = json.decode(response.body);
-      return data['drinks'];
-
+      final drink = Drink.fromJson(data);
+      // return data['drinks'];
+      return drink;
     } catch (err) {
       return null;
     }
@@ -80,15 +75,12 @@ class AppApisService {
 
       var response = await http.post(
         url,
-        headers: {
-        },
-        body: {
-        },
+        headers: {},
+        body: {},
       );
 
       var data = json.decode(response.body);
       return data['drinks'];
-
     } catch (err) {
       return null;
     }
@@ -102,15 +94,12 @@ class AppApisService {
 
       var response = await http.post(
         url,
-        headers: {
-        },
-        body: {
-        },
+        headers: {},
+        body: {},
       );
 
       var data = json.decode(response.body);
       return data['ingredients'];
-
     } catch (err) {
       return null;
     }
@@ -118,23 +107,19 @@ class AppApisService {
 
   Future<dynamic> ingredientById(int ingredientId) async {
     try {
-      var url = Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
+      var url =
+          Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
 
       var response = await http.post(
         url,
-        headers: {
-        },
-        body: {
-        },
+        headers: {},
+        body: {},
       );
 
       var data = json.decode(response.body);
       return data['ingredients'];
-
     } catch (err) {
       return null;
     }
   }
-
-  
 }
