@@ -141,9 +141,7 @@ class SettingsScreen extends StatelessWidget {
           PopupMenuButton<bool>(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             initialValue: false,
-            onSelected: (value) {
-
-            },
+            onSelected: (value) {},
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) {
               return [

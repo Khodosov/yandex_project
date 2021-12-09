@@ -16,88 +16,100 @@ class _DrinkListItemState extends State<DrinkListItem> {
 
   @override
   Widget build(BuildContext context) {
-    final leading = SizedBox(
-      width: 55,
-      height: 55,
-      child: CachedNetworkImage(
-        imageUrl: widget.drink.strImageSource ?? '',
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            CircularProgressIndicator(value: downloadProgress.progress),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+    final leading = CachedNetworkImage(
+      fit: BoxFit.cover,
+      imageUrl: widget.drink.strDrinkThumb ?? 'http://via.placeholder.com/350x150',
+      progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+        child: CircularProgressIndicator(
+          value: downloadProgress.progress,
+          color: Theme.of(context).iconTheme.color,
+        ),
       ),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
 
     final ingredients = StringBuffer();
     ingredients.writeAll(widget.drink.getIngredients(), ', ');
-
-    return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8),
+    return SizedBox(
+      height: 150,
+      // width: MediaQuery.of(context).size.width,
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        margin: const EdgeInsets.all(8),
-        child: Row(
-          children: [
-            Flexible(
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    rolled = !rolled;
-                  });
-                },
-                borderRadius: rolled ? const BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ) : BorderRadius.circular(20),
-                child: ListTile(
-                  leading: leading,
-                  title: Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      widget.drink.strDrink,
-                      style: const TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: AnimatedCrossFade(
-                      crossFadeState: rolled ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                      firstChild: Text(widget.drink.strAlcoholic ?? ''),
-                      secondChild: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(widget.drink.strAlcoholic ?? ''),
-                          widget.drink.strDrinkAlternate != null ? Text(widget.drink.strDrinkAlternate!) : Container(),
-                          widget.drink.strCategory != null ? Text(widget.drink.strCategory!) : Container(),
-                          widget.drink.strGlass != null ? Text(widget.drink.strGlass!) : Container(),
-                          Text(ingredients.toString()),
-                        ],
-                      ),
-                      duration: const Duration(milliseconds: 200),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              rolled = !rolled;
+            });
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              leading,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SingleChildScrollView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Text(
+                            widget.drink.strDrink,
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: AnimatedCrossFade(
+                            crossFadeState: rolled ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                            firstChild: Text(widget.drink.strAlcoholic ?? ''),
+                            secondChild: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(widget.drink.strAlcoholic ?? ''),
+                                widget.drink.strDrinkAlternate != null
+                                    ? Text(widget.drink.strDrinkAlternate!)
+                                    : Container(),
+                                widget.drink.strCategory != null ? Text(widget.drink.strCategory!) : Container(),
+                                widget.drink.strGlass != null ? Text(widget.drink.strGlass!) : Container(),
+                                Text(ingredients.toString()),
+                              ],
+                            ),
+                            duration: const Duration(milliseconds: 300),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    // isn't const due to further state changes
-                    icon: Icon(Icons.favorite_border),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.read_more),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      // isn't const due to further state changes
+                      icon: Icon(Icons.favorite_border),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.read_more),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -9,6 +9,8 @@ class ResultsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
+
     return BlocBuilder<SearchBloc, SearchState>(
       buildWhen: (previous, current) {
         return previous != current;
@@ -16,6 +18,7 @@ class ResultsList extends StatelessWidget {
       builder: (context, state) {
         if (!state.isRefreshing) {
           return ListView.builder(
+            padding: padding.add(const EdgeInsets.only(bottom: 150)),
             itemCount: state.drinks.length,
             itemBuilder: (context, index) {
               return DrinkListItem(drink: state.drinks[index]);
