@@ -18,15 +18,6 @@ class SettingsScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Settings'),
             elevation: 0,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                BlocProvider.of<NavigationBloc>(context).add(
-                  NavigationEvent.changeTab(tab: context.read<NavigationBloc>().state.previousTab, context: context),
-                );
-                Navigator.of(context).pop();
-              },
-            ),
           ),
           body: SafeArea(
             child: Padding(
@@ -36,13 +27,17 @@ class SettingsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppConstants.smallRadius),
                   color: Colors.transparent.withAlpha(30),
                 ),
-                child: ListView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(
                       height: 20,
                     ),
                     brightness(context),
                     appMode(context),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),

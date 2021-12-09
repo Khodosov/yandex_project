@@ -13,22 +13,20 @@ part 'navigation_state.dart';
 class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   NavigationBloc() : super(NavigationState.initial());
 
-
   @override
   Stream<NavigationState> mapEventToState(
     NavigationEvent event,
   ) async* {
     yield* event.map(
       changeTab: (e) async* {
-        if (e.tab == AppTab.settings){
+        if (e.tab == AppTab.settings) {
           Navigator.pushNamed(e.context, '/settings');
+        } else {
+          yield state.copyWith(
+            tab: e.tab,
+          );
         }
-        final tab = state.tab;
-        yield state.copyWith(
-          tab: e.tab,
-          previousTab: tab,
-        );
-      }
+      },
     );
   }
 }
