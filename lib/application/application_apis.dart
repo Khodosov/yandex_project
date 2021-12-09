@@ -1,7 +1,9 @@
 import 'package:http/http.dart' as http;
+import 'package:yandex_project/domain/models/drink.dart';
 import 'dart:convert';
 
-import 'package:yandex_project/domain/models/drink.dart';
+import 'package:yandex_project/domain/models/drink_dto.dart';
+import 'package:yandex_project/domain/models/ingredient_dto.dart';
 
 class AppApisService {
   var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
@@ -22,7 +24,14 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return List.of(data['drinks']).map((e) => Drink.fromJson(e)).toList();
+      var list = List.of(data['drinks']);
+      List <Drink> listDrink = [];
+      for(var i = 0; i < list.length; i++){
+        DrinkDTO tempDTO = DrinkDTO.fromJson(list[i]);
+        Drink tempDrink = Drink.fromDTO(tempDTO);
+        listDrink.add(tempDrink);
+      }
+      return listDrink;
     } catch (err) {
       return <Drink>[];
     }
@@ -39,7 +48,8 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['drinks'];
+      final drink = Drink.fromDTO(DrinkDTO.fromJson(data['drinks']));
+      return drink;
     } catch (err) {
       return null;
     }
@@ -56,8 +66,7 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      final drink = Drink.fromJson(data);
-      // return data['drinks'];
+      final drink = Drink.fromDTO(DrinkDTO.fromJson(data['drinks']));
       return drink;
     } catch (err) {
       return null;
@@ -76,7 +85,8 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['drinks'];
+      final drink = Drink.fromDTO(DrinkDTO.fromJson(data['drinks']));
+      return drink;
     } catch (err) {
       return null;
     }
@@ -95,7 +105,8 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['ingredients'];
+      final ingredient = IngredientDTO.fromJson(data['ingredients']);
+      return ingredient;
     } catch (err) {
       return null;
     }
@@ -113,11 +124,14 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['ingredients'];
+      final ingredient = IngredientDTO.fromJson(data['ingredients']);
+      return ingredient;
     } catch (err) {
       return null;
     }
   }
+
+
 }
 
   
