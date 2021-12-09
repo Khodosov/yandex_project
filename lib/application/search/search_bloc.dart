@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:yandex_project/application/application_apis.dart';
 import 'package:yandex_project/domain/models/drink.dart';
+import 'package:yandex_project/domain/models/drink_dto.dart';
 
 part 'search_event.dart';
 
