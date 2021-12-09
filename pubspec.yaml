@@ -19,7 +19,7 @@ dependencies:
   cached_network_image: ^3.2.0
   flutter_platform_widgets: ^1.11.1
   flutter_native_splash: ^1.3.2
-
+  provider: ^6.0.1
 
 
 dev_dependencies:
@@ -44,8 +44,12 @@ flutter:
   uses-material-design: true
 
 flutter_native_splash:
-  color: "#42a5f5"
-  #background_image: "assets/background.png"
+  color: "#ffffff"
+  color_dark: "1a1a1a"
+  image: "assets/icon/icon.png"
+  android: true
+  ios: true
+
 
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
   # the leading # character.
