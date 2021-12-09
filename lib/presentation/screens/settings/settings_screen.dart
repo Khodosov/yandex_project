@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
+import 'package:yandex_project/constants.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -16,13 +18,22 @@ class SettingsScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Settings'),
             elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                BlocProvider.of<NavigationBloc>(context).add(
+                  NavigationEvent.changeTab(tab: context.read<NavigationBloc>().state.previousTab, context: context),
+                );
+                Navigator.of(context).pop();
+              },
+            ),
           ),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppConstants.smallRadius),
                   color: Colors.transparent.withAlpha(30),
                 ),
                 child: ListView(
@@ -42,7 +53,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget brightness(BuildContext context){
+  Widget brightness(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -64,11 +75,10 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           PopupMenuButton<ThemeMode>(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
             initialValue: context.read<PreferencesBloc>().state.themeMode,
             onSelected: (value) {
-              BlocProvider.of<PreferencesBloc>(context)
-                  .add(PreferencesEvent.changeTheme(themeMode: value));
+              BlocProvider.of<PreferencesBloc>(context).add(PreferencesEvent.changeTheme(themeMode: value));
             },
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) {
@@ -117,7 +127,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget appMode(BuildContext context){
+  Widget appMode(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -139,7 +149,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           PopupMenuButton<bool>(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
             initialValue: false,
             onSelected: (value) {},
             icon: const Icon(Icons.more_vert),
@@ -169,7 +179,6 @@ class SettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-
               ];
             },
           ),

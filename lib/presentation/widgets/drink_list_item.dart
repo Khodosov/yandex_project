@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:yandex_project/constants.dart';
 import 'package:yandex_project/domain/models/drink.dart';
 
 class DrinkListItem extends StatefulWidget {
@@ -35,7 +36,7 @@ class _DrinkListItemState extends State<DrinkListItem> {
       // width: MediaQuery.of(context).size.width,
       child: Card(
         elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         clipBehavior: Clip.antiAlias,
         child: InkWell(

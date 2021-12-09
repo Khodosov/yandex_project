@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/presentation/screens/home/home_page.dart';
 import 'package:yandex_project/presentation/screens/settings/settings_screen.dart';
 import 'application/preferences/preferences_bloc.dart';
@@ -21,6 +22,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<SearchBloc>(
           create: (_) => SearchBloc(),
+        ),
+        BlocProvider<NavigationBloc>(
+          create: (_) => NavigationBloc(),
         ),
       ],
       child: BlocBuilder<PreferencesBloc, PreferencesState>(
