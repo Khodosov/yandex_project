@@ -29,6 +29,7 @@ class App extends StatelessWidget {
         },
         builder: (context, state) {
           return MaterialApp(
+            navigatorObservers: [],
             debugShowCheckedModeBanner: false,
             themeMode: state.themeMode,
             theme: ThemeData(
@@ -47,4 +48,9 @@ class App extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class Observer extends NavigatorObserver {
+
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
+import 'package:yandex_project/constants.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({Key? key}) : super(key: key);
@@ -14,16 +15,14 @@ class CustomBottomBar extends StatelessWidget {
         height: MediaQuery.of(context).size.width / 5.5,
         child: Card(
           elevation: 5,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
           margin: const EdgeInsets.all(8),
           // color: Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 icon: const Icon(Icons.favorite),
               ),
               IconButton(

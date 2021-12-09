@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
+import 'package:yandex_project/constants.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppConstants.smallRadius),
                   color: Colors.transparent.withAlpha(30),
                 ),
                 child: ListView(
@@ -64,7 +65,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           PopupMenuButton<ThemeMode>(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
             initialValue: context.read<PreferencesBloc>().state.themeMode,
             onSelected: (value) {
               BlocProvider.of<PreferencesBloc>(context)
@@ -139,7 +140,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           PopupMenuButton<bool>(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
             initialValue: false,
             onSelected: (value) {},
             icon: const Icon(Icons.more_vert),
