@@ -4,10 +4,9 @@ import 'dart:convert';
 import 'package:yandex_project/domain/models/drink.dart';
 
 class AppApisService {
-  var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-  //Список всех коктейлей по первой букве - не писал
-  //используйте cocktailByName - отрабатывает лучше
+
+  var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
   ///drinks
 
