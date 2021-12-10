@@ -50,7 +50,7 @@ class SearchBar extends StatelessWidget {
                   icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color,),
                   border: InputBorder.none
               ),
-              onFieldSubmitted: (text) {
+              onChanged: (text) {
                 BlocProvider.of<SearchBloc>(context).add(SearchEvent.searchByName(name: text));
               },
             ),
