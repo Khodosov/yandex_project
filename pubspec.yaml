@@ -34,6 +34,7 @@ dev_dependencies:
   freezed: ^0.15.0+1
   json_serializable: ^6.0.0
   flutter_lints: ^1.0.0
+  google_fonts: ^2.1.0
 
 
 
@@ -44,6 +45,7 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
+
 
 flutter_native_splash:
   color: "#ffffff"

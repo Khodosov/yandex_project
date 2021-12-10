@@ -5,26 +5,63 @@ import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/constants.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
+
+  @override
+  State<SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  bool rolled = true;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationBloc, NavigationState>(
       buildWhen: (previous, current) {
+        if (current.tab == AppTab.search){
+          setState(() {
+            rolled = false;
+          });
+        } else {
+          setState(() {
+            rolled = true;
+          });
+        }
         return previous.tab != current.tab;
       },
       builder: (context, state) {
-        return AnimatedCrossFade(
-          duration: const Duration(milliseconds: 300),
-          crossFadeState: state.tab == AppTab.search ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-          firstChild: searchLine(context),
-          secondChild: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              searchLine(context),
-              const Placeholder(),
-            ],
+        return GestureDetector(
+          onPanUpdate: (details) {
+            if (details.delta.dy > 0) {
+              BlocProvider.of<NavigationBloc>(context)
+                  .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
+              setState(() {
+                rolled = true;
+              });
+            }
+            if (details.delta.dy < 0) {
+              BlocProvider.of<NavigationBloc>(context)
+                  .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
+              setState(() {
+                rolled = false;
+              });
+            }
+          },
+          behavior: HitTestBehavior.translucent,
+          child: AnimatedCrossFade(
+            duration: const Duration(milliseconds: 300),
+            crossFadeState: !rolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            firstChild: searchLine(context),
+            secondChild: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                searchLine(context),
+                 SizedBox(
+                    width: MediaQuery.of(context).size.width - 16,
+                    child:  Placeholder()),
+              ],
+            ),
           ),
         );
       },
@@ -42,6 +79,10 @@ class SearchBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
           child: TextFormField(
+            onTap: () {
+              BlocProvider.of<NavigationBloc>(context)
+                  .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
+            },
             cursorHeight: 15,
             cursorColor: Theme.of(context).iconTheme.color,
             scrollPadding: EdgeInsets.zero,

@@ -17,7 +17,6 @@ class Drink {
   final String? imgSource;
   final String? attribute;
   final String? commons;
-  static RegExp exp =  RegExp('\S');
 
   Drink(
       {required this.name,
@@ -69,7 +68,7 @@ class Drink {
           dto.strIngredient13,
           dto.strIngredient14,
           dto.strIngredient15,
-        ].where((ing) => ing != null && ing != '' && exp.hasMatch(ing)).toList(),
+        ].where((ing) => ing != null && ing != '').toList(),
         measures: [
           dto.strMeasure1,
           dto.strMeasure2,
@@ -86,6 +85,6 @@ class Drink {
           dto.strMeasure13,
           dto.strMeasure14,
           dto.strMeasure15
-        ].where((meas) => meas != null && meas != '' && exp.hasMatch(meas)).toList());
+        ].where((meas) => meas != null && meas != '').toList());
   }
 }

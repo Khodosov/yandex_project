@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/bottom_bar.dart';
+import 'package:yandex_project/presentation/screens/home/widgets/favorites_list.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/results_list.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/search_bar.dart';
 import 'package:yandex_project/presentation/widgets/blur_widget.dart';
@@ -19,7 +21,7 @@ class HomePage extends StatelessWidget {
       return Scaffold(
         body: Stack(
           children: [
-            const ResultsList(),
+            state.tab == AppTab.favorites ? const FavoritesList() : const ResultsList(),
             Positioned(
               right: 0,
               left: 0,
@@ -28,7 +30,10 @@ class HomePage extends StatelessWidget {
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(state.tab.toString().split('.').last),
+                    child: Text(
+                      state.tab.fromEnum(),
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
                 ),
               ),

@@ -30,6 +30,12 @@ class _$SearchEventTearOff {
   _RandomSelectionCocktail randomSelectionCocktail() {
     return const _RandomSelectionCocktail();
   }
+
+  _AddToFavorites addToFavorites({required Drink drink}) {
+    return _AddToFavorites(
+      drink: drink,
+    );
+  }
 }
 
 /// @nodoc
@@ -42,6 +48,7 @@ mixin _$SearchEvent {
     required TResult Function(String name) searchByName,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,6 +56,7 @@ mixin _$SearchEvent {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +64,7 @@ mixin _$SearchEvent {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +74,7 @@ mixin _$SearchEvent {
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +82,7 @@ mixin _$SearchEvent {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +90,7 @@ mixin _$SearchEvent {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -166,6 +178,7 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(String name) searchByName,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
   }) {
     return searchByName(name);
   }
@@ -176,6 +189,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
   }) {
     return searchByName?.call(name);
   }
@@ -186,6 +200,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -201,6 +216,7 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
   }) {
     return searchByName(this);
   }
@@ -211,6 +227,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
     return searchByName?.call(this);
   }
@@ -221,6 +238,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -283,6 +301,7 @@ class _$_RandomCocktail implements _RandomCocktail {
     required TResult Function(String name) searchByName,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
   }) {
     return randomCocktail();
   }
@@ -293,6 +312,7 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
   }) {
     return randomCocktail?.call();
   }
@@ -303,6 +323,7 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
   }) {
     if (randomCocktail != null) {
@@ -318,6 +339,7 @@ class _$_RandomCocktail implements _RandomCocktail {
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
   }) {
     return randomCocktail(this);
   }
@@ -328,6 +350,7 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
     return randomCocktail?.call(this);
   }
@@ -338,6 +361,7 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
   }) {
     if (randomCocktail != null) {
@@ -396,6 +420,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     required TResult Function(String name) searchByName,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
   }) {
     return randomSelectionCocktail();
   }
@@ -406,6 +431,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
   }) {
     return randomSelectionCocktail?.call();
   }
@@ -416,6 +442,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
   }) {
     if (randomSelectionCocktail != null) {
@@ -431,6 +458,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
   }) {
     return randomSelectionCocktail(this);
   }
@@ -441,6 +469,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
     return randomSelectionCocktail?.call(this);
   }
@@ -451,6 +480,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
   }) {
     if (randomSelectionCocktail != null) {
@@ -462,4 +492,150 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
 
 abstract class _RandomSelectionCocktail implements SearchEvent {
   const factory _RandomSelectionCocktail() = _$_RandomSelectionCocktail;
+}
+
+/// @nodoc
+abstract class _$AddToFavoritesCopyWith<$Res> {
+  factory _$AddToFavoritesCopyWith(
+          _AddToFavorites value, $Res Function(_AddToFavorites) then) =
+      __$AddToFavoritesCopyWithImpl<$Res>;
+  $Res call({Drink drink});
+}
+
+/// @nodoc
+class __$AddToFavoritesCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res>
+    implements _$AddToFavoritesCopyWith<$Res> {
+  __$AddToFavoritesCopyWithImpl(
+      _AddToFavorites _value, $Res Function(_AddToFavorites) _then)
+      : super(_value, (v) => _then(v as _AddToFavorites));
+
+  @override
+  _AddToFavorites get _value => super._value as _AddToFavorites;
+
+  @override
+  $Res call({
+    Object? drink = freezed,
+  }) {
+    return _then(_AddToFavorites(
+      drink: drink == freezed
+          ? _value.drink
+          : drink // ignore: cast_nullable_to_non_nullable
+              as Drink,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AddToFavorites implements _AddToFavorites {
+  const _$_AddToFavorites({required this.drink});
+
+  @override
+  final Drink drink;
+
+  @override
+  String toString() {
+    return 'SearchEvent.addToFavorites(drink: $drink)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _AddToFavorites &&
+            (identical(other.drink, drink) || other.drink == drink));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, drink);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AddToFavoritesCopyWith<_AddToFavorites> get copyWith =>
+      __$AddToFavoritesCopyWithImpl<_AddToFavorites>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String name) searchByName,
+    required TResult Function() randomCocktail,
+    required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
+  }) {
+    return addToFavorites(drink);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String name)? searchByName,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+  }) {
+    return addToFavorites?.call(drink);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String name)? searchByName,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (addToFavorites != null) {
+      return addToFavorites(drink);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
+  }) {
+    return addToFavorites(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+  }) {
+    return addToFavorites?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (addToFavorites != null) {
+      return addToFavorites(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddToFavorites implements SearchEvent {
+  const factory _AddToFavorites({required Drink drink}) = _$_AddToFavorites;
+
+  Drink get drink;
+  @JsonKey(ignore: true)
+  _$AddToFavoritesCopyWith<_AddToFavorites> get copyWith =>
+      throw _privateConstructorUsedError;
 }

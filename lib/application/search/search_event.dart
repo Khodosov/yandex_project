@@ -7,4 +7,6 @@ class SearchEvent with _$SearchEvent {
   const factory SearchEvent.randomCocktail() = _RandomCocktail;
 
   const factory SearchEvent.randomSelectionCocktail() = _RandomSelectionCocktail;
+
+  const factory SearchEvent.addToFavorites({required Drink drink}) = _AddToFavorites;
 }
