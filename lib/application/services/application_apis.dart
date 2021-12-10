@@ -61,6 +61,19 @@ class AppApisService {
     }
   }
 
+  ///not used yet
+  //only for 2 dollars
+  Future<List<Drink>> randomSelectionCocktail() async {
+    try {
+      var data = await getIpJson('randomselection.php', {});
+      return List.of(data ? ['drinks'])
+          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
+          .toList(); //List.of(data?['drinks']).map((e) => Drink.fromJson(e)).toList();
+    } catch (err) {
+      return <Drink>[];
+    }
+  }
+
   var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
   ///drinks replaced
