@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ingredient.dart';
+part of 'ingredient_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

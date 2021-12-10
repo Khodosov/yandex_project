@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'drink.dart';
+part of 'drink_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Drink _$DrinkFromJson(Map<String, dynamic> json) => Drink(
+DrinkDTO _$DrinkDTOFromJson(Map<String, dynamic> json) => DrinkDTO(
       strDrink: json['strDrink'] as String,
       idDrink: json['idDrink'] as String,
       strDrinkAlternate: json['strDrinkAlternate'] as String?,
@@ -54,7 +54,7 @@ Drink _$DrinkFromJson(Map<String, dynamic> json) => Drink(
           json['strCreativeCommonsConfirmed'] as String?,
     );
 
-Map<String, dynamic> _$DrinkToJson(Drink instance) => <String, dynamic>{
+Map<String, dynamic> _$DrinkDTOToJson(DrinkDTO instance) => <String, dynamic>{
       'strDrink': instance.strDrink,
       'idDrink': instance.idDrink,
       'strDrinkAlternate': instance.strDrinkAlternate,

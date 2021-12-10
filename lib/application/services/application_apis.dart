@@ -1,7 +1,9 @@
 import 'package:http/http.dart' as http;
+import 'package:yandex_project/domain/models/drink.dart';
 import 'dart:convert';
 
-import 'package:yandex_project/domain/models/drink.dart';
+import 'package:yandex_project/domain/models/drink_dto.dart';
+import 'package:yandex_project/domain/models/ingredient_dto.dart';
 
 class AppApisService {
 
@@ -21,13 +23,13 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return List.of(data['drinks']).map((e) => Drink.fromJson(e)).toList();
+      return List.of(data['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
     } catch (err) {
       return <Drink>[];
     }
   }
 
-  Future<dynamic> cocktailById(int cocktailId) async {
+  Future<List<Drink>> cocktailById(int cocktailId) async {
     try {
       var url = Uri.parse(baseUrl + 'lookup.php?i=' + cocktailId.toString());
 
@@ -38,13 +40,13 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['drinks'];
+      return List.of(data['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
     } catch (err) {
-      return null;
+      return <Drink>[];
     }
   }
 
-  Future<dynamic> randomCocktail() async {
+  Future<List<Drink>> randomCocktail() async {
     try {
       var url = Uri.parse(baseUrl + 'random.php');
 
@@ -55,17 +57,14 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      final drink = Drink.fromJson(data);
-      // return data['drinks'];
-      //test
-      return drink;
+      return List.of(data['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
     } catch (err) {
-      return null;
+      return <Drink>[];
     }
   }
 
   //only for 2 dollars
-  Future<dynamic> randomSelectionCocktail() async {
+  Future<List<Drink>> randomSelectionCocktail() async {
     try {
       var url = Uri.parse(baseUrl + 'randomselection.php');
 
@@ -76,15 +75,15 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['drinks'];
+      return List.of(data['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
     } catch (err) {
-      return null;
+      return <Drink>[];
     }
   }
 
   ///ingredients
 
-  Future<dynamic> ingredientByName(String ingredientName) async {
+  Future<List<Ingredient>> ingredientByName(String ingredientName) async {
     try {
       var url = Uri.parse(baseUrl + 'search.php?i=' + ingredientName);
 
@@ -95,13 +94,13 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['ingredients'];
+      return List.of(data['drinks']).map((e) => Ingredient.fromJson(e)).toList();
     } catch (err) {
-      return null;
+      return <Ingredient>[];
     }
   }
 
-  Future<dynamic> ingredientById(int ingredientId) async {
+  Future<List<Ingredient>> ingredientById(int ingredientId) async {
     try {
       var url =
           Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
@@ -113,11 +112,13 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return data['ingredients'];
+      return List.of(data['drinks']).map((e) => Ingredient.fromJson(e)).toList();
     } catch (err) {
-      return null;
+      return <Ingredient>[];
     }
   }
+
+
 }
 
   

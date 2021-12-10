@@ -5,4 +5,6 @@ class SearchEvent with _$SearchEvent {
   const factory SearchEvent.searchByName({required String name}) = _SearchByName;
 
   const factory SearchEvent.randomCocktail() = _RandomCocktail;
+
+  const factory SearchEvent.randomSelectionCocktail() = _RandomSelectionCocktail;
 }
