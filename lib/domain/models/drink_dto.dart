@@ -100,53 +100,5 @@ class DrinkDTO {
 
   Map<String, dynamic> toJson() => _$DrinkDTOToJson(this);
 
-  List<String> getIngredients(){
-    final result = <String>[];
-    if (strIngredient1 != null){
-      result.add(strIngredient1!);
-    }
-    if (strIngredient2 != null){
-      result.add(strIngredient2!);
-    }
-    if (strIngredient3 != null){
-      result.add(strIngredient3!);
-    }
-    if (strIngredient4 != null){
-      result.add(strIngredient4!);
-    }
-    if (strIngredient5 != null) {
-      result.add(strIngredient5!);
-    }
-    if (strIngredient6 != null){
-      result.add(strIngredient6!);
-    }
-    if (strIngredient7 != null){
-      result.add(strIngredient7!);
-    }
-    if (strIngredient8 != null){
-      result.add(strIngredient8!);
-    }
-    if (strIngredient9 != null){
-      result.add(strIngredient9!);
-    }
-    if (strIngredient10 != null){
-      result.add(strIngredient10!);
-    }
-    if (strIngredient11 != null){
-      result.add(strIngredient11!);
-    }
-    if (strIngredient12 != null){
-      result.add(strIngredient12!);
-    }
-    if (strIngredient13 != null){
-      result.add(strIngredient13!);
-    }
-    if (strIngredient14 != null){
-      result.add(strIngredient14!);
-    }
-    if (strIngredient15 != null){
-      result.add(strIngredient15!);
-    }
-    return result;
-  }
+
 }
