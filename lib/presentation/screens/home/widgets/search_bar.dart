@@ -10,9 +10,8 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<NavigationBloc, NavigationState>(
-      buildWhen: (previous, current){
+      buildWhen: (previous, current) {
         return previous.tab != current.tab;
       },
       builder: (context, state) {
@@ -32,28 +31,30 @@ class SearchBar extends StatelessWidget {
     );
   }
 
-  Widget searchLine(BuildContext context){
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width / 7,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
-        margin: const EdgeInsets.all(8),
-        elevation: 5,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
-            child: TextFormField(
-              cursorHeight: 15,
-              cursorColor: Theme.of(context).iconTheme.color,
-              decoration:  InputDecoration(
-                  icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color,),
-                  border: InputBorder.none
-              ),
-              onChanged: (text) {
-                BlocProvider.of<SearchBloc>(context).add(SearchEvent.searchByName(name: text));
-              },
-            ),
+  Widget searchLine(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
+      margin: const EdgeInsets.all(8),
+      elevation: 5,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width - 16,
+        height: 40,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: TextFormField(
+            cursorHeight: 15,
+            cursorColor: Theme.of(context).iconTheme.color,
+            scrollPadding: EdgeInsets.zero,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.zero,
+                icon: Icon(
+                  Icons.search,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                border: InputBorder.none),
+            onChanged: (text) {
+              BlocProvider.of<SearchBloc>(context).add(SearchEvent.searchByName(name: text));
+            },
           ),
         ),
       ),

@@ -6,13 +6,12 @@ part of 'ingredient_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-IngredientDTO _$IngredientDTOFromJson(Map<String, dynamic> json) =>
-    IngredientDTO(
+Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       name: json['name'] as String,
       id: json['id'] as int,
     );
 
-Map<String, dynamic> _$IngredientDTOToJson(IngredientDTO instance) =>
+Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
     <String, dynamic>{
       'name': instance.name,
       'id': instance.id,

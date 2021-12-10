@@ -9,6 +9,7 @@ class BlurWidget extends StatelessWidget {
   final bool? bottom;
   final bool? right;
   final bool? left;
+  final BorderRadius? borderRadius;
 
   const BlurWidget({
     Key? key,
@@ -17,12 +18,13 @@ class BlurWidget extends StatelessWidget {
     this.bottom,
     this.right,
     this.left,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+      borderRadius: borderRadius ?? BorderRadius.circular(AppConstants.smallRadius),
       child: ColoredBox(
         color: Colors.black12,
         child: SafeArea(
