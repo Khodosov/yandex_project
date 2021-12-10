@@ -69,7 +69,7 @@ class Drink {
           dto.strIngredient13,
           dto.strIngredient14,
           dto.strIngredient15,
-        ].where((ing) => ing != null && ing != '' && exp.hasMatch(ing)).toList(),
+        ].where((ing) => ing != null && ing != '').toList(),
         measures: [
           dto.strMeasure1,
           dto.strMeasure2,
