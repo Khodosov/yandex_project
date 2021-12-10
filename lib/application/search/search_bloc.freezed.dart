@@ -26,6 +26,10 @@ class _$SearchEventTearOff {
   _RandomCocktail randomCocktail() {
     return const _RandomCocktail();
   }
+
+  _RandomSelectionCocktail randomSelectionCocktail() {
+    return const _RandomSelectionCocktail();
+  }
 }
 
 /// @nodoc
@@ -37,18 +41,21 @@ mixin _$SearchEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String name) searchByName,
     required TResult Function() randomCocktail,
+    required TResult Function() randomSelectionCocktail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,18 +63,22 @@ mixin _$SearchEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +165,7 @@ class _$_SearchByName implements _SearchByName {
   TResult when<TResult extends Object?>({
     required TResult Function(String name) searchByName,
     required TResult Function() randomCocktail,
+    required TResult Function() randomSelectionCocktail,
   }) {
     return searchByName(name);
   }
@@ -163,6 +175,7 @@ class _$_SearchByName implements _SearchByName {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
   }) {
     return searchByName?.call(name);
   }
@@ -172,6 +185,7 @@ class _$_SearchByName implements _SearchByName {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -185,6 +199,8 @@ class _$_SearchByName implements _SearchByName {
   TResult map<TResult extends Object?>({
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
   }) {
     return searchByName(this);
   }
@@ -194,6 +210,7 @@ class _$_SearchByName implements _SearchByName {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
   }) {
     return searchByName?.call(this);
   }
@@ -203,6 +220,7 @@ class _$_SearchByName implements _SearchByName {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -264,6 +282,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   TResult when<TResult extends Object?>({
     required TResult Function(String name) searchByName,
     required TResult Function() randomCocktail,
+    required TResult Function() randomSelectionCocktail,
   }) {
     return randomCocktail();
   }
@@ -273,6 +292,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
   }) {
     return randomCocktail?.call();
   }
@@ -282,6 +302,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name)? searchByName,
     TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
     required TResult orElse(),
   }) {
     if (randomCocktail != null) {
@@ -295,6 +316,8 @@ class _$_RandomCocktail implements _RandomCocktail {
   TResult map<TResult extends Object?>({
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
   }) {
     return randomCocktail(this);
   }
@@ -304,6 +327,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
   }) {
     return randomCocktail?.call(this);
   }
@@ -313,6 +337,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     required TResult orElse(),
   }) {
     if (randomCocktail != null) {
@@ -324,4 +349,117 @@ class _$_RandomCocktail implements _RandomCocktail {
 
 abstract class _RandomCocktail implements SearchEvent {
   const factory _RandomCocktail() = _$_RandomCocktail;
+}
+
+/// @nodoc
+abstract class _$RandomSelectionCocktailCopyWith<$Res> {
+  factory _$RandomSelectionCocktailCopyWith(_RandomSelectionCocktail value,
+          $Res Function(_RandomSelectionCocktail) then) =
+      __$RandomSelectionCocktailCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$RandomSelectionCocktailCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res>
+    implements _$RandomSelectionCocktailCopyWith<$Res> {
+  __$RandomSelectionCocktailCopyWithImpl(_RandomSelectionCocktail _value,
+      $Res Function(_RandomSelectionCocktail) _then)
+      : super(_value, (v) => _then(v as _RandomSelectionCocktail));
+
+  @override
+  _RandomSelectionCocktail get _value =>
+      super._value as _RandomSelectionCocktail;
+}
+
+/// @nodoc
+
+class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
+  const _$_RandomSelectionCocktail();
+
+  @override
+  String toString() {
+    return 'SearchEvent.randomSelectionCocktail()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _RandomSelectionCocktail);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String name) searchByName,
+    required TResult Function() randomCocktail,
+    required TResult Function() randomSelectionCocktail,
+  }) {
+    return randomSelectionCocktail();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String name)? searchByName,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+  }) {
+    return randomSelectionCocktail?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String name)? searchByName,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+    required TResult orElse(),
+  }) {
+    if (randomSelectionCocktail != null) {
+      return randomSelectionCocktail();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
+  }) {
+    return randomSelectionCocktail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+  }) {
+    return randomSelectionCocktail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    required TResult orElse(),
+  }) {
+    if (randomSelectionCocktail != null) {
+      return randomSelectionCocktail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RandomSelectionCocktail implements SearchEvent {
+  const factory _RandomSelectionCocktail() = _$_RandomSelectionCocktail;
 }

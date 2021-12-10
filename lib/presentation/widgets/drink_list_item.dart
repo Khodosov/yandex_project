@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:yandex_project/constants.dart';
 import 'package:yandex_project/domain/models/drink.dart';
 
 class DrinkListItem extends StatefulWidget {
@@ -18,7 +19,7 @@ class _DrinkListItemState extends State<DrinkListItem> {
   Widget build(BuildContext context) {
     final leading = CachedNetworkImage(
       fit: BoxFit.cover,
-      imageUrl: widget.drink.strDrinkThumb ?? 'http://via.placeholder.com/350x150',
+      imageUrl: widget.drink.thumb ?? 'http://via.placeholder.com/350x150',
       progressIndicatorBuilder: (context, url, downloadProgress) => Center(
         child: CircularProgressIndicator(
           value: downloadProgress.progress,
@@ -29,13 +30,13 @@ class _DrinkListItemState extends State<DrinkListItem> {
     );
 
     final ingredients = StringBuffer();
-    ingredients.writeAll(widget.drink.getIngredients(), ', ');
+    ingredients.writeAll(widget.drink.ingredients, ', ');
     return SizedBox(
       height: 150,
       // width: MediaQuery.of(context).size.width,
       child: Card(
         elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -60,7 +61,7 @@ class _DrinkListItemState extends State<DrinkListItem> {
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
-                            widget.drink.strDrink,
+                            widget.drink.name,
                             style: const TextStyle(
                               fontSize: 20,
                             ),
@@ -70,16 +71,16 @@ class _DrinkListItemState extends State<DrinkListItem> {
                           padding: const EdgeInsets.only(top: 8.0),
                           child: AnimatedCrossFade(
                             crossFadeState: rolled ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                            firstChild: Text(widget.drink.strAlcoholic ?? ''),
+                            firstChild: Text(widget.drink.alcoholic ?? ''),
                             secondChild: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(widget.drink.strAlcoholic ?? ''),
-                                widget.drink.strDrinkAlternate != null
-                                    ? Text(widget.drink.strDrinkAlternate!)
+                                Text(widget.drink.alcoholic ?? ''),
+                                widget.drink.alter != null
+                                    ? Text(widget.drink.alter!)
                                     : Container(),
-                                widget.drink.strCategory != null ? Text(widget.drink.strCategory!) : Container(),
-                                widget.drink.strGlass != null ? Text(widget.drink.strGlass!) : Container(),
+                                widget.drink.category != null ? Text(widget.drink.category!) : Container(),
+                                widget.drink.glass != null ? Text(widget.drink.glass!) : Container(),
                                 Text(ingredients.toString()),
                               ],
                             ),
