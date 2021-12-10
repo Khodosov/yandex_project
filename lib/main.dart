@@ -38,14 +38,16 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             themeMode: state.themeMode,
             theme: ThemeData(
-              textTheme: GoogleFonts.latoTextTheme(
-                Theme.of(context).textTheme,
-              ),
+              textTheme: GoogleFonts.latoTextTheme(),
               primarySwatch: Colors.amber,
               scaffoldBackgroundColor: Colors.amber,
               progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.black),
             ),
-            darkTheme: ThemeData.dark(),
+            darkTheme: ThemeData.dark().copyWith(
+              textTheme: GoogleFonts.latoTextTheme(
+                  ThemeData.dark().textTheme
+              ),
+            ),
             onGenerateRoute: (settings) {
               switch (settings.name) {
                 case '/home':
