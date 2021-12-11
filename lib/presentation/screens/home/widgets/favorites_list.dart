@@ -4,14 +4,14 @@ import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/presentation/widgets/drink_item.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class ResultsList extends StatefulWidget {
-  const ResultsList({Key? key}) : super(key: key);
+class FavoritesList extends StatefulWidget {
+  const FavoritesList({Key? key}) : super(key: key);
 
   @override
-  State<ResultsList> createState() => _ResultsListState();
+  State<FavoritesList> createState() => _FavoritesListState();
 }
 
-class _ResultsListState extends State<ResultsList> {
+class _FavoritesListState extends State<FavoritesList> {
   final controller = PageController(
     viewportFraction: 0.96,
   );
@@ -27,7 +27,7 @@ class _ResultsListState extends State<ResultsList> {
 
     return BlocBuilder<SearchBloc, SearchState>(
       buildWhen: (previous, current) {
-        return previous != current;
+        return previous.favorites != current.favorites;
       },
       builder: (context, state) {
         if (!state.isRefreshing) {
@@ -36,10 +36,10 @@ class _ResultsListState extends State<ResultsList> {
               padding: const EdgeInsets.only(bottom: 130, top: 40),
               child: PageView.builder(
                 controller: controller,
-                padEnds: state.drinks.length == 1 ? true : false,
-                itemCount: state.drinks.length,
+                padEnds: state.favorites.length == 1 ? true : false,
+                itemCount: state.favorites.length,
                 itemBuilder: (context, index) {
-                  return DrinkItem(drink: state.drinks[index]);
+                  return DrinkItem(drink: state.favorites[index]);
                 },
               ),
             ),

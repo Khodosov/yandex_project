@@ -17,7 +17,6 @@ class Drink {
   final String? imgSource;
   final String? attribute;
   final String? commons;
-  static RegExp exp =  RegExp('\S');
 
   Drink(
       {required this.name,
@@ -86,6 +85,6 @@ class Drink {
           dto.strMeasure13,
           dto.strMeasure14,
           dto.strMeasure15
-        ].where((meas) => meas != null && meas != '' && exp.hasMatch(meas)).toList());
+        ].where((meas) => meas != null && meas != '').toList());
   }
 }

@@ -6,6 +6,7 @@ import 'package:yandex_project/presentation/screens/home/home_page.dart';
 import 'package:yandex_project/presentation/screens/settings/settings_screen.dart';
 import 'application/preferences/preferences_bloc.dart';
 import 'application/search/search_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main()  {
   runApp(const App());
@@ -37,6 +38,9 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             themeMode: state.themeMode,
             theme: ThemeData(
+              textTheme: GoogleFonts.latoTextTheme(
+                Theme.of(context).textTheme,
+              ),
               primarySwatch: Colors.amber,
               scaffoldBackgroundColor: Colors.amber,
               progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.black),
