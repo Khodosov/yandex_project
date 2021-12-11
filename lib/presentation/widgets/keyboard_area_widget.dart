@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class KeyboardArea extends StatelessWidget {
@@ -11,10 +13,9 @@ class KeyboardArea extends StatelessWidget {
   Widget build(BuildContext context) {
     final MediaQueryData data = MediaQuery.of(context);
     EdgeInsets insets = data.viewInsets;
-    print(insets.bottom);
     return Padding(
       padding: EdgeInsets.only(
-        bottom: insets.bottom,
+        bottom: max(0.0, insets.bottom - data.size.width / 5.5),
       ),
       child: MediaQuery.removeViewInsets(
         context: context,

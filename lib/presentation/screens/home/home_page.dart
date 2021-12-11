@@ -21,7 +21,6 @@ class HomePage extends StatelessWidget {
         return previous != current;
       },
       builder: (context, state) {
-
         return ColoredBox(
           color: Theme.of(context).scaffoldBackgroundColor,
           child: Stack(
@@ -55,8 +54,10 @@ class HomePage extends StatelessWidget {
                   top: false,
                   child: Column(
                     children: const [
+                      KeyboardArea(
+                        child: SearchBar(),
+                      ),
                       CustomBottomBar(),
-                      SearchBar(),
                     ],
                   ),
                 ),
