@@ -4,6 +4,7 @@ import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/constants.dart';
 import 'package:yandex_project/domain/general/enums.dart';
+import 'package:yandex_project/presentation/widgets/keyboard_area_widget.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationBloc, NavigationState>(
       buildWhen: (previous, current) {
-        if (current.tab == AppTab.search){
+        if (current.tab == AppTab.search) {
           setState(() {
             rolled = false;
           });
@@ -57,9 +58,7 @@ class _SearchBarState extends State<SearchBar> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 searchLine(context),
-                 SizedBox(
-                    width: MediaQuery.of(context).size.width - 16,
-                    child:  Placeholder()),
+                SizedBox(width: MediaQuery.of(context).size.width - 16, child: const Placeholder()),
               ],
             ),
           ),
@@ -74,20 +73,21 @@ class _SearchBarState extends State<SearchBar> {
       margin: const EdgeInsets.all(8),
       elevation: 5,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width - 16,
         height: 40,
+        width: MediaQuery.of(context).size.width - 16,
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
-          child: TextFormField(
+          child: TextField(
             onTap: () {
               BlocProvider.of<NavigationBloc>(context)
                   .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
             },
-            cursorHeight: 15,
             cursorColor: Theme.of(context).iconTheme.color,
+            cursorHeight: 13,
+            style: const TextStyle(fontSize: 14),
             scrollPadding: EdgeInsets.zero,
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
+                contentPadding: const EdgeInsets.symmetric(vertical: -12.0, horizontal: 0.0),
                 icon: Icon(
                   Icons.search,
                   color: Theme.of(context).iconTheme.color,
