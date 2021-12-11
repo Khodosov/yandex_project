@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:yandex_project/domain/exception/custom_exception.dart';
+import 'package:yandex_project/domain/exception/request_exception.dart';
+import 'package:yandex_project/domain/exception/response_exception.dart';
 import 'package:yandex_project/domain/models/drink.dart';
 import 'package:yandex_project/domain/models/drink_dto.dart';
 import 'package:yandex_project/domain/models/ingredient_dto.dart';
-import 'package:yandex_project/exception/bad_request_exception.dart';
-import 'package:yandex_project/exception/response_exception.dart';
-import 'package:yandex_project/exception/custom_exception.dart';
 
 class AppApisService {
   final Dio _dio = Dio(
@@ -25,7 +25,7 @@ class AppApisService {
       if (e.response == null) {
         throw ResponseException(e.response!.data.toString() + "\n" + e.response!.headers.toString() + "\n" + e.response!.requestOptions.toString());
       } else {
-        throw BadRequestException(e.requestOptions.toString() + "\n" + e.message.toString());
+        throw RequestException(e.requestOptions.toString() + "\n" + e.message.toString());
       }
     }
   }
@@ -104,7 +104,7 @@ class AppApisService {
   Future<List<Ingredient>> ingredientById(int ingredientId) async {
     try {
       var url =
-          Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
+      Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
 
       var response = await http.post(
         url,
