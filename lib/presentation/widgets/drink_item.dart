@@ -18,27 +18,27 @@ class DrinkItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchBloc, SearchState>(
-      buildWhen: (previous, current){
-        return previous.favorites != current.favorites;
-      },
-      builder: (context, state) {
-        final isFavor = state.favorites.contains(drink);
-        return Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              LayoutBuilder(
-                builder: (context, constraint) {
-                  return Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      ClipRRect(
+    return BlocBuilder<SearchBloc, SearchState>(buildWhen: (previous, current) {
+      return previous.favorites != current.favorites;
+    }, builder: (context, state) {
+      final isFavor = state.favorites.contains(drink);
+      return Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            LayoutBuilder(
+              builder: (context, constraint) {
+                return Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Hero(
+                      tag: drink.name,
+                      child: ClipRRect(
                         borderRadius: BorderRadius.circular(AppConstants.smallRadius),
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
@@ -58,26 +58,31 @@ class DrinkItem extends StatelessWidget {
                           errorWidget: (context, url, error) => const Icon(Icons.error_outline),
                         ),
                       ),
-                      Positioned(
-                        bottom: -10,
-                        child: BlurWidget(
-                          borderRadius: const BorderRadius.all(Radius.circular(0)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: constraint.maxWidth,
-                              child: DrinkTitleWidget(
-                                drink: drink,
-                              ),
+                    ),
+                    Positioned(
+                      bottom: -10,
+                      child: BlurWidget(
+                        borderRadius: const BorderRadius.all(Radius.circular(0)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: constraint.maxWidth,
+                            child: DrinkTitleWidget(
+                              drink: drink,
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  );
-                },
-              ),
-              Expanded(
+                    ),
+                  ],
+                );
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -101,36 +106,36 @@ class DrinkItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    iconSize: 35,
-                    onPressed: () {
-                      BlocProvider.of<SearchBloc>(context).add(SearchEvent.addToFavorites(drink: drink));
-                    },
-                    icon: Icon(
-                      !isFavor ? Icons.favorite_border : Icons.favorite,
-                    ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  iconSize: 35,
+                  onPressed: () {
+                    BlocProvider.of<SearchBloc>(context).add(SearchEvent.addToFavorites(drink: drink));
+                  },
+                  icon: Icon(
+                    !isFavor ? Icons.favorite_border : Icons.favorite,
                   ),
-                  IconButton(
-                    iconSize: 35,
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/drink', arguments: drink);
-                    },
-                    icon: const Icon(
-                      Icons.info_outline,
-                    ),
+                ),
+                IconButton(
+                  iconSize: 35,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/drink', arguments: drink);
+                  },
+                  icon: const Icon(
+                    Icons.info_outline,
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              )
-            ],
-          ),
-        );
-      }
-    );
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            )
+          ],
+        ),
+      );
+    });
   }
 }

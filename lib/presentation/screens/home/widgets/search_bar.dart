@@ -4,7 +4,6 @@ import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/constants.dart';
 import 'package:yandex_project/domain/general/enums.dart';
-import 'package:yandex_project/presentation/widgets/keyboard_area_widget.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
