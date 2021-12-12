@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
 import 'package:yandex_project/constants.dart';
+import 'package:yandex_project/presentation/widgets/background_widget.dart';
+import 'package:yandex_project/presentation/widgets/blur_widget.dart';
+import 'package:yandex_project/presentation/widgets/custom_app_bar.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -13,34 +16,34 @@ class SettingsScreen extends StatelessWidget {
         return previous.themeMode != current.themeMode;
       },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Settings'),
-            elevation: 0,
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppConstants.smallRadius),
-                  color: Colors.transparent.withAlpha(30),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    brightness(context),
-                    appMode(context),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
+        return BackgroundWidget(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 120, left: 8, right: 8),
+                child: BlurWidget(
+                  top: false,
+                  bottom: false,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      brightness(context),
+                      const Divider(
+                        indent: 20,
+                        endIndent: 20,
+                      ),
+                      appMode(context),
+                    ],
+                  ),
                 ),
               ),
-            ),
+              CustomAppBar(
+                title: Text(
+                  'Settings',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ),
+            ],
           ),
         );
       },
