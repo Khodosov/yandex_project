@@ -23,9 +23,14 @@ class AppApisService {
       return response.data;
     } on DioError catch (e) {
       if (e.response == null) {
-        throw ResponseException(e.response!.data.toString() + "\n" + e.response!.headers.toString() + "\n" + e.response!.requestOptions.toString());
+        throw ResponseException(e.response!.data.toString() +
+            "\n" +
+            e.response!.headers.toString() +
+            "\n" +
+            e.response!.requestOptions.toString());
       } else {
-        throw RequestException(e.requestOptions.toString() + "\n" + e.message.toString());
+        throw RequestException(
+            e.requestOptions.toString() + "\n" + e.message.toString());
       }
     }
   }
@@ -79,7 +84,6 @@ class AppApisService {
 
   var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-
   ///ingredients
 
   Future<List<Ingredient>> ingredientByName(String ingredientName) async {
@@ -104,7 +108,7 @@ class AppApisService {
   Future<List<Ingredient>> ingredientById(int ingredientId) async {
     try {
       var url =
-      Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
+          Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
 
       var response = await http.post(
         url,
@@ -121,5 +125,3 @@ class AppApisService {
     }
   }
 }
-
-  

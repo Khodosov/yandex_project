@@ -25,7 +25,6 @@ class _FavoritesListState extends State<FavoritesList> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<SearchBloc, SearchState>(
       buildWhen: (previous, current) {
         return previous.favorites != current.favorites;
@@ -35,14 +34,16 @@ class _FavoritesListState extends State<FavoritesList> {
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 130, top: 40),
-              child: state.favorites.isNotEmpty ? PageView.builder(
-                controller: controller,
-                padEnds: state.favorites.length == 1 ? true : false,
-                itemCount: state.favorites.length,
-                itemBuilder: (context, index) {
-                  return DrinkItem(drink: state.favorites[index]);
-                },
-              ) : const NotFoundWidget(),
+              child: state.favorites.isNotEmpty
+                  ? PageView.builder(
+                      controller: controller,
+                      padEnds: state.favorites.length == 1 ? true : false,
+                      itemCount: state.favorites.length,
+                      itemBuilder: (context, index) {
+                        return DrinkItem(drink: state.favorites[index]);
+                      },
+                    )
+                  : const NotFoundWidget(),
             ),
           );
         } else {

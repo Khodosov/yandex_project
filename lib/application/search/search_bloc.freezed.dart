@@ -51,6 +51,7 @@ mixin _$SearchEvent {
     required TResult Function(Drink drink) addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String name)? searchByName,
@@ -59,6 +60,7 @@ mixin _$SearchEvent {
     TResult Function(Drink drink)? addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name)? searchByName,
@@ -68,6 +70,7 @@ mixin _$SearchEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SearchByName value) searchByName,
@@ -77,6 +80,7 @@ mixin _$SearchEvent {
     required TResult Function(_AddToFavorites value) addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
@@ -85,6 +89,7 @@ mixin _$SearchEvent {
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SearchByName value)? searchByName,
@@ -108,6 +113,7 @@ class _$SearchEventCopyWithImpl<$Res> implements $SearchEventCopyWith<$Res> {
   _$SearchEventCopyWithImpl(this._value, this._then);
 
   final SearchEvent _value;
+
   // ignore: unused_field
   final $Res Function(SearchEvent) _then;
 }
@@ -117,6 +123,7 @@ abstract class _$SearchByNameCopyWith<$Res> {
   factory _$SearchByNameCopyWith(
           _SearchByName value, $Res Function(_SearchByName) then) =
       __$SearchByNameCopyWithImpl<$Res>;
+
   $Res call({String name});
 }
 
@@ -252,6 +259,7 @@ abstract class _SearchByName implements SearchEvent {
   const factory _SearchByName({required String name}) = _$_SearchByName;
 
   String get name;
+
   @JsonKey(ignore: true)
   _$SearchByNameCopyWith<_SearchByName> get copyWith =>
       throw _privateConstructorUsedError;
@@ -499,6 +507,7 @@ abstract class _$AddToFavoritesCopyWith<$Res> {
   factory _$AddToFavoritesCopyWith(
           _AddToFavorites value, $Res Function(_AddToFavorites) then) =
       __$AddToFavoritesCopyWithImpl<$Res>;
+
   $Res call({Drink drink});
 }
 
@@ -635,6 +644,7 @@ abstract class _AddToFavorites implements SearchEvent {
   const factory _AddToFavorites({required Drink drink}) = _$_AddToFavorites;
 
   Drink get drink;
+
   @JsonKey(ignore: true)
   _$AddToFavoritesCopyWith<_AddToFavorites> get copyWith =>
       throw _privateConstructorUsedError;

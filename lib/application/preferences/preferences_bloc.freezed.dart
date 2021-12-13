@@ -36,27 +36,32 @@ mixin _$PreferencesEvent {
     required TResult Function(ThemeMode themeMode) changeTheme,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(ThemeMode themeMode)? changeTheme,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ThemeMode themeMode)? changeTheme,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeTheme value) changeTheme,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ChangeTheme value)? changeTheme,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeTheme value)? changeTheme,
@@ -74,6 +79,7 @@ abstract class $PreferencesEventCopyWith<$Res> {
   factory $PreferencesEventCopyWith(
           PreferencesEvent value, $Res Function(PreferencesEvent) then) =
       _$PreferencesEventCopyWithImpl<$Res>;
+
   $Res call({ThemeMode themeMode});
 }
 
@@ -83,6 +89,7 @@ class _$PreferencesEventCopyWithImpl<$Res>
   _$PreferencesEventCopyWithImpl(this._value, this._then);
 
   final PreferencesEvent _value;
+
   // ignore: unused_field
   final $Res Function(PreferencesEvent) _then;
 
@@ -105,6 +112,7 @@ abstract class _$ChangeThemeCopyWith<$Res>
   factory _$ChangeThemeCopyWith(
           _ChangeTheme value, $Res Function(_ChangeTheme) then) =
       __$ChangeThemeCopyWithImpl<$Res>;
+
   @override
   $Res call({ThemeMode themeMode});
 }
@@ -225,6 +233,7 @@ abstract class _ChangeTheme implements PreferencesEvent {
 
   @override
   ThemeMode get themeMode;
+
   @override
   @JsonKey(ignore: true)
   _$ChangeThemeCopyWith<_ChangeTheme> get copyWith =>

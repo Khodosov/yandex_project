@@ -16,71 +16,76 @@ class CustomBottomBar extends StatelessWidget {
         return previous.tab != current.tab;
       },
       builder: (context, state) {
-        return LayoutBuilder(
-          builder: (context, constraint) {
-            return SizedBox(
-              width: constraint.maxWidth,
-              height:  constraint.maxWidth / 5.5,
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
-                margin: const EdgeInsets.all(8),
-                // color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    tabIcon(
-                      selected: state.tab == AppTab.favorites,
-                      onTap: () {
-                        BlocProvider.of<NavigationBloc>(context)
-                            .add(NavigationEvent.changeTab(tab: AppTab.favorites, context: context));
-                      },
-                      icon: Icons.favorite,
-                      context: context,
-                    ),
-                    tabIcon(
-                      selected: state.tab == AppTab.random,
-                      onTap: () {
-                        BlocProvider.of<NavigationBloc>(context)
-                            .add(NavigationEvent.changeTab(tab: AppTab.random, context: context));
-                        BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
-                      },
-                      icon: Icons.casino,
-                      context: context,
-                    ),
-                    tabIcon(
-                      selected: state.tab == AppTab.home,
-                      onTap: () {
-                        BlocProvider.of<NavigationBloc>(context)
-                            .add(NavigationEvent.changeTab(tab: AppTab.home, context: context));
-                      },
-                      icon: Icons.house,
-                      context: context,
-                    ),
-                    tabIcon(
-                      selected: state.tab == AppTab.search,
-                      onTap: () {
-                        BlocProvider.of<NavigationBloc>(context)
-                            .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
-                      },
-                      icon: Icons.search,
-                      context: context,
-                    ),
-                    tabIcon(
-                      selected: state.tab == AppTab.settings,
-                      onTap: () {
-                        BlocProvider.of<NavigationBloc>(context)
-                            .add(NavigationEvent.changeTab(tab: AppTab.settings, context: context));
-                      },
-                      icon: Icons.settings,
-                      context: context,
-                    ),
-                  ],
-                ),
+        return LayoutBuilder(builder: (context, constraint) {
+          return SizedBox(
+            width: constraint.maxWidth,
+            height: constraint.maxWidth / 5.5,
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
+              margin: const EdgeInsets.all(8),
+              // color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  tabIcon(
+                    selected: state.tab == AppTab.favorites,
+                    onTap: () {
+                      BlocProvider.of<NavigationBloc>(context).add(
+                          NavigationEvent.changeTab(
+                              tab: AppTab.favorites, context: context));
+                    },
+                    icon: Icons.favorite,
+                    context: context,
+                  ),
+                  tabIcon(
+                    selected: state.tab == AppTab.random,
+                    onTap: () {
+                      BlocProvider.of<NavigationBloc>(context).add(
+                          NavigationEvent.changeTab(
+                              tab: AppTab.random, context: context));
+                      BlocProvider.of<SearchBloc>(context)
+                          .add(const SearchEvent.randomCocktail());
+                    },
+                    icon: Icons.casino,
+                    context: context,
+                  ),
+                  tabIcon(
+                    selected: state.tab == AppTab.home,
+                    onTap: () {
+                      BlocProvider.of<NavigationBloc>(context).add(
+                          NavigationEvent.changeTab(
+                              tab: AppTab.home, context: context));
+                    },
+                    icon: Icons.house,
+                    context: context,
+                  ),
+                  tabIcon(
+                    selected: state.tab == AppTab.search,
+                    onTap: () {
+                      BlocProvider.of<NavigationBloc>(context).add(
+                          NavigationEvent.changeTab(
+                              tab: AppTab.search, context: context));
+                    },
+                    icon: Icons.search,
+                    context: context,
+                  ),
+                  tabIcon(
+                    selected: state.tab == AppTab.settings,
+                    onTap: () {
+                      BlocProvider.of<NavigationBloc>(context).add(
+                          NavigationEvent.changeTab(
+                              tab: AppTab.settings, context: context));
+                    },
+                    icon: Icons.settings,
+                    context: context,
+                  ),
+                ],
               ),
-            );
-          }
-        );
+            ),
+          );
+        });
       },
     );
   }
@@ -94,14 +99,17 @@ class CustomBottomBar extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
-        color: !selected ? Colors.transparent : Theme.of(context).iconTheme.color,
+        color:
+            !selected ? Colors.transparent : Theme.of(context).iconTheme.color,
         borderRadius: BorderRadius.circular(AppConstants.smallRadius),
       ),
       child: IconButton(
         onPressed: onTap,
         icon: Icon(
           icon,
-          color: selected ? Theme.of(context).cardColor : Theme.of(context).iconTheme.color,
+          color: selected
+              ? Theme.of(context).cardColor
+              : Theme.of(context).iconTheme.color,
         ),
       ),
     );

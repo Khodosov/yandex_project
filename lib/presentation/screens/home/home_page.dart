@@ -29,7 +29,9 @@ class HomePage extends StatelessWidget {
               AnimatedCrossFade(
                 firstChild: const ResultsList(),
                 secondChild: const FavoritesList(),
-                crossFadeState: state.tab == AppTab.favorites ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                crossFadeState: state.tab == AppTab.favorites
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
                 duration: const Duration(milliseconds: 300),
               ),
               CustomAppBar(

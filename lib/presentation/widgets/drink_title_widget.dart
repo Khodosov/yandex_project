@@ -23,7 +23,6 @@ class DrinkTitleWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 4),
           child: Container(
-
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppConstants.smallRadius),
               color: Theme.of(context).cardColor.withOpacity(0.5),

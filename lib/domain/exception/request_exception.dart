@@ -1,5 +1,6 @@
 class RequestException implements Exception {
   final _message;
+
   RequestException([this._message]);
 
   @override

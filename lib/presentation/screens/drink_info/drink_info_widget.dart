@@ -17,7 +17,7 @@ class DrinkInfoScreen extends StatelessWidget {
     for (int i = 0; i < drink.ingredients.length; i++) {
       final ingredient = drink.ingredients[i];
       String measure = 'up to you';
-      if (i < drink.measures.length){
+      if (i < drink.measures.length) {
         measure = drink.measures[i] ?? 'up to you';
       }
       ingredientsWithMeasures.add(
@@ -57,7 +57,8 @@ class DrinkInfoScreen extends StatelessWidget {
                 child: CachedNetworkImage(
                   fit: BoxFit.cover,
                   imageUrl: drink.thumb ?? 'http://via.placeholder.com/350x150',
-                  progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
                     child: SizedBox(
                       width: double.infinity,
                       child: Center(
@@ -68,7 +69,8 @@ class DrinkInfoScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error_outline),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.error_outline),
                 ),
               ),
             ),
@@ -115,10 +117,12 @@ class DrinkInfoScreen extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                                  borderRadius: BorderRadius.circular(
+                                      AppConstants.smallRadius),
                                 ),
                                 duration: const Duration(milliseconds: 600),
-                                content: const Text('Ingredients copied NOT YET ACTUALLY :('),
+                                content: const Text(
+                                    'Ingredients copied NOT YET ACTUALLY :('),
                               ),
                             );
                           },

@@ -1,5 +1,6 @@
 class ResponseException implements Exception {
   final _message;
+
   ResponseException([this._message]);
 
   @override

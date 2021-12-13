@@ -14,7 +14,8 @@ class CustomAppBar extends StatelessWidget {
       right: 0,
       left: 0,
       child: BlurWidget(
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppConstants.smallRadius)),
+        borderRadius: const BorderRadius.vertical(
+            bottom: Radius.circular(AppConstants.smallRadius)),
         bottom: false,
         child: AppBar(
           toolbarHeight: 40,

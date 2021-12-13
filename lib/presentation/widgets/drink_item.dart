@@ -24,7 +24,8 @@ class DrinkItem extends StatelessWidget {
       final isFavor = state.favorites.contains(drink);
       return Card(
         elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         clipBehavior: Clip.antiAlias,
         child: Column(
@@ -39,11 +40,14 @@ class DrinkItem extends StatelessWidget {
                     Hero(
                       tag: drink.name,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                        borderRadius:
+                            BorderRadius.circular(AppConstants.smallRadius),
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
-                          imageUrl: drink.thumb ?? 'http://via.placeholder.com/350x150',
-                          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                          imageUrl: drink.thumb ??
+                              'http://via.placeholder.com/350x150',
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Center(
                             child: SizedBox(
                               height: constraint.maxWidth,
                               width: constraint.maxWidth,
@@ -55,14 +59,16 @@ class DrinkItem extends StatelessWidget {
                               ),
                             ),
                           ),
-                          errorWidget: (context, url, error) => const Icon(Icons.error_outline),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error_outline),
                         ),
                       ),
                     ),
                     Positioned(
                       bottom: -10,
                       child: BlurWidget(
-                        borderRadius: const BorderRadius.all(Radius.circular(0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(0)),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
@@ -113,7 +119,8 @@ class DrinkItem extends StatelessWidget {
                 IconButton(
                   iconSize: 35,
                   onPressed: () {
-                    BlocProvider.of<SearchBloc>(context).add(SearchEvent.addToFavorites(drink: drink));
+                    BlocProvider.of<SearchBloc>(context)
+                        .add(SearchEvent.addToFavorites(drink: drink));
                   },
                   icon: Icon(
                     !isFavor ? Icons.favorite_border : Icons.favorite,

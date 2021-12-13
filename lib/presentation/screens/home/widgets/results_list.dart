@@ -24,7 +24,6 @@ class _ResultsListState extends State<ResultsList> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<SearchBloc, SearchState>(
       buildWhen: (previous, current) {
         return previous != current;

@@ -24,7 +24,8 @@ class BlurWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(AppConstants.smallRadius),
+      borderRadius:
+          borderRadius ?? BorderRadius.circular(AppConstants.smallRadius),
       child: ColoredBox(
         color: Colors.black12,
         child: SafeArea(
