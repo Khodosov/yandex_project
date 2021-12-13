@@ -31,8 +31,8 @@ extension DrinkTypeToString on DrinkType {
         return 'Alcoholic';
       case 'nonAlcoholic':
         return 'Non alcoholic';
-      case 'optionalAlcoholic':
-        return 'Optional Alcoholic';
+      case 'optionalAlcohol':
+        return 'Optional Alcohol';
       default:
         return '';
     }
