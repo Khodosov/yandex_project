@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:yandex_project/constants.dart';
+import 'package:yandex_project/constants/constants.dart';
 
 class BlurWidget extends StatelessWidget {
   final Widget child;

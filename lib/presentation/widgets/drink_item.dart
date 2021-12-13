@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
-import 'package:yandex_project/constants.dart';
+import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
 import 'package:yandex_project/presentation/widgets/drink_title_widget.dart';
 
@@ -38,6 +38,7 @@ class DrinkItem extends StatelessWidget {
                   clipBehavior: Clip.none,
                   children: [
                     Hero(
+                      transitionOnUserGestures: true,
                       tag: drink.name,
                       child: ClipRRect(
                         borderRadius:
@@ -73,8 +74,12 @@ class DrinkItem extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
                             width: constraint.maxWidth,
-                            child: DrinkTitleWidget(
-                              drink: drink,
+                            child: Hero(
+                              transitionOnUserGestures: true,
+                              tag: drink.id,
+                              child: DrinkTitleWidget(
+                                drink: drink,
+                              ),
                             ),
                           ),
                         ),

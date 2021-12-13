@@ -11,7 +11,7 @@ import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/presentation/widgets/custom_app_bar.dart';
 import 'package:yandex_project/presentation/widgets/keyboard_area_widget.dart';
 
-import '../../../constants.dart';
+import '../../../constants/constants.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,14 +26,13 @@ class HomePage extends StatelessWidget {
         return BackgroundWidget(
           child: Stack(
             children: [
-              AnimatedCrossFade(
-                firstChild: const ResultsList(),
-                secondChild: const FavoritesList(),
-                crossFadeState: state.tab == AppTab.favorites
-                    ? CrossFadeState.showSecond
-                    : CrossFadeState.showFirst,
-                duration: const Duration(milliseconds: 300),
-              ),
+              // AnimatedCrossFade(
+              //   firstChild: const ResultsList(),
+              //   secondChild: const FavoritesList(),
+              //   crossFadeState: state.tab == AppTab.favorites ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              //   duration: const Duration(milliseconds: 400),
+              // ),
+              state.tab == AppTab.favorites ? const FavoritesList() : const ResultsList(),
               CustomAppBar(
                 title: Padding(
                   padding: const EdgeInsets.all(8.0),
