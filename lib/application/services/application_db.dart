@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:yandex_project/domain/models/ingredient_dto.dart';
+import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
 
 class AppBDService {
 

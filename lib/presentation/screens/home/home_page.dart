@@ -26,7 +26,12 @@ class HomePage extends StatelessWidget {
         return BackgroundWidget(
           child: Stack(
             children: [
-              state.tab == AppTab.favorites ? const FavoritesList() : const ResultsList(),
+              AnimatedCrossFade(
+                firstChild: const ResultsList(),
+                secondChild: const FavoritesList(),
+                crossFadeState: state.tab == AppTab.favorites ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 300),
+              ),
               CustomAppBar(
                 title: Padding(
                   padding: const EdgeInsets.all(8.0),

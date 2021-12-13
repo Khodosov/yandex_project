@@ -7,7 +7,7 @@ import 'package:yandex_project/domain/exception/request_exception.dart';
 import 'package:yandex_project/domain/exception/response_exception.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
 import 'package:yandex_project/domain/models/drink/drink_dto.dart';
-import 'package:yandex_project/domain/models/ingredient_dto.dart';
+import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
 
 class AppApisService {
   final Dio _dio = Dio(

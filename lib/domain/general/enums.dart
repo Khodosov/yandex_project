@@ -13,7 +13,7 @@ enum DrinkType {
   alcoholic,
   @JsonValue('Non alcoholic')
   nonAlcoholic,
-  @JsonValue('Optional alcoholic')
+  @JsonValue('Optional alcohol')
   optionalAlcoholic
 }
 

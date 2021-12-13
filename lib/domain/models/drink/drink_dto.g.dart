@@ -105,5 +105,5 @@ Map<String, dynamic> _$DrinkDTOToJson(DrinkDTO instance) => <String, dynamic>{
 const _$DrinkTypeEnumMap = {
   DrinkType.alcoholic: 'Alcoholic',
   DrinkType.nonAlcoholic: 'Non alcoholic',
-  DrinkType.optionalAlcoholic: 'Optional alcoholic',
+  DrinkType.optionalAlcoholic: 'Optional alcohol',
 };
