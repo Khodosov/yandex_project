@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
+import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({Key? key}) : super(key: key);
 
-  void onFilterUpdate(BuildContext context, Filter filter){
+  void onFilterUpdate(BuildContext context, Filter filter) {
     BlocProvider.of<SearchBloc>(context).add(SearchEvent.updateFilter(filter: filter));
   }
-
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(
-      buildWhen: (previous, current){
+      buildWhen: (previous, current) {
         return previous.filter != current.filter;
       },
       builder: (context, state) {
@@ -34,28 +34,79 @@ class FilterWidget extends StatelessWidget {
               children: [
                 InputChip(
                   label: const Text('Alcoholic'),
-                  selected: true,
+                  selected: (state.filter.drinkType ?? []).contains(DrinkType.alcoholic),
                   onSelected: (selected) {
                     if (selected) {
-                    } else {}
+                      final List<DrinkType> types = List.from(state.filter.drinkType ?? []);
+                      types.add(DrinkType.alcoholic);
+                      onFilterUpdate(
+                        context,
+                        state.filter.copyWith(
+                          drinkType: types,
+                        ),
+                      );
+                    } else {
+                      final List<DrinkType> types = List.from(state.filter.drinkType ?? []);
+                      types.remove(DrinkType.alcoholic);
+                      onFilterUpdate(
+                        context,
+                        state.filter.copyWith(
+                          drinkType: types,
+                        ),
+                      );
+                    }
                   },
                   selectedColor: Colors.amber,
                 ),
                 InputChip(
                   label: const Text('Non alcoholic'),
-                  selected: false,
+                  selected: (state.filter.drinkType ?? []).contains(DrinkType.nonAlcoholic),
                   onSelected: (selected) {
                     if (selected) {
-                    } else {}
+                      final List<DrinkType> types = List.from(state.filter.drinkType ?? []);
+                      types.add(DrinkType.nonAlcoholic);
+                      onFilterUpdate(
+                        context,
+                        state.filter.copyWith(
+                          drinkType: types,
+                        ),
+                      );
+                    } else {
+                      final List<DrinkType> types = List.from(state.filter.drinkType ?? []);
+                      types.remove(DrinkType.nonAlcoholic);
+                      onFilterUpdate(
+                        context,
+                        state.filter.copyWith(
+                          drinkType: types,
+                        ),
+                      );
+                    }
                   },
                   selectedColor: Colors.amber,
                 ),
                 InputChip(
                   label: const Text('Optional alcohol'),
-                  selected: true,
+                  selected: (state.filter.drinkType ?? []).contains(DrinkType.optionalAlcohol),
                   onSelected: (selected) {
                     if (selected) {
-                    } else {}
+                      final List<DrinkType> types = List.from(state.filter.drinkType ?? []);
+                      types.add(DrinkType.optionalAlcohol);
+                      onFilterUpdate(
+                        context,
+                        state.filter.copyWith(
+                          drinkType: types,
+                        ),
+                      );
+                    } else {
+                      final List<DrinkType> types = List.from(state.filter.drinkType ?? []);
+                      types.remove(DrinkType.optionalAlcohol);
+                      onFilterUpdate(
+                        context,
+                        state.filter.copyWith(
+                          drinkType: types,
+                        ),
+                      );
+                    }
                   },
                   selectedColor: Colors.amber,
                 ),
@@ -63,18 +114,17 @@ class FilterWidget extends StatelessWidget {
             ),
           ),
         );
-        // for (final ingredient in ingredients){
-        //   filters.add();
+
+        // TODO: Get ingredients from storage or somewhere else
+        // for (final ingredient in ingredients ?? []){
+        //   filters.add(
+        //     CheckboxListTile(
+        //       title: Text(ingredient.name),
+        //       value: false,
+        //       onChanged: (value) {},
+        //     ),
+        //   );
         // }
-        filters.add(
-          CheckboxListTile(
-            title: const Text('Ingredient'),
-            value: false,
-            onChanged: (value) {
-              print(value);
-            },
-          ),
-        );
         return LayoutBuilder(
           builder: (context, constraints) {
             return SizedBox(
