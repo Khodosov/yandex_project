@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:yandex_project/domain/exception/custom_exception.dart';
 import 'package:yandex_project/domain/exception/request_exception.dart';
 import 'package:yandex_project/domain/exception/response_exception.dart';
-import 'package:yandex_project/domain/models/drink.dart';
-import 'package:yandex_project/domain/models/drink_dto.dart';
+import 'package:yandex_project/domain/models/drink/drink.dart';
+import 'package:yandex_project/domain/models/drink/drink_dto.dart';
 import 'package:yandex_project/domain/models/ingredient_dto.dart';
 
 class AppApisService {

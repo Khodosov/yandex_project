@@ -1,4 +1,5 @@
-import 'package:yandex_project/domain/models/drink_dto.dart';
+import 'package:yandex_project/domain/general/enums.dart';
+import 'package:yandex_project/domain/models/drink/drink_dto.dart';
 
 class Drink {
   final String name;
@@ -8,7 +9,7 @@ class Drink {
   final String? video;
   final String? category;
   final String? iba;
-  final String? alcoholic;
+  final DrinkType? alcoholic;
   final String? glass;
   final String? instructions;
   final String? thumb;

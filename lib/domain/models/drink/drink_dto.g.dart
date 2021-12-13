@@ -14,7 +14,8 @@ DrinkDTO _$DrinkDTOFromJson(Map<String, dynamic> json) => DrinkDTO(
       strVideo: json['strVideo'] as String?,
       strCategory: json['strCategory'] as String?,
       strIBA: json['strIBA'] as String?,
-      strAlcoholic: json['strAlcoholic'] as String?,
+      strAlcoholic:
+          $enumDecodeNullable(_$DrinkTypeEnumMap, json['strAlcoholic']),
       strGlass: json['strGlass'] as String?,
       strInstructions: json['strInstructions'] as String?,
       strDrinkThumb: json['strDrinkThumb'] as String?,
@@ -62,7 +63,7 @@ Map<String, dynamic> _$DrinkDTOToJson(DrinkDTO instance) => <String, dynamic>{
       'strVideo': instance.strVideo,
       'strCategory': instance.strCategory,
       'strIBA': instance.strIBA,
-      'strAlcoholic': instance.strAlcoholic,
+      'strAlcoholic': _$DrinkTypeEnumMap[instance.strAlcoholic],
       'strGlass': instance.strGlass,
       'strInstructions': instance.strInstructions,
       'strDrinkThumb': instance.strDrinkThumb,
@@ -100,3 +101,9 @@ Map<String, dynamic> _$DrinkDTOToJson(DrinkDTO instance) => <String, dynamic>{
       'strImageAttribution': instance.strImageAttribution,
       'strCreativeCommonsConfirmed': instance.strCreativeCommonsConfirmed,
     };
+
+const _$DrinkTypeEnumMap = {
+  DrinkType.alcoholic: 'Alcoholic',
+  DrinkType.nonAlcoholic: 'Non alcoholic',
+  DrinkType.optionalAlcoholic: 'Optional alcoholic',
+};

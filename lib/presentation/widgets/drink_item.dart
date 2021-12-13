@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/constants.dart';
-import 'package:yandex_project/domain/models/drink.dart';
+import 'package:yandex_project/domain/models/drink/drink.dart';
 import 'package:yandex_project/presentation/widgets/drink_title_widget.dart';
 
 import 'blur_widget.dart';

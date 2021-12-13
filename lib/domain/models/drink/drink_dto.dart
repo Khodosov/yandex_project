@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:yandex_project/domain/general/enums.dart';
 
 part 'drink_dto.g.dart';
 
-@JsonSerializable(explicitToJson: true, includeIfNull: true)
+@JsonSerializable(explicitToJson: true)
 class DrinkDTO {
   final String strDrink;
   final String idDrink;
@@ -11,7 +12,7 @@ class DrinkDTO {
   final String? strVideo;
   final String? strCategory;
   final String? strIBA;
-  final String? strAlcoholic;
+  final DrinkType? strAlcoholic;
   final String? strGlass;
   final String? strInstructions;
   final String? strDrinkThumb;
