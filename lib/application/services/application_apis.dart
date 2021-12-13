@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:yandex_project/constants/api_key.dart';
 import 'package:yandex_project/domain/exception/custom_exception.dart';
 import 'package:yandex_project/domain/exception/request_exception.dart';
 import 'package:yandex_project/domain/exception/response_exception.dart';
@@ -11,19 +12,20 @@ import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
 
 class AppApisService {
   final Dio _dio = Dio(
-    BaseOptions(
-        baseUrl: 'https://www.thecocktaildb.com/api/json/v1/1/', method: 'get'),
+    BaseOptions(baseUrl: 'https://www.thecocktaildb.com/api/json/v1/1/', method: 'get'),
   );
 
-  Future<Map<String, dynamic>?> getIpJson(
-      String localPath, Map<String, String> queryParameters) async {
+  Future<Map<String, dynamic>?> getIpJson(String localPath, Map<String, String> queryParameters) async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(localPath,
-          queryParameters: queryParameters);
+      final response = await _dio.get<Map<String, dynamic>>(localPath, queryParameters: queryParameters);
       return response.data;
     } on DioError catch (e) {
       if (e.response == null) {
-        throw ResponseException(e.response!.data.toString() + "\n" + e.response!.headers.toString() + "\n" + e.response!.requestOptions.toString());
+        throw ResponseException(e.response!.data.toString() +
+            "\n" +
+            e.response!.headers.toString() +
+            "\n" +
+            e.response!.requestOptions.toString());
       } else {
         throw RequestException(e.requestOptions.toString() + "\n" + e.message.toString());
       }
@@ -34,9 +36,7 @@ class AppApisService {
   Future<List<Drink>> cocktailByName(String cocktailName) async {
     try {
       var data = await getIpJson('search.php', {'s': cocktailName});
-      return List.of(data?['drinks'])
-          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
-          .toList();
+      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
     } catch (err) {
       throw CustomException(err);
     }
@@ -45,9 +45,7 @@ class AppApisService {
   Future<List<Drink>> cocktailById(int cocktailId) async {
     try {
       var data = await getIpJson('lookup.php', {'i': cocktailId.toString()});
-      return List.of(data?['drinks'])
-          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
-          .toList();
+      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
     } catch (err) {
       throw CustomException(err);
     }
@@ -71,14 +69,14 @@ class AppApisService {
       var data = await getIpJson('randomselection.php', {});
       return List.of(data?['drinks'])
           .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
-          .toList(); //List.of(data?['drinks']).map((e) => Drink.fromJson(e)).toList();
+          .toList();
+      //List.of(data?['drinks']).map((e) => Drink.fromJson(e)).toList();
     } catch (err) {
       throw CustomException(err);
     }
   }
 
   var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
-
 
   ///ingredients
 
@@ -93,9 +91,7 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return List.of(data['drinks'])
-          .map((e) => Ingredient.fromJson(e))
-          .toList();
+      return List.of(data['drinks']).map((e) => Ingredient.fromJson(e)).toList();
     } catch (err) {
       throw CustomException(err);
     }
@@ -103,8 +99,7 @@ class AppApisService {
 
   Future<List<Ingredient>> ingredientById(int ingredientId) async {
     try {
-      var url =
-      Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
+      var url = Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
 
       var response = await http.post(
         url,
@@ -113,13 +108,9 @@ class AppApisService {
       );
 
       var data = json.decode(response.body);
-      return List.of(data['drinks'])
-          .map((e) => Ingredient.fromJson(e))
-          .toList();
+      return List.of(data['drinks']).map((e) => Ingredient.fromJson(e)).toList();
     } catch (err) {
       throw CustomException(err);
     }
   }
 }
-
-  

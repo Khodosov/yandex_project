@@ -17,43 +17,48 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Stream<SearchState> mapEventToState(
     SearchEvent event,
   ) async* {
-    yield* event.map(addToFavorites: (e) async* {
-      final List<Drink> old = List.from(state.favorites);
-      if (old.contains(e.drink)) {
-        old.remove(e.drink);
-      } else {
-        old.add(e.drink);
-      }
-      yield state.copyWith(
-        favorites: old,
-      );
-    }, searchByName: (e) async* {
-      yield state.copyWith(
-        isRefreshing: true,
-      );
-      final newDrinks = await AppApisService().cocktailByName(e.name.trim());
-      yield state.copyWith(
-        drinks: newDrinks,
-        isRefreshing: false,
-      );
-    }, randomCocktail: (e) async* {
-      yield state.copyWith(
-        isRefreshing: true,
-      );
-      final newDrink = await AppApisService().randomCocktail();
-      yield state.copyWith(
-        drinks: newDrink,
-        isRefreshing: false,
-      );
-    }, randomSelectionCocktail: (e) async* {
-      yield state.copyWith(
-        isRefreshing: true,
-      );
-      final randDrinks = await AppApisService().randomSelectionCocktail();
-      yield state.copyWith(
-        drinks: randDrinks,
-        isRefreshing: false,
-      );
-    });
+    yield* event.map(
+      addToFavorites: (e) async* {
+        final List<Drink> old = List.from(state.favorites);
+        if (old.contains(e.drink)) {
+          old.remove(e.drink);
+        } else {
+          old.add(e.drink);
+        }
+        yield state.copyWith(
+          favorites: old,
+        );
+      },
+      searchByName: (e) async* {
+        yield state.copyWith(
+          isRefreshing: true,
+        );
+        final newDrinks = await AppApisService().cocktailByName(e.name.trim());
+        yield state.copyWith(
+          drinks: newDrinks,
+          isRefreshing: false,
+        );
+      },
+      randomCocktail: (e) async* {
+        yield state.copyWith(
+          isRefreshing: true,
+        );
+        final newDrink = await AppApisService().randomCocktail();
+        yield state.copyWith(
+          drinks: newDrink,
+          isRefreshing: false,
+        );
+      },
+      randomSelectionCocktail: (e) async* {
+        yield state.copyWith(
+          isRefreshing: true,
+        );
+        final randDrinks = await AppApisService().randomSelectionCocktail();
+        yield state.copyWith(
+          drinks: randDrinks,
+          isRefreshing: false,
+        );
+      },
+    );
   }
 }

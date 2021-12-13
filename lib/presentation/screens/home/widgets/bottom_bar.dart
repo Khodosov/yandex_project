@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
-import 'package:yandex_project/constants.dart';
+import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 
 class CustomBottomBar extends StatelessWidget {

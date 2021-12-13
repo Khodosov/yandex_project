@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:yandex_project/constants.dart';
+import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
 import 'package:yandex_project/presentation/widgets/background_widget.dart';
 import 'package:yandex_project/presentation/widgets/blur_widget.dart';
@@ -51,6 +51,7 @@ class DrinkInfoScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 50.0),
             child: Hero(
+              transitionOnUserGestures: true,
               tag: drink.name,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppConstants.smallRadius),
@@ -93,8 +94,12 @@ class DrinkInfoScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Flexible(
-                                child: DrinkTitleWidget(
-                                  drink: drink,
+                                child: Hero(
+                                  transitionOnUserGestures: true,
+                                  tag: drink.id,
+                                  child: DrinkTitleWidget(
+                                    drink: drink,
+                                  ),
                                 ),
                               ),
                             ],

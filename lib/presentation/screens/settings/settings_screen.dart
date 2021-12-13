@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
-import 'package:yandex_project/constants.dart';
+import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/presentation/widgets/background_widget.dart';
 import 'package:yandex_project/presentation/widgets/blur_widget.dart';
 import 'package:yandex_project/presentation/widgets/custom_app_bar.dart';
