@@ -84,8 +84,21 @@ class AppApisService {
 
   var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-  ///ingredients
 
+  ///ingredients
+  Future<List<Ingredient>> listIngredients() async {
+    try {
+      var data = await getIpJson('list.php', {'i': 'list'});
+      return List.of(data ? ['drinks'])
+          .map((e) => Ingredient.fromJson(e))
+          .toList();
+    } catch (err) {
+      return <Ingredient>[];
+    }
+  }
+
+
+  ///not used, to be rewrite
   Future<List<Ingredient>> ingredientByName(String ingredientName) async {
     try {
       var url = Uri.parse(baseUrl + 'search.php?i=' + ingredientName);

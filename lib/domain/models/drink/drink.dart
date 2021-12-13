@@ -1,23 +1,25 @@
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/drink/drink_dto.dart';
+import 'package:hive/hive.dart';
 
+@HiveType(typeId: 0)
 class Drink {
-  final String name;
-  final int id;
-  final String? alter;
-  final String? tags;
-  final String? video;
-  final String? category;
-  final String? iba;
-  final DrinkType? alcoholic;
-  final String? glass;
-  final String? instructions;
-  final String? thumb;
-  final List<String?> ingredients;
-  final List<String?> measures;
-  final String? imgSource;
-  final String? attribute;
-  final String? commons;
+  @HiveField(0) final String name;
+  @HiveField(1) final int id;
+  @HiveField(2) final String? alter;
+  @HiveField(3) final String? tags;
+  @HiveField(4) final String? video;
+  @HiveField(5) final String? category;
+  @HiveField(6) final String? iba;
+  @HiveField(7) final String? alcoholic;
+  @HiveField(8) final String? glass;
+  @HiveField(9) final String? instructions;
+  @HiveField(10) final String? thumb;
+  @HiveField(11) final List<String?> ingredients;
+  @HiveField(12) final List<String?> measures;
+  @HiveField(13) final String? imgSource;
+  @HiveField(14) final String? attribute;
+  @HiveField(15) final String? commons;
 
   Drink(
       {required this.name,

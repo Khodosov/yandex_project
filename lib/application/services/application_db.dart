@@ -1,74 +1,71 @@
+import 'package:hive/hive.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:yandex_project/domain/models/drink/drink.dart';
 import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
 
-class AppBDService {
-  late Database database;
 
-  static Future _onConfigure(Database db) async {
-    await db.execute('PRAGMA foreign_keys = ON');
+class AppDBService {
+
+  void initHiveOptions() async {
+
+    Hive.registerAdapter(IngredientAdapter());
+
+    final ingredientsBox = await Hive.openBox<List<Ingredient>>('Ingredients');
+    final favoriteBox = await Hive.openBox<List<Drink>>('Favorites');
+    //final settingsBox = await Hive.openBox<Settings>('Settings');
   }
 
-  Future<void> startDataBase() async {
-    var databasesPath = await getDatabasesPath();
-    String pathToDB = databasesPath + 'yBuhlishko.db';
+  Future<void> putIngredientList(List<Ingredient> ingredientList) async {
+    final ingredientsBox = await Hive.openBox<List<Ingredient>>('Ingredients');
 
-    database = await openDatabase(pathToDB,
-        version: 1,
-        onConfigure: _onConfigure,
-        onUpgrade: (db, oldVersion, newVersion) async {},
-        onCreate: (Database db, int version) async {
-      // When creating the db, create the table
-      await db.execute('PRAGMA foreign_keys=on;');
-      await db.execute(
-          'CREATE TABLE ingredients (id INTEGER PRIMARY KEY, name TEXT)');
-    });
+    ingredientsBox.put('list', ingredientList);
   }
 
-  Future<void> insertAllIngredients(List<Ingredient> allData) async {
+  Future<List<Ingredient>> getIngredientList() async {
     try {
-      var batch = database.batch();
+      final ingredientsBox = await Hive.openBox<List<Ingredient>>('Ingredients');
 
-      batch.delete('ingredients');
-
-      //rewrite to insert from map
-      allData.forEach((result) {
-        batch.rawInsert('INSERT INTO ingredients(id, name) VALUES(?, ?)', [
-          result.id,
-          result.name,
-        ]);
-      });
-
-      await batch.commit();
+      List<Ingredient>? list = ingredientsBox.get('list');
+      return (list == null) ? <Ingredient>[]: list;
     } catch (error) {
-      //log("error");
+      return <Ingredient>[];
     }
   }
 
-  Future<dynamic> getIngredients() async {
-    try {
-      var list = await database.query('ingredients', columns: ['id', 'name']);
-      return list;
-    } catch (error) {
-      return [];
-    }
+  Future<void> putFavoriteList(List<Drink> favoriteList) async {
+    final favoriteBox = await Hive.openBox<List<Drink>>('Favorites');
+
+    favoriteBox.put('list', favoriteList);
   }
 
-  Future<dynamic> getIngredientById(int ingredientId) async {
+  Future<List<Drink>> getFavoriteList() async {
     try {
-      var list = await getIngredientsWithCondition('id = ?', [ingredientId]);
-      return list;
-    } catch (error) {
-      return [];
-    }
-  }
+      final favoriteBox = await Hive.openBox<List<Drink>>('Favorites');
 
-  Future<dynamic> getIngredientsWithCondition(String condition, args) async {
-    try {
-      var list = await database.query('ingredients',
-          columns: ['id', 'name'], where: condition, whereArgs: args);
-      return list;
+      List<Drink>? list = favoriteBox.get('list');
+      return (list == null) ? <Drink>[]: list;
     } catch (error) {
-      return [];
+      return <Drink>[];
     }
   }
+//
+//  Future<void> putSettings(Settings settings) async { // didn't have model settings
+//    final settingsBox = await Hive.openBox<Settings>('Settings');
+//
+//    settingsBox.put('settings', settings);
+//  }
+//
+//  Future<Settings> getSettings() async {
+//    try {
+//      final settingsBox = await Hive.openBox<Settings>('Settings');
+//
+//      Settings settings = settingsBox.get('settings');
+//      return (settings == null) ? new Settings(): settings;
+//    } catch (error) {
+//      return new Settings();
+//    }
+//  }
+
+
+
 }
