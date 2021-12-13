@@ -17,9 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SearchEventTearOff {
   const _$SearchEventTearOff();
 
-  _SearchByName searchByName({required String name}) {
-    return _SearchByName(
-      name: name,
+  _SearchByName searchByFilter() {
+    return const _SearchByName();
+  }
+
+  _UpdateFilter updateFilter({required Filter filter}) {
+    return _UpdateFilter(
+      filter: filter,
     );
   }
 
@@ -45,54 +49,55 @@ const $SearchEvent = _$SearchEventTearOff();
 mixin _$SearchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) searchByName,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_SearchByName value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
@@ -113,7 +118,6 @@ class _$SearchEventCopyWithImpl<$Res> implements $SearchEventCopyWith<$Res> {
   _$SearchEventCopyWithImpl(this._value, this._then);
 
   final SearchEvent _value;
-
   // ignore: unused_field
   final $Res Function(SearchEvent) _then;
 }
@@ -123,8 +127,6 @@ abstract class _$SearchByNameCopyWith<$Res> {
   factory _$SearchByNameCopyWith(
           _SearchByName value, $Res Function(_SearchByName) then) =
       __$SearchByNameCopyWithImpl<$Res>;
-
-  $Res call({String name});
 }
 
 /// @nodoc
@@ -136,82 +138,63 @@ class __$SearchByNameCopyWithImpl<$Res> extends _$SearchEventCopyWithImpl<$Res>
 
   @override
   _SearchByName get _value => super._value as _SearchByName;
-
-  @override
-  $Res call({
-    Object? name = freezed,
-  }) {
-    return _then(_SearchByName(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_SearchByName implements _SearchByName {
-  const _$_SearchByName({required this.name});
-
-  @override
-  final String name;
+  const _$_SearchByName();
 
   @override
   String toString() {
-    return 'SearchEvent.searchByName(name: $name)';
+    return 'SearchEvent.searchByFilter()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _SearchByName &&
-            (identical(other.name, name) || other.name == name));
+        (other.runtimeType == runtimeType && other is _SearchByName);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name);
-
-  @JsonKey(ignore: true)
-  @override
-  _$SearchByNameCopyWith<_SearchByName> get copyWith =>
-      __$SearchByNameCopyWithImpl<_SearchByName>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) searchByName,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
-    return searchByName(name);
+    return searchByFilter();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
-    return searchByName?.call(name);
+    return searchByFilter?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
   }) {
-    if (searchByName != null) {
-      return searchByName(name);
+    if (searchByFilter != null) {
+      return searchByFilter();
     }
     return orElse();
   }
@@ -219,49 +202,206 @@ class _$_SearchByName implements _SearchByName {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_SearchByName value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
   }) {
-    return searchByName(this);
+    return searchByFilter(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
-    return searchByName?.call(this);
+    return searchByFilter?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
   }) {
-    if (searchByName != null) {
-      return searchByName(this);
+    if (searchByFilter != null) {
+      return searchByFilter(this);
     }
     return orElse();
   }
 }
 
 abstract class _SearchByName implements SearchEvent {
-  const factory _SearchByName({required String name}) = _$_SearchByName;
+  const factory _SearchByName() = _$_SearchByName;
+}
 
-  String get name;
+/// @nodoc
+abstract class _$UpdateFilterCopyWith<$Res> {
+  factory _$UpdateFilterCopyWith(
+          _UpdateFilter value, $Res Function(_UpdateFilter) then) =
+      __$UpdateFilterCopyWithImpl<$Res>;
+  $Res call({Filter filter});
+
+  $FilterCopyWith<$Res> get filter;
+}
+
+/// @nodoc
+class __$UpdateFilterCopyWithImpl<$Res> extends _$SearchEventCopyWithImpl<$Res>
+    implements _$UpdateFilterCopyWith<$Res> {
+  __$UpdateFilterCopyWithImpl(
+      _UpdateFilter _value, $Res Function(_UpdateFilter) _then)
+      : super(_value, (v) => _then(v as _UpdateFilter));
+
+  @override
+  _UpdateFilter get _value => super._value as _UpdateFilter;
+
+  @override
+  $Res call({
+    Object? filter = freezed,
+  }) {
+    return _then(_UpdateFilter(
+      filter: filter == freezed
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as Filter,
+    ));
+  }
+
+  @override
+  $FilterCopyWith<$Res> get filter {
+    return $FilterCopyWith<$Res>(_value.filter, (value) {
+      return _then(_value.copyWith(filter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateFilter implements _UpdateFilter {
+  const _$_UpdateFilter({required this.filter});
+
+  @override
+  final Filter filter;
+
+  @override
+  String toString() {
+    return 'SearchEvent.updateFilter(filter: $filter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UpdateFilter &&
+            (identical(other.filter, filter) || other.filter == filter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filter);
 
   @JsonKey(ignore: true)
-  _$SearchByNameCopyWith<_SearchByName> get copyWith =>
+  @override
+  _$UpdateFilterCopyWith<_UpdateFilter> get copyWith =>
+      __$UpdateFilterCopyWithImpl<_UpdateFilter>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
+    required TResult Function() randomCocktail,
+    required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
+  }) {
+    return updateFilter(filter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+  }) {
+    return updateFilter?.call(filter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (updateFilter != null) {
+      return updateFilter(filter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SearchByName value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
+    required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
+  }) {
+    return updateFilter(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+  }) {
+    return updateFilter?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (updateFilter != null) {
+      return updateFilter(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateFilter implements SearchEvent {
+  const factory _UpdateFilter({required Filter filter}) = _$_UpdateFilter;
+
+  Filter get filter;
+  @JsonKey(ignore: true)
+  _$UpdateFilterCopyWith<_UpdateFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -306,7 +446,8 @@ class _$_RandomCocktail implements _RandomCocktail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) searchByName,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
@@ -317,7 +458,8 @@ class _$_RandomCocktail implements _RandomCocktail {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
@@ -328,7 +470,8 @@ class _$_RandomCocktail implements _RandomCocktail {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
@@ -343,7 +486,8 @@ class _$_RandomCocktail implements _RandomCocktail {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_SearchByName value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
@@ -355,7 +499,8 @@ class _$_RandomCocktail implements _RandomCocktail {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
@@ -366,7 +511,8 @@ class _$_RandomCocktail implements _RandomCocktail {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
@@ -425,7 +571,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) searchByName,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
@@ -436,7 +583,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
@@ -447,7 +595,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
@@ -462,7 +611,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_SearchByName value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
@@ -474,7 +624,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
@@ -485,7 +636,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
@@ -507,7 +659,6 @@ abstract class _$AddToFavoritesCopyWith<$Res> {
   factory _$AddToFavoritesCopyWith(
           _AddToFavorites value, $Res Function(_AddToFavorites) then) =
       __$AddToFavoritesCopyWithImpl<$Res>;
-
   $Res call({Drink drink});
 }
 
@@ -567,7 +718,8 @@ class _$_AddToFavorites implements _AddToFavorites {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) searchByName,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
@@ -578,7 +730,8 @@ class _$_AddToFavorites implements _AddToFavorites {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
@@ -589,7 +742,8 @@ class _$_AddToFavorites implements _AddToFavorites {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? searchByName,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
@@ -604,7 +758,8 @@ class _$_AddToFavorites implements _AddToFavorites {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_SearchByName value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
@@ -616,7 +771,8 @@ class _$_AddToFavorites implements _AddToFavorites {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
@@ -627,7 +783,8 @@ class _$_AddToFavorites implements _AddToFavorites {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SearchByName value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
@@ -644,7 +801,6 @@ abstract class _AddToFavorites implements SearchEvent {
   const factory _AddToFavorites({required Drink drink}) = _$_AddToFavorites;
 
   Drink get drink;
-
   @JsonKey(ignore: true)
   _$AddToFavoritesCopyWith<_AddToFavorites> get copyWith =>
       throw _privateConstructorUsedError;

@@ -13,18 +13,17 @@ enum DrinkType {
   alcoholic,
   @JsonValue('Non alcoholic')
   nonAlcoholic,
-  @JsonValue('Optional alcoholic')
-  optionalAlcoholic
+  @JsonValue('Optional alcohol')
+  optionalAlcohol
 }
 
 extension ParseToString on AppTab {
   String fromEnum() {
-    return toString().split('.').last[0].toUpperCase() +
-        toString().split('.').last.substring(1);
+    return toString().split('.').last[0].toUpperCase() + toString().split('.').last.substring(1);
   }
 }
 
-extension DrinkToString on DrinkType {
+extension DrinkTypeToString on DrinkType {
   String fromEnum() {
     final drinkType = toString().split('.').last;
     switch (drinkType) {
@@ -32,8 +31,8 @@ extension DrinkToString on DrinkType {
         return 'Alcoholic';
       case 'nonAlcoholic':
         return 'Non alcoholic';
-      case 'optionalAlcoholic':
-        return 'Optional Alcoholic';
+      case 'optionalAlcohol':
+        return 'Optional Alcohol';
       default:
         return '';
     }

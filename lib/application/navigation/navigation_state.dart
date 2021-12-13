@@ -9,7 +9,7 @@ class NavigationState with EquatableMixin {
 
   factory NavigationState.initial() {
     return const NavigationState(
-      tab: AppTab.home,
+      tab: AppTab.random,
     );
   }
 

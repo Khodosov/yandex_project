@@ -5,4 +5,6 @@ class AppConstants {
 
   static const double titleFontSize = 30;
 
+  static const double subtitleFontSize = 14;
+
 }

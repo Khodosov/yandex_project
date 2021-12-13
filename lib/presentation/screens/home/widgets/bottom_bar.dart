@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
-import 'package:yandex_project/constants.dart';
+import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/general/enums.dart';
+import 'package:yandex_project/domain/models/filter/filter.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // return SizedBox(height: 50,);
     return BlocBuilder<NavigationBloc, NavigationState>(
       buildWhen: (previous, current) {
         return previous.tab != current.tab;
@@ -46,21 +46,23 @@ class CustomBottomBar extends StatelessWidget {
                           NavigationEvent.changeTab(
                               tab: AppTab.random, context: context));
                       BlocProvider.of<SearchBloc>(context)
-                          .add(const SearchEvent.randomCocktail());
+                          .add(const SearchEvent.updateFilter(filter: Filter()));
+                      BlocProvider.of<SearchBloc>(context)
+                          .add(const SearchEvent.randomSelectionCocktail());
                     },
                     icon: Icons.casino,
                     context: context,
                   ),
-                  tabIcon(
-                    selected: state.tab == AppTab.home,
-                    onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(
-                          NavigationEvent.changeTab(
-                              tab: AppTab.home, context: context));
-                    },
-                    icon: Icons.house,
-                    context: context,
-                  ),
+                  // tabIcon(
+                  //   selected: state.tab == AppTab.home,
+                  //   onTap: () {
+                  //     BlocProvider.of<NavigationBloc>(context).add(
+                  //         NavigationEvent.changeTab(
+                  //             tab: AppTab.home, context: context));
+                  //   },
+                  //   icon: Icons.house,
+                  //   context: context,
+                  // ),
                   tabIcon(
                     selected: state.tab == AppTab.search,
                     onTap: () {

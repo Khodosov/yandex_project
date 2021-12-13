@@ -31,7 +31,6 @@ const $NavigationEvent = _$NavigationEventTearOff();
 /// @nodoc
 mixin _$NavigationEvent {
   AppTab get tab => throw _privateConstructorUsedError;
-
   BuildContext get context => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
@@ -39,32 +38,27 @@ mixin _$NavigationEvent {
     required TResult Function(AppTab tab, BuildContext context) changeTab,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(AppTab tab, BuildContext context)? changeTab,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppTab tab, BuildContext context)? changeTab,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeTab value) changeTab,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ChangeTab value)? changeTab,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeTab value)? changeTab,
@@ -82,7 +76,6 @@ abstract class $NavigationEventCopyWith<$Res> {
   factory $NavigationEventCopyWith(
           NavigationEvent value, $Res Function(NavigationEvent) then) =
       _$NavigationEventCopyWithImpl<$Res>;
-
   $Res call({AppTab tab, BuildContext context});
 }
 
@@ -92,7 +85,6 @@ class _$NavigationEventCopyWithImpl<$Res>
   _$NavigationEventCopyWithImpl(this._value, this._then);
 
   final NavigationEvent _value;
-
   // ignore: unused_field
   final $Res Function(NavigationEvent) _then;
 
@@ -120,7 +112,6 @@ abstract class _$ChangeTabCopyWith<$Res>
   factory _$ChangeTabCopyWith(
           _ChangeTab value, $Res Function(_ChangeTab) then) =
       __$ChangeTabCopyWithImpl<$Res>;
-
   @override
   $Res call({AppTab tab, BuildContext context});
 }
@@ -247,10 +238,8 @@ abstract class _ChangeTab implements NavigationEvent {
 
   @override
   AppTab get tab;
-
   @override
   BuildContext get context;
-
   @override
   @JsonKey(ignore: true)
   _$ChangeTabCopyWith<_ChangeTab> get copyWith =>
