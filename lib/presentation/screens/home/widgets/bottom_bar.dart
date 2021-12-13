@@ -10,7 +10,6 @@ class CustomBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return SizedBox(height: 50,);
     return BlocBuilder<NavigationBloc, NavigationState>(
       buildWhen: (previous, current) {
         return previous.tab != current.tab;
@@ -46,21 +45,21 @@ class CustomBottomBar extends StatelessWidget {
                           NavigationEvent.changeTab(
                               tab: AppTab.random, context: context));
                       BlocProvider.of<SearchBloc>(context)
-                          .add(const SearchEvent.randomCocktail());
+                          .add(const SearchEvent.randomSelectionCocktail());
                     },
                     icon: Icons.casino,
                     context: context,
                   ),
-                  tabIcon(
-                    selected: state.tab == AppTab.home,
-                    onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(
-                          NavigationEvent.changeTab(
-                              tab: AppTab.home, context: context));
-                    },
-                    icon: Icons.house,
-                    context: context,
-                  ),
+                  // tabIcon(
+                  //   selected: state.tab == AppTab.home,
+                  //   onTap: () {
+                  //     BlocProvider.of<NavigationBloc>(context).add(
+                  //         NavigationEvent.changeTab(
+                  //             tab: AppTab.home, context: context));
+                  //   },
+                  //   icon: Icons.house,
+                  //   context: context,
+                  // ),
                   tabIcon(
                     selected: state.tab == AppTab.search,
                     onTap: () {

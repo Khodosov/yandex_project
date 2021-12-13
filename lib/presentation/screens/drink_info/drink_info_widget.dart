@@ -58,8 +58,7 @@ class DrinkInfoScreen extends StatelessWidget {
                 child: CachedNetworkImage(
                   fit: BoxFit.cover,
                   imageUrl: drink.thumb ?? 'http://via.placeholder.com/350x150',
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
+                  progressIndicatorBuilder: (context, url, downloadProgress) => Center(
                     child: SizedBox(
                       width: double.infinity,
                       child: Center(
@@ -70,8 +69,9 @@ class DrinkInfoScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.error_outline),
+                  errorWidget: (context, url, error) {
+                    return const Icon(Icons.error_outline);
+                  },
                 ),
               ),
             ),
@@ -93,18 +93,18 @@ class DrinkInfoScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Row(
-                            children: [
-                              Flexible(
-                                child: Hero(
-                                  transitionOnUserGestures: true,
-                                  tag: drink.id,
+                          child: Hero(
+                            transitionOnUserGestures: true,
+                            tag: drink.id,
+                            child: Row(
+                              children: [
+                                Flexible(
                                   child: DrinkTitleWidget(
                                     drink: drink,
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         drink.category != null
@@ -116,26 +116,21 @@ class DrinkInfoScreen extends StatelessWidget {
                                 ),
                               )
                             : const SizedBox.shrink(),
-                        InkWell(
-                          onTap: () {
-                            // Copy ingredients to filter
+                        ListTile(
+                          onTap: (){
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppConstants.smallRadius),
+                                  borderRadius: BorderRadius.circular(AppConstants.smallRadius),
                                 ),
                                 duration: const Duration(milliseconds: 600),
-                                content: const Text(
-                                    'Ingredients copied NOT YET ACTUALLY :('),
+                                content: const Text('Ingredients copied NOT YET ACTUALLY :('),
                               ),
                             );
                           },
-                          child: ListTile(
-                            title: const Text('Ingredients'),
-                            subtitle: Column(
-                              children: ingredientsWithMeasures,
-                            ),
+                          title: const Text('Ingredients'),
+                          subtitle: Column(
+                            children: ingredientsWithMeasures,
                           ),
                         ),
                         drink.glass != null

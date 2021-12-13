@@ -5,12 +5,14 @@ class SearchState with EquatableMixin {
   final bool isRefreshing;
   final List<Drink> favorites;
   final List<String> history;
+  final Filter filter;
 
   const SearchState({
     required this.history,
     required this.drinks,
     required this.isRefreshing,
     required this.favorites,
+    required this.filter,
   });
 
   factory SearchState.initial() => const SearchState(
@@ -18,6 +20,9 @@ class SearchState with EquatableMixin {
         drinks: <Drink>[],
         isRefreshing: false,
         favorites: [],
+        filter: Filter(
+          drinkType: DrinkType.values,
+        ),
       );
 
   SearchState copyWith({
@@ -25,8 +30,10 @@ class SearchState with EquatableMixin {
     List<Drink>? favorites,
     bool? isRefreshing,
     List<String>? history,
+    Filter? filter,
   }) {
     return SearchState(
+      filter: filter ?? this.filter,
       favorites: favorites ?? this.favorites,
       history: history ?? this.history,
       drinks: drinks ?? this.drinks,
@@ -40,5 +47,6 @@ class SearchState with EquatableMixin {
         isRefreshing,
         history,
         favorites,
+        filter,
       ];
 }

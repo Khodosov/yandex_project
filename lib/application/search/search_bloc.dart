@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:yandex_project/domain/general/enums.dart';
+import 'package:yandex_project/domain/models/filter/filter.dart';
 import '../services/application_apis.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
 
@@ -18,6 +20,24 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     SearchEvent event,
   ) async* {
     yield* event.map(
+      updateFilter: (e) async* {
+        yield state.copyWith(
+          filter: e.filter,
+        );
+      },
+      ///
+      /// Big method for all search calls
+      ///
+      searchByFilter: (e) async* {
+        yield state.copyWith(
+          isRefreshing: true,
+        );
+        final newDrinks = await AppApisService().cocktailByName((state.filter.name ?? '').trim());
+        yield state.copyWith(
+          drinks: newDrinks,
+          isRefreshing: false,
+        );
+      },
       addToFavorites: (e) async* {
         final List<Drink> old = List.from(state.favorites);
         if (old.contains(e.drink)) {
@@ -27,16 +47,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         }
         yield state.copyWith(
           favorites: old,
-        );
-      },
-      searchByName: (e) async* {
-        yield state.copyWith(
-          isRefreshing: true,
-        );
-        final newDrinks = await AppApisService().cocktailByName(e.name.trim());
-        yield state.copyWith(
-          drinks: newDrinks,
-          isRefreshing: false,
         );
       },
       randomCocktail: (e) async* {

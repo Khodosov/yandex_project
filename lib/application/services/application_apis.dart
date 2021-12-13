@@ -12,7 +12,7 @@ import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
 
 class AppApisService {
   final Dio _dio = Dio(
-    BaseOptions(baseUrl: 'https://www.thecocktaildb.com/api/json/v1/1/', method: 'get'),
+    BaseOptions(baseUrl: 'https://www.thecocktaildb.com/api/json/v2/${ApiKey.apiKey}/', method: 'get'),
   );
 
   Future<Map<String, dynamic>?> getIpJson(String localPath, Map<String, String> queryParameters) async {
@@ -33,7 +33,10 @@ class AppApisService {
     }
   }
 
-  ///drinks
+  ///
+  /// drinks
+  /// done
+  ///
   Future<List<Drink>> cocktailByName(String cocktailName) async {
     try {
       var data = await getIpJson('search.php', {'s': cocktailName});
@@ -42,7 +45,9 @@ class AppApisService {
       throw CustomException(err);
     }
   }
-
+  ///
+  /// Useless by now
+  ///
   Future<List<Drink>> cocktailById(int cocktailId) async {
     try {
       var data = await getIpJson('lookup.php', {'i': cocktailId.toString()});
@@ -51,7 +56,9 @@ class AppApisService {
       throw CustomException(err);
     }
   }
-
+  ///
+  /// For shake
+  ///
   Future<List<Drink>> randomCocktail() async {
     try {
       var data = await getIpJson('random.php', {});
@@ -63,8 +70,9 @@ class AppApisService {
     }
   }
 
-  ///not used yet
-  //only for 2 dollars
+  ///
+  /// Random button
+  ///
   Future<List<Drink>> randomSelectionCocktail() async {
     try {
       var data = await getIpJson('randomselection.php', {});
@@ -97,7 +105,6 @@ class AppApisService {
       throw CustomException(err);
     }
   }
-
   Future<List<Ingredient>> ingredientById(int ingredientId) async {
     try {
       var url =

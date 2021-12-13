@@ -4,6 +4,7 @@ import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/presentation/widgets/drink_item.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:yandex_project/presentation/widgets/not_found_widget.dart';
+import 'package:yandex_project/presentation/widgets/page_dots_widget.dart';
 
 class FavoritesList extends StatefulWidget {
   const FavoritesList({Key? key}) : super(key: key);
@@ -14,7 +15,8 @@ class FavoritesList extends StatefulWidget {
 
 class _FavoritesListState extends State<FavoritesList> {
   final controller = PageController(
-    viewportFraction: 0.96,
+    // viewportFraction: 0.96,
+    viewportFraction: 1,
   );
 
   @override
@@ -35,14 +37,24 @@ class _FavoritesListState extends State<FavoritesList> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 130, top: 40),
               child: state.favorites.isNotEmpty
-                  ? PageView.builder(
-                      controller: controller,
-                      padEnds: state.favorites.length == 1 ? true : false,
-                      itemCount: state.favorites.length,
-                      itemBuilder: (context, index) {
-                        return DrinkItem(drink: state.favorites[index]);
-                      },
-                    )
+                  ? Column(
+                    children: [
+                      PageDotsWidget(
+                        pageController: controller,
+                        pageCount: state.favorites.length,
+                      ),
+                      Expanded(
+                        child: PageView.builder(
+                            controller: controller,
+                            padEnds: state.favorites.length == 1 ? true : false,
+                            itemCount: state.favorites.length,
+                            itemBuilder: (context, index) {
+                              return DrinkItem(drink: state.favorites[index]);
+                            },
+                          ),
+                      ),
+                    ],
+                  )
                   : const NotFoundWidget(),
             ),
           );
