@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:yandex_project/domain/models/preferences_db/preferences_db.dart';
 
 part 'preferences_event.dart';
 

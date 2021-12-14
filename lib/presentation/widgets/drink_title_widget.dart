@@ -35,7 +35,8 @@ class DrinkTitleWidget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Text(
-                    drink.alcoholic != null ? drink.alcoholic!.fromEnum() : '-',
+                    //drink.alcoholic != null ? drink.alcoholic!.fromEnum() : '-',
+                    'dfdf',
                     style: const TextStyle(
                       fontSize: AppConstants.subtitleFontSize,
                     ),

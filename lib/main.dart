@@ -8,7 +8,10 @@ import 'application/preferences/preferences_bloc.dart';
 import 'application/search/search_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main()  {
+import 'application/services/aplication_initialConfig.dart';
+
+void main() async {
+  await onStartApp();
   runApp(const App());
 }
 

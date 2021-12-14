@@ -8,7 +8,7 @@ import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
 Future<void> onStartApp() async {
 
-  AppDBService().initHiveOptions();
+  await AppDBService().initHiveOptions();
 
   List<Ingredient> ingridientList = await AppDBService().getIngredientList();
   if (ingridientList.isEmpty) {
