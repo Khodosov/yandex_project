@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shake/shake.dart';
+import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/bottom_bar.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/favorites_list.dart';
@@ -23,6 +25,13 @@ class HomePage extends StatelessWidget {
         return previous != current;
       },
       builder: (context, state) {
+        if (state.tab != AppTab.settings) {
+          ShakeDetector detector = ShakeDetector.autoStart(
+            onPhoneShake: () {
+              BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
+            },
+          );
+        } else {}
         // Scaffold for snack bars in case of no connection issues
         return Scaffold(
           body: BackgroundWidget(

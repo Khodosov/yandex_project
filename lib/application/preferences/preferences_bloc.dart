@@ -17,6 +17,11 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
     PreferencesEvent event,
   ) async* {
     yield* event.map(
+      changeSearchMode: (e) async* {
+        yield state.copyWith(
+          nonAlcoholicMode: e.mode,
+        );
+      },
       changeTheme: (e) async* {
         yield state.copyWith(
           themeMode: e.themeMode,
