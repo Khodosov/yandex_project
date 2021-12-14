@@ -3,7 +3,7 @@
 
 import 'package:yandex_project/application/services/application_apis.dart';
 import 'package:yandex_project/application/services/application_db.dart';
-import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
+import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
 
 Future<void> onStartApp() async {

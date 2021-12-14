@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ingredient_dto.dart';
+part of 'ingredient.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

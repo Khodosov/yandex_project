@@ -72,12 +72,10 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           PopupMenuButton<ThemeMode>(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
             initialValue: context.read<PreferencesBloc>().state.themeMode,
             onSelected: (value) {
-              BlocProvider.of<PreferencesBloc>(context)
-                  .add(PreferencesEvent.changeTheme(themeMode: value));
+              BlocProvider.of<PreferencesBloc>(context).add(PreferencesEvent.changeTheme(themeMode: value));
             },
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) {
@@ -148,8 +146,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           PopupMenuButton<bool>(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
             initialValue: false,
             onSelected: (value) {},
             icon: const Icon(Icons.more_vert),

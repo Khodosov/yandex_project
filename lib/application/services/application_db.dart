@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
-import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
+import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
 
 class AppDBService {
@@ -34,7 +34,6 @@ class AppDBService {
 
   Future<void> putFavoriteList(List<Drink> favoriteList) async {
     final favoriteBox = await Hive.openBox<List<Drink>>('Favorites');
-
     favoriteBox.put('list', favoriteList);
   }
 

@@ -23,40 +23,43 @@ class HomePage extends StatelessWidget {
         return previous != current;
       },
       builder: (context, state) {
-        return BackgroundWidget(
-          child: Stack(
-            children: [
-              state.tab == AppTab.favorites ? const FavoritesList() : const ResultsList(),
-              CustomAppBar(
-                title: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    state.tab.fromEnum(),
-                    style: Theme.of(context).textTheme.headline6,
+        // Scaffold for snack bars in case of no connection issues
+        return Scaffold(
+          body: BackgroundWidget(
+            child: Stack(
+              children: [
+                state.tab == AppTab.favorites ? const FavoritesList() : const ResultsList(),
+                CustomAppBar(
+                  title: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      state.tab.fromEnum(),
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: BlurWidget(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(AppConstants.smallRadius),
-                    topLeft: Radius.circular(AppConstants.smallRadius),
-                  ),
-                  top: false,
-                  child: Column(
-                    children: const [
-                      KeyboardArea(
-                        child: SearchBar(),
-                      ),
-                      CustomBottomBar(),
-                    ],
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: BlurWidget(
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(AppConstants.smallRadius),
+                      topLeft: Radius.circular(AppConstants.smallRadius),
+                    ),
+                    top: false,
+                    child: Column(
+                      children: const [
+                        KeyboardArea(
+                          child: SearchBar(),
+                        ),
+                        CustomBottomBar(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

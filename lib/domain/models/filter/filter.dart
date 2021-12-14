@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:yandex_project/domain/general/enums.dart';
-import 'package:yandex_project/domain/models/ingredient/ingredient_dto.dart';
+import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
 part 'filter.freezed.dart';
 

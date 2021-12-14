@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ingredient_dto.g.dart';
+part 'ingredient.g.dart';
 
 
 @JsonSerializable(explicitToJson: true, includeIfNull: true)

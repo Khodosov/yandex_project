@@ -11,7 +11,7 @@ class Drink {
   @HiveField(4) final String? video;
   @HiveField(5) final String? category;
   @HiveField(6) final String? iba;
-  @HiveField(7) final String? alcoholic;
+  @HiveField(7) final DrinkType? alcoholic;
   @HiveField(8) final String? glass;
   @HiveField(9) final String? instructions;
   @HiveField(10) final String? thumb;
