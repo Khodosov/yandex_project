@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:yandex_project/application/preferences/preferences_bloc.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
 import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
@@ -47,23 +48,23 @@ class AppDBService {
       return <Drink>[];
     }
   }
-//
-//  Future<void> putSettings(Settings settings) async { // didn't have model settings
-//    final settingsBox = await Hive.openBox<Settings>('Settings');
-//
-//    settingsBox.put('settings', settings);
-//  }
-//
-//  Future<Settings> getSettings() async {
-//    try {
-//      final settingsBox = await Hive.openBox<Settings>('Settings');
-//
-//      Settings settings = settingsBox.get('settings');
-//      return (settings == null) ? new Settings(): settings;
-//    } catch (error) {
-//      return new Settings();
-//    }
-//  }
+
+  Future<void> putSettings(PreferencesState preferencesState) async { // didn't have model settings
+    final preferencesStateBox = await Hive.openBox<PreferencesState>('PreferencesState');
+
+    preferencesStateBox.put('settings', preferencesState);
+  }
+
+  Future<PreferencesState> getSettings() async {
+    try {
+      final preferencesStateBox = await Hive.openBox<PreferencesState>('PreferencesState');
+
+      PreferencesState preferencesState = preferencesStateBox.get('settings') ?? PreferencesState.initial();
+      return preferencesState;
+    } catch (error) {
+      return PreferencesState.initial();
+    }
+  }
 
 
 

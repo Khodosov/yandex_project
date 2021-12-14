@@ -1,8 +1,9 @@
 part of 'preferences_bloc.dart';
 
+@HiveType(typeId: 2)
 class PreferencesState with EquatableMixin {
-  final ThemeMode themeMode;
-  final bool nonAlcoholicMode;
+  @HiveField(0) final ThemeMode themeMode;
+  @HiveField(1) final bool nonAlcoholicMode;
 
   const PreferencesState({
     required this.themeMode,
