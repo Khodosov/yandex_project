@@ -25,6 +25,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           filter: e.filter,
         );
       },
+
       ///
       /// Big method for all search calls
       ///
@@ -32,7 +33,65 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         yield state.copyWith(
           isRefreshing: true,
         );
-        final newDrinks = await AppApisService().cocktailByName((state.filter.name ?? '').trim());
+        var newDrinks = <Drink>[];
+        if (state.filter.name == null) {
+          if (state.filter.ingredients == null) {
+            if (state.filter.drinkType == null) {
+              newDrinks = await AppApisService().cocktailByName('');
+            } else {
+              for (var element in state.filter.drinkType!) {
+                var tempList = <Drink>[];
+                tempList = await AppApisService()
+                    .filterByAlcoholic(element.toString());
+                newDrinks = [...newDrinks, ...tempList].toSet().toList();
+              }
+            }
+          } else {
+            String ingredients = '';
+            for (var i = 0; i < state.filter.ingredients!.length; i++) {
+              if (i != state.filter.ingredients!.length - 1) {
+                ingredients += state.filter.ingredients![i].toString();
+                ingredients += ',';
+              } else {
+                ingredients += state.filter.ingredients![i].toString();
+              }
+            }
+            newDrinks = await AppApisService().filterByIngredients(ingredients);
+            if (state.filter.drinkType != null) {
+              for (var element in state.filter.drinkType!) {
+                var tempList = <Drink>[];
+                tempList = await AppApisService()
+                    .filterByAlcoholic(element.toString());
+                newDrinks = [...newDrinks, ...tempList].toSet().toList();
+              }
+            }
+          }
+        } else {
+          newDrinks = await AppApisService()
+              .cocktailByName((state.filter.name ?? '').trim());
+          if (state.filter.ingredients != null) {
+            for (var drink in newDrinks) {
+              for (var i = 0; i < state.filter.ingredients!.length; i++) {
+                if (!drink.ingredients.contains(state.filter.ingredients![i])) {
+                  newDrinks.remove(drink);
+                  break;
+                }
+              }
+            }
+          }
+          if (state.filter.drinkType != null){
+            for (var drink in newDrinks) {
+              for (var i = 0; i < state.filter.drinkType!.length; i++) {
+                if (drink.alcoholic != state.filter.drinkType![i]) {
+                  newDrinks.remove(drink);
+                  break;
+                }
+              }
+            }
+          }
+        }
+        newDrinks = await AppApisService()
+            .cocktailByName((state.filter.name ?? '').trim());
         yield state.copyWith(
           drinks: newDrinks,
           isRefreshing: false,
