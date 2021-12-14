@@ -12,12 +12,16 @@ import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
 class AppApisService {
   final Dio _dio = Dio(
-    BaseOptions(baseUrl: 'https://www.thecocktaildb.com/api/json/v2/${ApiKey.apiKey}/', method: 'get'),
+    BaseOptions(
+        baseUrl: 'https://www.thecocktaildb.com/api/json/v2/${ApiKey.apiKey}/',
+        method: 'get'),
   );
 
-  Future<Map<String, dynamic>?> getIpJson(String localPath, Map<String, String> queryParameters) async {
+  Future<Map<String, dynamic>?> getIpJson(
+      String localPath, Map<String, String> queryParameters) async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(localPath, queryParameters: queryParameters);
+      final response = await _dio.get<Map<String, dynamic>>(localPath,
+          queryParameters: queryParameters);
       return response.data;
     } on DioError catch (e) {
       if (e.response == null) {
@@ -40,22 +44,28 @@ class AppApisService {
   Future<List<Drink>> cocktailByName(String cocktailName) async {
     try {
       var data = await getIpJson('search.php', {'s': cocktailName});
-      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
+      return List.of(data?['drinks'])
+          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
+          .toList();
     } catch (err) {
       throw CustomException(err);
     }
   }
+
   ///
   /// Useless by now
   ///
   Future<List<Drink>> cocktailById(int cocktailId) async {
     try {
       var data = await getIpJson('lookup.php', {'i': cocktailId.toString()});
-      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
+      return List.of(data?['drinks'])
+          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
+          .toList();
     } catch (err) {
       throw CustomException(err);
     }
   }
+
   ///
   /// For shake
   ///
@@ -104,33 +114,46 @@ class AppApisService {
   ///not used, to be rewrite
   Future<List<Ingredient>> ingredientByName(String ingredientName) async {
     try {
-      var url = Uri.parse(baseUrl + 'search.php?i=' + ingredientName);
-
-      var response = await http.post(
-        url,
-        headers: {},
-        body: {},
-      );
-
-      var data = json.decode(response.body);
-      return List.of(data['drinks']).map((e) => Ingredient.fromJson(e)).toList();
+      var data = await getIpJson('search.php', {'i': ingredientName});
+      return List.of(data!['drinks'])
+          .map((e) => Ingredient.fromJson(e))
+          .toList();
     } catch (err) {
       throw CustomException(err);
     }
   }
+
   Future<List<Ingredient>> ingredientById(int ingredientId) async {
     try {
-      var url =
-      Uri.parse(baseUrl + 'lookup.php?iid=' + ingredientId.toString());
+      var data =
+          await getIpJson('lookup.php', {'iid': ingredientId.toString()});
+      return List.of(data!['drinks'])
+          .map((e) => Ingredient.fromJson(e))
+          .toList();
+    } catch (err) {
+      throw CustomException(err);
+    }
+  }
 
-      var response = await http.post(
-        url,
-        headers: {},
-        body: {},
-      );
+  Future<List<Drink>> filterByAlcoholic(String drinkType) async {
+    try {
+      var data =
+      await getIpJson('filter.php', {'a': drinkType});
+      return List.of(data?['drinks'])
+          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
+          .toList();
+    } catch (err) {
+      throw CustomException(err);
+    }
+  }
 
-      var data = json.decode(response.body);
-      return List.of(data['drinks']).map((e) => Ingredient.fromJson(e)).toList();
+  Future<List<Drink>> filterByIngredients(String ingredients) async {
+    try {
+      var data =
+      await getIpJson('filter.php', {'i': ingredients});
+      return List.of(data?['drinks'])
+          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
+          .toList();
     } catch (err) {
       throw CustomException(err);
     }
