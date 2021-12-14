@@ -18,6 +18,7 @@ class CustomAppBar extends StatelessWidget {
             bottom: Radius.circular(AppConstants.smallRadius)),
         bottom: false,
         child: AppBar(
+          centerTitle: true,
           toolbarHeight: 40,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,

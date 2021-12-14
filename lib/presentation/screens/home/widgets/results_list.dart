@@ -21,7 +21,7 @@ class _ResultsListState extends State<ResultsList> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomSelectionCocktail());
+    // BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomSelectionCocktail());
   }
 
   @override
