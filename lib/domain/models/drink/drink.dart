@@ -1,11 +1,11 @@
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/drink/drink_dto.dart';
 import 'package:hive/hive.dart';
+
 part 'drink.g.dart';
 
 @HiveType(typeId: 0)
 class Drink {
-
   @HiveField(0)
   final String name;
 

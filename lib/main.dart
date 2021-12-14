@@ -8,7 +8,7 @@ import 'application/preferences/preferences_bloc.dart';
 import 'application/search/search_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'application/services/aplication_initialConfig.dart';
+import 'application/services/application_initialConfig.dart';
 
 void main() async {
   await onStartApp();
@@ -23,10 +23,10 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PreferencesBloc>(
-          create: (_) => PreferencesBloc(),
+          create: (_) => PreferencesBloc()..add(const PreferencesEvent.init()),
         ),
         BlocProvider<SearchBloc>(
-          create: (_) => SearchBloc(),
+          create: (_) => SearchBloc()..add(const SearchEvent.init()),
         ),
         BlocProvider<NavigationBloc>(
           create: (_) => NavigationBloc(),

@@ -9,21 +9,17 @@ class PreferencesState with EquatableMixin {
     required this.nonAlcoholicMode,
   });
 
-  factory PreferencesState.initial() => const PreferencesState(
-        themeMode: ThemeMode.system,
-        nonAlcoholicMode: false,
-      );
-
-  PreferencesDB toDB() {
-    return PreferencesDB(
-      themeMode: themeMode,
-      nonAlcoholicMode: nonAlcoholicMode,
+  factory PreferencesState.initial() {
+    return const PreferencesState(
+      themeMode: ThemeMode.system,
+      nonAlcoholicMode: false,
     );
   }
 
   static PreferencesState fromDB(PreferencesDB preferencesDB) {
     return PreferencesState(
-      themeMode: preferencesDB.themeMode,
+      themeMode:
+          ThemeMode.values.firstWhere((element) => element.toString().split('.').last == preferencesDB.themeMode),
       nonAlcoholicMode: preferencesDB.nonAlcoholicMode,
     );
   }

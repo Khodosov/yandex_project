@@ -17,7 +17,7 @@ class PreferencesDBAdapter extends TypeAdapter<PreferencesDB> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PreferencesDB(
-      themeMode: fields[0] as ThemeMode,
+      themeMode: fields[0] as String,
       nonAlcoholicMode: fields[1] as bool,
     );
   }

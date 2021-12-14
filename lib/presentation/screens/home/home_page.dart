@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       onPhoneShake: () async {
         if ((await Vibration.hasCustomVibrationsSupport() ?? false) &&
             (await Vibration.hasAmplitudeControl() ?? false)) {
-          Vibration.vibrate(pattern: [0, 7], intensities: [255]);
+          Vibration.vibrate(pattern: [0, 10, 20, 10], intensities: [255, 255]);
         }
         BlocProvider.of<NavigationBloc>(context).add(NavigationEvent.changeTab(tab: AppTab.random, context: context));
         BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
         }
         // Scaffold for snack bars in case of no connection issues
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: BackgroundWidget(
             child: Stack(
               children: [
