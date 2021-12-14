@@ -1,25 +1,58 @@
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/drink/drink_dto.dart';
 import 'package:hive/hive.dart';
+part 'drink.g.dart';
 
 @HiveType(typeId: 0)
 class Drink {
-  @HiveField(0) final String name;
-  @HiveField(1) final int id;
-  @HiveField(2) final String? alter;
-  @HiveField(3) final String? tags;
-  @HiveField(4) final String? video;
-  @HiveField(5) final String? category;
-  @HiveField(6) final String? iba;
-  @HiveField(7) final DrinkType? alcoholic;
-  @HiveField(8) final String? glass;
-  @HiveField(9) final String? instructions;
-  @HiveField(10) final String? thumb;
-  @HiveField(11) final List<String?> ingredients;
-  @HiveField(12) final List<String?> measures;
-  @HiveField(13) final String? imgSource;
-  @HiveField(14) final String? attribute;
-  @HiveField(15) final String? commons;
+
+  @HiveField(0)
+  final String name;
+
+  @HiveField(1)
+  final int id;
+
+  @HiveField(2)
+  final String? alter;
+
+  @HiveField(3)
+  final String? tags;
+
+  @HiveField(4)
+  final String? video;
+
+  @HiveField(5)
+  final String? category;
+
+  @HiveField(6)
+  final String? iba;
+
+  @HiveField(7)
+  final DrinkType? alcoholic;
+
+  @HiveField(8)
+  final String? glass;
+
+  @HiveField(9)
+  final String? instructions;
+
+  @HiveField(10)
+  final String? thumb;
+
+  @HiveField(11)
+  final List<String?> ingredients;
+
+  @HiveField(12)
+  final List<String?> measures;
+
+  @HiveField(13)
+  final String? imgSource;
+
+  @HiveField(14)
+  final String? attribute;
+
+  @HiveField(15)
+  final String? commons;
 
   Drink(
       {required this.name,

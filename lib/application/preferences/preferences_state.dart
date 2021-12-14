@@ -1,9 +1,8 @@
 part of 'preferences_bloc.dart';
 
-@HiveType(typeId: 2)
 class PreferencesState with EquatableMixin {
-  @HiveField(0) final ThemeMode themeMode;
-  @HiveField(1) final bool nonAlcoholicMode;
+  final ThemeMode themeMode;
+  final bool nonAlcoholicMode;
 
   const PreferencesState({
     required this.themeMode,
@@ -14,6 +13,20 @@ class PreferencesState with EquatableMixin {
         themeMode: ThemeMode.system,
         nonAlcoholicMode: false,
       );
+
+  PreferencesDB toDB() {
+    return PreferencesDB(
+      themeMode: themeMode,
+      nonAlcoholicMode: nonAlcoholicMode,
+    );
+  }
+
+  static PreferencesState fromDB(PreferencesDB preferencesDB) {
+    return PreferencesState(
+      themeMode: preferencesDB.themeMode,
+      nonAlcoholicMode: preferencesDB.nonAlcoholicMode,
+    );
+  }
 
   PreferencesState copyWith({
     ThemeMode? themeMode,
