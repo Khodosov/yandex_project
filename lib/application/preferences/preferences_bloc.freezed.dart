@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PreferencesEventTearOff {
   const _$PreferencesEventTearOff();
 
+  _Init init() {
+    return const _Init();
+  }
+
   _ChangeTheme changeTheme({required ThemeMode themeMode}) {
     return _ChangeTheme(
       themeMode: themeMode,
@@ -37,18 +41,21 @@ const $PreferencesEvent = _$PreferencesEventTearOff();
 mixin _$PreferencesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() init,
     required TResult Function(ThemeMode themeMode) changeTheme,
     required TResult Function(bool mode) changeSearchMode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function(ThemeMode themeMode)? changeTheme,
     TResult Function(bool mode)? changeSearchMode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function(ThemeMode themeMode)? changeTheme,
     TResult Function(bool mode)? changeSearchMode,
     required TResult orElse(),
@@ -56,18 +63,21 @@ mixin _$PreferencesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
     required TResult Function(_ChangeTheme value) changeTheme,
     required TResult Function(_ChangeSearchMode value) changeSearchMode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
     TResult Function(_ChangeTheme value)? changeTheme,
     TResult Function(_ChangeSearchMode value)? changeSearchMode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
     TResult Function(_ChangeTheme value)? changeTheme,
     TResult Function(_ChangeSearchMode value)? changeSearchMode,
     required TResult orElse(),
@@ -90,6 +100,114 @@ class _$PreferencesEventCopyWithImpl<$Res>
   final PreferencesEvent _value;
   // ignore: unused_field
   final $Res Function(PreferencesEvent) _then;
+}
+
+/// @nodoc
+abstract class _$InitCopyWith<$Res> {
+  factory _$InitCopyWith(_Init value, $Res Function(_Init) then) =
+      __$InitCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$InitCopyWithImpl<$Res> extends _$PreferencesEventCopyWithImpl<$Res>
+    implements _$InitCopyWith<$Res> {
+  __$InitCopyWithImpl(_Init _value, $Res Function(_Init) _then)
+      : super(_value, (v) => _then(v as _Init));
+
+  @override
+  _Init get _value => super._value as _Init;
+}
+
+/// @nodoc
+
+class _$_Init implements _Init {
+  const _$_Init();
+
+  @override
+  String toString() {
+    return 'PreferencesEvent.init()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Init);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(ThemeMode themeMode) changeTheme,
+    required TResult Function(bool mode) changeSearchMode,
+  }) {
+    return init();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(ThemeMode themeMode)? changeTheme,
+    TResult Function(bool mode)? changeSearchMode,
+  }) {
+    return init?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(ThemeMode themeMode)? changeTheme,
+    TResult Function(bool mode)? changeSearchMode,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_ChangeTheme value) changeTheme,
+    required TResult Function(_ChangeSearchMode value) changeSearchMode,
+  }) {
+    return init(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ChangeTheme value)? changeTheme,
+    TResult Function(_ChangeSearchMode value)? changeSearchMode,
+  }) {
+    return init?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ChangeTheme value)? changeTheme,
+    TResult Function(_ChangeSearchMode value)? changeSearchMode,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Init implements PreferencesEvent {
+  const factory _Init() = _$_Init;
 }
 
 /// @nodoc
@@ -157,6 +275,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() init,
     required TResult Function(ThemeMode themeMode) changeTheme,
     required TResult Function(bool mode) changeSearchMode,
   }) {
@@ -166,6 +285,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function(ThemeMode themeMode)? changeTheme,
     TResult Function(bool mode)? changeSearchMode,
   }) {
@@ -175,6 +295,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function(ThemeMode themeMode)? changeTheme,
     TResult Function(bool mode)? changeSearchMode,
     required TResult orElse(),
@@ -188,6 +309,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
     required TResult Function(_ChangeTheme value) changeTheme,
     required TResult Function(_ChangeSearchMode value) changeSearchMode,
   }) {
@@ -197,6 +319,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
     TResult Function(_ChangeTheme value)? changeTheme,
     TResult Function(_ChangeSearchMode value)? changeSearchMode,
   }) {
@@ -206,6 +329,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
     TResult Function(_ChangeTheme value)? changeTheme,
     TResult Function(_ChangeSearchMode value)? changeSearchMode,
     required TResult orElse(),
@@ -290,6 +414,7 @@ class _$_ChangeSearchMode implements _ChangeSearchMode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() init,
     required TResult Function(ThemeMode themeMode) changeTheme,
     required TResult Function(bool mode) changeSearchMode,
   }) {
@@ -299,6 +424,7 @@ class _$_ChangeSearchMode implements _ChangeSearchMode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function(ThemeMode themeMode)? changeTheme,
     TResult Function(bool mode)? changeSearchMode,
   }) {
@@ -308,6 +434,7 @@ class _$_ChangeSearchMode implements _ChangeSearchMode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
     TResult Function(ThemeMode themeMode)? changeTheme,
     TResult Function(bool mode)? changeSearchMode,
     required TResult orElse(),
@@ -321,6 +448,7 @@ class _$_ChangeSearchMode implements _ChangeSearchMode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
     required TResult Function(_ChangeTheme value) changeTheme,
     required TResult Function(_ChangeSearchMode value) changeSearchMode,
   }) {
@@ -330,6 +458,7 @@ class _$_ChangeSearchMode implements _ChangeSearchMode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
     TResult Function(_ChangeTheme value)? changeTheme,
     TResult Function(_ChangeSearchMode value)? changeSearchMode,
   }) {
@@ -339,6 +468,7 @@ class _$_ChangeSearchMode implements _ChangeSearchMode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
     TResult Function(_ChangeTheme value)? changeTheme,
     TResult Function(_ChangeSearchMode value)? changeSearchMode,
     required TResult orElse(),

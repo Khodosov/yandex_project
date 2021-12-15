@@ -6,7 +6,7 @@ part 'preferences_db.g.dart';
 
 @HiveType(typeId: 2)
 class PreferencesDB {
-  @HiveField(0) final ThemeMode themeMode;
+  @HiveField(0) final String themeMode;
   @HiveField(1) final bool nonAlcoholicMode;
 
   const PreferencesDB({
@@ -15,13 +15,13 @@ class PreferencesDB {
   });
 
   factory PreferencesDB.initial() => const PreferencesDB(
-    themeMode: ThemeMode.system,
+    themeMode: 'system',
     nonAlcoholicMode: false,
   );
 
-  static PreferencesDB fromDB(PreferencesState preferencesState) {
+  static PreferencesDB toDB(PreferencesState preferencesState) {
     return PreferencesDB(
-      themeMode: preferencesState.themeMode,
+      themeMode: preferencesState.themeMode.toString().split('.').last,
       nonAlcoholicMode: preferencesState.nonAlcoholicMode,
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shake/shake.dart';
+import 'package:vibration/vibration.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/bottom_bar.dart';
@@ -15,8 +16,31 @@ import 'package:yandex_project/presentation/widgets/keyboard_area_widget.dart';
 
 import '../../../constants/constants.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late final ShakeDetector shakeDetector;
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomSelectionCocktail());
+    shakeDetector = ShakeDetector.waitForStart(
+      onPhoneShake: () async {
+        if ((await Vibration.hasCustomVibrationsSupport() ?? false) &&
+            (await Vibration.hasAmplitudeControl() ?? false)) {
+          Vibration.vibrate(pattern: [0, 10, 20, 10], intensities: [255, 255]);
+        }
+        BlocProvider.of<NavigationBloc>(context).add(NavigationEvent.changeTab(tab: AppTab.random, context: context));
+        BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +50,13 @@ class HomePage extends StatelessWidget {
       },
       builder: (context, state) {
         if (state.tab != AppTab.settings) {
-          ShakeDetector detector = ShakeDetector.autoStart(
-            onPhoneShake: () {
-              BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
-            },
-          );
-        } else {}
+          shakeDetector.startListening();
+        } else {
+          shakeDetector.startListening();
+        }
         // Scaffold for snack bars in case of no connection issues
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: BackgroundWidget(
             child: Stack(
               children: [

@@ -1,4 +1,7 @@
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+part 'enums.g.dart';
 
 enum AppTab {
   favorites,
@@ -8,13 +11,14 @@ enum AppTab {
   settings,
 }
 
+@HiveType(typeId: 3)
 enum DrinkType {
   @JsonValue('Alcoholic')
-  alcoholic,
+  @HiveField(0) alcoholic,
   @JsonValue('Non alcoholic')
-  nonAlcoholic,
+  @HiveField(1) nonAlcoholic,
   @JsonValue('Optional alcohol')
-  optionalAlcohol
+  @HiveField(2) optionalAlcohol
 }
 
 extension ParseToString on AppTab {
@@ -38,3 +42,4 @@ extension DrinkTypeToString on DrinkType {
     }
   }
 }
+
