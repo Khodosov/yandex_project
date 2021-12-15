@@ -9,6 +9,7 @@ part 'ingredient.g.dart';
 class Ingredient {
 
   @HiveField(0)
+  @JsonKey(name: 'strIngredient1')
   final String name;
 
   Ingredient({required this.name});

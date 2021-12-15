@@ -45,10 +45,10 @@ class IngredientAdapter extends TypeAdapter<Ingredient> {
 // **************************************************************************
 
 Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
-      name: json['name'] as String,
+      name: json['strIngredient1'] as String,
     );
 
 Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'strIngredient1': instance.name,
     };

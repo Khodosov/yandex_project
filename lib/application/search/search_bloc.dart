@@ -50,7 +50,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         if (state.filter.name == null) {
           if (state.filter.ingredients == null) {
             if (state.filter.drinkType == null) {
-              newDrinks = await AppApisService().cocktailByName('');
+              newDrinks = await AppApisService().cocktailByName((state.filter.name ?? '').trim());
             } else {
               for (var element in state.filter.drinkType!) {
                 var tempList = <Drink>[];
@@ -100,7 +100,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             }
           }
         }
-        newDrinks = await AppApisService().cocktailByName((state.filter.name ?? '').trim());
         yield state.copyWith(
           drinks: newDrinks,
           isRefreshing: false,
