@@ -1,7 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:yandex_project/application/services/application_db.dart';
+import 'package:yandex_project/domain/exception/failures.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
 import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
@@ -21,24 +23,25 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Stream<SearchState> mapEventToState(
     SearchEvent event,
   ) async* {
+    final apiCall = AppApisService();
     final dataBase = AppDBService();
 
     yield* event.map(
       init: (e) async* {
         final ingredients = await dataBase.getIngredientList();
         final favorites = await dataBase.getFavoriteList();
-        print(ingredients.length);
-        print(ingredients.map((e) => e.name));
         yield state.copyWith(
           ingredients: ingredients,
           favorites: favorites,
         );
       },
       updateFilter: (e) async* {
+        print(e.filter);
         yield state.copyWith(
           filter: e.filter,
         );
       },
+
       ///
       /// Big method for all search calls
       ///
@@ -46,64 +49,35 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         yield state.copyWith(
           isRefreshing: true,
         );
-        var newDrinks = <Drink>[];
-        if (state.filter.name == null) {
-          if (state.filter.ingredients == null) {
-            if (state.filter.drinkType == null) {
-              newDrinks = await AppApisService().cocktailByName((state.filter.name ?? '').trim());
-            } else {
-              for (var element in state.filter.drinkType!) {
-                var tempList = <Drink>[];
-                tempList = await AppApisService().filterByAlcoholic(element.toString());
-                newDrinks = <Drink>{...newDrinks, ...tempList}.toList();
-              }
-            }
-          } else {
-            String ingredients = '';
-            for (var i = 0; i < state.filter.ingredients!.length; i++) {
-              if (i != state.filter.ingredients!.length - 1) {
-                ingredients += state.filter.ingredients![i].toString();
-                ingredients += ',';
-              } else {
-                ingredients += state.filter.ingredients![i].toString();
-              }
-            }
-            newDrinks = await AppApisService().filterByIngredients(ingredients);
-            if (state.filter.drinkType != null) {
-              for (var element in state.filter.drinkType!) {
-                var tempList = <Drink>[];
-                tempList = await AppApisService().filterByAlcoholic(element.toString());
-                newDrinks = <Drink>{...newDrinks, ...tempList}.toList();
-              }
-            }
-          }
-        } else {
-          newDrinks = await AppApisService().cocktailByName((state.filter.name ?? '').trim());
-          if (state.filter.ingredients != null) {
-            for (var drink in newDrinks) {
-              for (var i = 0; i < state.filter.ingredients!.length; i++) {
-                if (!drink.ingredients.contains(state.filter.ingredients![i].toString())) {
-                  newDrinks.remove(drink);
-                  break;
+        final nameCheck = state.filter.name != null;
+        final ingredientsCheck = state.filter.ingredients != null;
+        // final typeCheck = state.filter.drinkType != null;
+        late Either<Failure, List<Drink>> drinks;
+        drinks = nameCheck
+            ? await apiCall.searchByName(state.filter.name!)
+            : ingredientsCheck
+                ? await apiCall.searchByIngredients(state.filter.ingredients!.join(','))
+                : await apiCall
+                    .searchByType(state.filter.drinkType!.map((e) => e.toString().split(('.')).last).join(','));
+        if (drinks.isRight()) {
+          final List<Drink> filtered = [];
+          drinks.fold(
+            (l) => null,
+            (r) {
+              for (final drink in r) {
+                  if (state.filter.ingredients?.toSet().containsAll(drink.ingredients) ?? true) {
+                    if (state.filter.drinkType!.contains(drink.alcoholic)) {
+                      filtered.add(drink);
+                    }
+                  }
                 }
-              }
-            }
-          }
-          if (state.filter.drinkType != null) {
-            for (var drink in newDrinks) {
-              for (var i = 0; i < state.filter.drinkType!.length; i++) {
-                if (drink.alcoholic != state.filter.drinkType![i]) {
-                  newDrinks.remove(drink);
-                  break;
-                }
-              }
-            }
-          }
+            },
+          );
+          yield state.copyWith(
+            drinks: right(filtered),
+            isRefreshing: false,
+          );
         }
-        yield state.copyWith(
-          drinks: newDrinks,
-          isRefreshing: false,
-        );
       },
       addToFavorites: (e) async* {
         final List<Drink> old = List.from(state.favorites);
@@ -121,7 +95,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         yield state.copyWith(
           isRefreshing: true,
         );
-        final newDrink = await AppApisService().randomCocktail();
+        final newDrink = await apiCall.randomCocktail();
         yield state.copyWith(
           drinks: newDrink,
           isRefreshing: false,
@@ -131,9 +105,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         yield state.copyWith(
           isRefreshing: true,
         );
-        final randDrinks = await AppApisService().randomSelectionCocktail();
+        final newDrinks = await apiCall.randomSelectionCocktail();
         yield state.copyWith(
-          drinks: randDrinks,
+          drinks: newDrinks,
           isRefreshing: false,
         );
       },

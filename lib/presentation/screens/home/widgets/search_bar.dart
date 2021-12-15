@@ -96,9 +96,10 @@ class _SearchBarState extends State<SearchBar> {
                 ),
                 border: InputBorder.none),
             onChanged: (text) {
+              final filter = context.read<SearchBloc>().state.filter;
               BlocProvider.of<SearchBloc>(context).add(
                 SearchEvent.updateFilter(
-                  filter: Filter(
+                  filter: filter.copyWith(
                     name: text,
                   ),
                 ),

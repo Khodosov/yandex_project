@@ -1,7 +1,7 @@
 part of 'search_bloc.dart';
 
 class SearchState with EquatableMixin {
-  final List<Drink> drinks;
+  final Either<Failure, List<Drink>> drinks;
   final bool isRefreshing;
   final List<Drink> favorites;
   final List<String> history;
@@ -17,19 +17,19 @@ class SearchState with EquatableMixin {
     required this.ingredients,
   });
 
-  factory SearchState.initial() => const SearchState(
+  factory SearchState.initial() => SearchState(
         history: <String>[],
-        drinks: <Drink>[],
+        drinks: right(<Drink>[]),
         isRefreshing: false,
         favorites: [],
-        filter: Filter(
+        filter: const Filter(
           drinkType: DrinkType.values,
         ),
         ingredients: [],
       );
 
   SearchState copyWith({
-    List<Drink>? drinks,
+    Either<Failure, List<Drink>>? drinks,
     List<Drink>? favorites,
     bool? isRefreshing,
     List<String>? history,
