@@ -1,6 +1,8 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:yandex_project/constants/api_key.dart';
 import 'package:yandex_project/domain/exception/custom_exception.dart';
+import 'package:yandex_project/domain/exception/failures.dart';
 import 'package:yandex_project/domain/exception/request_exception.dart';
 import 'package:yandex_project/domain/exception/response_exception.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
@@ -33,12 +35,33 @@ class AppApisService {
   /// drinks
   /// done
   ///
-  Future<List<Drink>> cocktailByName(String cocktailName) async {
+  Future<Either<Failure, List<Drink>>> searchByName(String cocktailName) async {
     try {
       var data = await getIpJson('search.php', {'s': cocktailName});
-      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
+      return right(List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
     } catch (err) {
-      throw CustomException(err);
+      // Check error type end return corresponding
+      return left(const Failure.serverError());
+    }
+  }
+
+  Future<Either<Failure, List<Drink>>> searchByType(String drinkType) async {
+    try {
+      var data = await getIpJson('filter.php', {'a': drinkType});
+      return right(List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
+    } catch (err) {
+      // Check error type end return corresponding
+      return left(const Failure.serverError());
+    }
+  }
+
+  Future<Either<Failure, List<Drink>>> searchByIngredients(String ingredients) async {
+    try {
+      var data = await getIpJson('filter.php', {'i': ingredients});
+      return right(List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
+    } catch (err) {
+      // Check error type end return corresponding
+      return left(const Failure.serverError());
     }
   }
 
@@ -57,27 +80,27 @@ class AppApisService {
   ///
   /// For shake
   ///
-  Future<List<Drink>> randomCocktail() async {
+  Future<Either<Failure, List<Drink>>> randomCocktail() async {
     try {
       var data = await getIpJson('random.php', {});
-      return List.of(data?['drinks'])
-          .map((e) => Drink.fromDTO(DrinkDTO.fromJson(e)))
-          .toList(); //List.of(data?['drinks']).map((e) => Drink.fromJson(e)).toList();
+      return right(List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
+      //List.of(data?['drinks']).map((e) => Drink.fromJson(e)).toList();
     } catch (err) {
-      throw CustomException(err);
+      // Check error type end return corresponding
+      return left(const Failure.serverError());
     }
   }
 
   ///
   /// Random button
   ///
-  Future<List<Drink>> randomSelectionCocktail() async {
+  Future<Either<Failure, List<Drink>>> randomSelectionCocktail() async {
     try {
       var data = await getIpJson('randomselection.php', {});
-      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
-      //List.of(data?['drinks']).map((e) => Drink.fromJson(e)).toList();
+      return right(List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
     } catch (err) {
-      throw CustomException(err);
+      // Check error type end return corresponding
+      return left(const Failure.serverError());
     }
   }
 
@@ -93,7 +116,6 @@ class AppApisService {
     }
   }
 
-  ///not used, to be rewrite
   Future<List<Ingredient>> ingredientByName(String ingredientName) async {
     try {
       var data = await getIpJson('search.php', {'i': ingredientName});
@@ -107,24 +129,6 @@ class AppApisService {
     try {
       var data = await getIpJson('lookup.php', {'iid': ingredientId.toString()});
       return List.of(data!['drinks']).map((e) => Ingredient.fromJson(e)).toList();
-    } catch (err) {
-      throw CustomException(err);
-    }
-  }
-
-  Future<List<Drink>> filterByAlcoholic(String drinkType) async {
-    try {
-      var data = await getIpJson('filter.php', {'a': drinkType});
-      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
-    } catch (err) {
-      throw CustomException(err);
-    }
-  }
-
-  Future<List<Drink>> filterByIngredients(String ingredients) async {
-    try {
-      var data = await getIpJson('filter.php', {'i': ingredients});
-      return List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList();
     } catch (err) {
       throw CustomException(err);
     }

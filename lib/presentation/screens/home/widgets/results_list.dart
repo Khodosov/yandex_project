@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/presentation/widgets/drink_item.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:yandex_project/presentation/widgets/not_found_widget.dart';
 import 'package:yandex_project/presentation/widgets/page_dots_widget.dart';
 
 class ResultsList extends StatefulWidget {
@@ -16,7 +17,6 @@ class _ResultsListState extends State<ResultsList> {
   final controller = PageController(
     viewportFraction: 1, // 0.9,
   );
-
 
   @override
   void initState() {
@@ -37,30 +37,37 @@ class _ResultsListState extends State<ResultsList> {
         return previous != current;
       },
       builder: (context, state) {
+        final results = state.drinks.fold(
+          (l) => null,
+          (r) {
+            return r;
+          },
+        );
         if (!state.isRefreshing) {
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 130, top: 40),
-              child: state.drinks.isNotEmpty
+              child: state.drinks.isRight() ?
+                  results!.isNotEmpty
                   ? Column(
                       children: [
                         PageDotsWidget(
                           pageController: controller,
-                          pageCount: state.drinks.length,
+                          pageCount: results.length,
                         ),
                         Expanded(
                           child: PageView.builder(
                             controller: controller,
-                            padEnds: state.drinks.length == 1 ? true : false,
-                            itemCount: state.drinks.length,
+                            padEnds: results.length == 1 ? true : false,
+                            itemCount: results.length,
                             itemBuilder: (context, index) {
-                              return DrinkItem(drink: state.drinks[index]);
+                              return DrinkItem(drink: results[index]);
                             },
                           ),
                         ),
                       ],
-                    )
-                  : const SizedBox.shrink(),
+                    ) : const SizedBox.shrink()
+                  : const NotFoundWidget(),
             ),
           );
         } else {
