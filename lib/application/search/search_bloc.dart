@@ -61,20 +61,16 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
                     .searchByType(state.filter.drinkType!.map((e) => e.toString().split(('.')).last).join(','));
         if (drinks.isRight()) {
           final List<Drink> filtered = [];
-          print('check ');
           drinks.fold(
             (l) => null,
             (r) {
-              r.forEach(
-                (element) {
-                  if (state.filter.ingredients?.toSet().containsAll(element.ingredients) ?? true) {
-                    if (state.filter.drinkType!.contains(element.alcoholic)) {
-                      print('type passed ${element.name} ${element.alcoholic}');
-                      filtered.add(element);
+              for (final drink in r) {
+                  if (state.filter.ingredients?.toSet().containsAll(drink.ingredients) ?? true) {
+                    if (state.filter.drinkType!.contains(drink.alcoholic)) {
+                      filtered.add(drink);
                     }
                   }
-                },
-              );
+                }
             },
           );
           yield state.copyWith(
