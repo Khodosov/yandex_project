@@ -58,6 +58,7 @@ class AppApisService {
   Future<Either<Failure, List<Drink>>> searchByIngredients(String ingredients) async {
     try {
       var data = await getIpJson('filter.php', {'i': ingredients});
+
       return right(List.of(data?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
     } catch (err) {
       // Check error type end return corresponding

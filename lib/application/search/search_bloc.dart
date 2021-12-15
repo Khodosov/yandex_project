@@ -36,7 +36,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         );
       },
       updateFilter: (e) async* {
-        print(e.filter);
         yield state.copyWith(
           filter: e.filter,
         );

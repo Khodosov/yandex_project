@@ -4,12 +4,14 @@ import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
+import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({Key? key}) : super(key: key);
 
   void onFilterUpdate(BuildContext context, Filter filter) {
     BlocProvider.of<SearchBloc>(context).add(SearchEvent.updateFilter(filter: filter));
+    BlocProvider.of<SearchBloc>(context).add(const SearchEvent.searchByFilter());
   }
 
   @override
@@ -126,8 +128,21 @@ class FilterWidget extends StatelessWidget {
             filters.add(
               CheckboxListTile(
                 title: Text(ingredient.name),
-                value: false,
-                onChanged: (value) {},
+                value: (state.filter.ingredients ?? []).contains(ingredient),
+                onChanged: (value) {
+                  final List<Ingredient> ingredients = List.from(state.filter.ingredients ?? []);
+                  if (!(state.filter.ingredients ?? []).contains(ingredient)) {
+                    ingredients.add(ingredient);
+                  } else {
+                    ingredients.remove(ingredient);
+                  }
+                  onFilterUpdate(
+                    context,
+                    state.filter.copyWith(
+                      ingredients: ingredients,
+                    ),
+                  );
+                },
               ),
             );
           }
