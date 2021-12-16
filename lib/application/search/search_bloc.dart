@@ -20,7 +20,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final AppApisService apiCall;
   final AppDBService dataBase;
 
-  SearchBloc({required this.apiCall, required this.dataBase}) : super(SearchState.initial());
+  SearchBloc({required this.apiCall, required this.dataBase})
+      : super(SearchState.initial());
 
   @override
   Stream<SearchState> mapEventToState(
@@ -55,17 +56,33 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         drinks = nameCheck
             ? await apiCall.searchByName(state.filter.name!)
             : ingredientsCheck
-                ? await apiCall.searchByIngredients(state.filter.ingredients!.join(','))
-                : await apiCall.searchByType(state.filter.drinkType!.map((e) => e.fromEnum()).join(','));
+                ? await apiCall.searchByName('a')
+                : await apiCall.searchByName('s');
         if (drinks.isRight()) {
           final List<Drink> filtered = [];
           drinks.fold(
             (l) => null,
             (r) {
               for (final drink in r) {
-                if (state.filter.ingredients?.toSet().containsAll(drink.ingredients) ?? true) {
-                  if (state.filter.drinkType?.contains(drink.alcoholic) ?? true) {
+                List<String>? ingredients = [];
+                if (state.filter.ingredients == null) {
+                  ingredients = null;
+                } else {
+                  for (Ingredient ing in state.filter.ingredients!) {
+                    ingredients.add(ing.name.toString());
+                  }
+                }
+                if (ingredients == null) {
+                  if (state.filter.drinkType?.contains(drink.alcoholic) ??
+                      true) {
                     filtered.add(drink);
+                  }
+                } else {
+                  if (drink.ingredients.toSet().containsAll(ingredients)) {
+                    if (state.filter.drinkType?.contains(drink.alcoholic) ??
+                        true) {
+                      filtered.add(drink);
+                    }
                   }
                 }
               }
