@@ -5,6 +5,7 @@ import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
 import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
+import 'package:yandex_project/presentation/screens/home/widgets/ingredients_filter.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({Key? key}) : super(key: key);
@@ -123,29 +124,9 @@ class FilterWidget extends StatelessWidget {
               ),
             ),
           );
-
-          for (final ingredient in state.ingredients) {
-            filters.add(
-              CheckboxListTile(
-                title: Text(ingredient.name),
-                value: (state.filter.ingredients ?? []).contains(ingredient),
-                onChanged: (value) {
-                  final List<Ingredient> ingredients = List.from(state.filter.ingredients ?? []);
-                  if (!(state.filter.ingredients ?? []).contains(ingredient)) {
-                    ingredients.add(ingredient);
-                  } else {
-                    ingredients.remove(ingredient);
-                  }
-                  onFilterUpdate(
-                    context,
-                    state.filter.copyWith(
-                      ingredients: ingredients,
-                    ),
-                  );
-                },
-              ),
-            );
-          }
+          filters.add(
+            IngredientsFilter(ingredients: state.ingredients),
+          );
           return LayoutBuilder(
             builder: (context, constraints) {
               return SizedBox(

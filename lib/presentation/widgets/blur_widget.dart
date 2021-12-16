@@ -35,13 +35,15 @@ class BlurWidget extends StatelessWidget {
           left: left ?? true,
           child: Stack(
             children: [
-              BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 40.0,
-                  sigmaY: 40.0,
-                ),
-                child: ColoredBox(
-                  color: Colors.black.withOpacity(0),
+              Positioned.fill(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 40.0,
+                    sigmaY: 40.0,
+                  ),
+                  child: ColoredBox(
+                    color: Colors.black.withOpacity(0),
+                  ),
                 ),
               ),
               child,

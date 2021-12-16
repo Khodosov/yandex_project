@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
+import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 import 'package:yandex_project/presentation/widgets/background_widget.dart';
 import 'package:yandex_project/presentation/widgets/blur_widget.dart';
 import 'package:yandex_project/presentation/widgets/custom_app_bar.dart';
@@ -118,16 +121,27 @@ class DrinkInfoScreen extends StatelessWidget {
                                 )
                               : const SizedBox.shrink(),
                           ListTile(
-                            onTap: (){
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(AppConstants.smallRadius),
-                                  ),
-                                  duration: const Duration(milliseconds: 600),
-                                  content: const Text('Ingredients copied NOT YET ACTUALLY :('),
-                                ),
-                              );
+                            onTap: () {
+                              // final filter = context.read<SearchBloc>().state.filter;
+                              // BlocProvider.of<SearchBloc>(context).add(
+                              //   SearchEvent.updateFilter(
+                              //     filter: filter.copyWith(
+                              //       ingredients: drink.ingredients.map((e) {
+                              //         print(e);
+                              //         return Ingredient(name: e!);
+                              //       }).toList(),
+                              //     ),
+                              //   ),
+                              // );
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   SnackBar(
+                              //     shape: RoundedRectangleBorder(
+                              //       borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                              //     ),
+                              //     duration: const Duration(milliseconds: 600),
+                              //     content: const Text('Ingredients copied'),
+                              //   ),
+                              // );
                             },
                             title: const Text('Ingredients'),
                             subtitle: Column(

@@ -17,15 +17,15 @@ part 'search_bloc.freezed.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  SearchBloc() : super(SearchState.initial());
+  final AppApisService apiCall;
+  final AppDBService dataBase;
+
+  SearchBloc({required this.apiCall, required this.dataBase}) : super(SearchState.initial());
 
   @override
   Stream<SearchState> mapEventToState(
     SearchEvent event,
   ) async* {
-    final apiCall = AppApisService();
-    final dataBase = AppDBService();
-
     yield* event.map(
       init: (e) async* {
         final ingredients = await dataBase.getIngredientList();
@@ -56,20 +56,19 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             ? await apiCall.searchByName(state.filter.name!)
             : ingredientsCheck
                 ? await apiCall.searchByIngredients(state.filter.ingredients!.join(','))
-                : await apiCall
-                    .searchByType(state.filter.drinkType!.map((e) => e.toString().split(('.')).last).join(','));
+                : await apiCall.searchByType(state.filter.drinkType!.map((e) => e.fromEnum()).join(','));
         if (drinks.isRight()) {
           final List<Drink> filtered = [];
           drinks.fold(
             (l) => null,
             (r) {
               for (final drink in r) {
-                  if (state.filter.ingredients?.toSet().containsAll(drink.ingredients) ?? true) {
-                    if (state.filter.drinkType!.contains(drink.alcoholic)) {
-                      filtered.add(drink);
-                    }
+                if (state.filter.ingredients?.toSet().containsAll(drink.ingredients) ?? true) {
+                  if (state.filter.drinkType?.contains(drink.alcoholic) ?? true) {
+                    filtered.add(drink);
                   }
                 }
+              }
             },
           );
           yield state.copyWith(
@@ -79,6 +78,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         }
       },
       addToFavorites: (e) async* {
+        dataBase.removeFavorite(id: e.drink.id);
         final List<Drink> old = List.from(state.favorites);
         if (old.contains(e.drink)) {
           old.remove(e.drink);

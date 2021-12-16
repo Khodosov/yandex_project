@@ -35,12 +35,12 @@ class _PageDotsWidgetState extends State<PageDotsWidget> {
 
   void onUpdate() {
     setState(() {
-      position = widget.pageController.page ?? 0;
+      position = (widget.pageController.page ?? 0).clamp(0.0, widget.pageCount.toDouble() - 1);
     });
-    final offset = widget.pageController.page ?? 0 / (widget.pageCount);
+    final offset = position / (widget.pageCount - 1);
 
     scrollController.animateTo(
-      offset * scrollController.position.maxScrollExtent / widget.pageCount,
+      offset * scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeIn,
     );
@@ -51,18 +51,19 @@ class _PageDotsWidgetState extends State<PageDotsWidget> {
     return Padding(
       padding: const EdgeInsets.only(top: 5.0, left: 20, right: 20),
       child: SingleChildScrollView(
-          controller: scrollController,
-          scrollDirection: Axis.horizontal,
-          child: DotsIndicator(
-            dotsCount: widget.pageCount,
-            position: position,
-            decorator: DotsDecorator(
-              activeSize: const Size(60.0, 9.0),
-              activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              color: Theme.of(context).iconTheme.color!.withOpacity(0.2),
-              activeColor: Theme.of(context).iconTheme.color!,
-            ),
-          )),
+        controller: scrollController,
+        scrollDirection: Axis.horizontal,
+        child: DotsIndicator(
+          dotsCount: widget.pageCount,
+          position: position.clamp(0.0, widget.pageCount.toDouble() - 1),
+          decorator: DotsDecorator(
+            activeSize: const Size(60.0, 9.0),
+            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+            color: Theme.of(context).iconTheme.color!.withOpacity(0.2),
+            activeColor: Theme.of(context).iconTheme.color!,
+          ),
+        ),
+      ),
     );
   }
 }
