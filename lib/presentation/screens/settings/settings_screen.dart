@@ -79,6 +79,12 @@ class SettingsScreen extends StatelessWidget {
               return [
                 const SizedBox(
                   width: 100,
+                ),
+                const SizedBox(
+                  width: 100,
+                ),
+                const SizedBox(
+                  width: 100,
                 )
               ];
             },
@@ -179,7 +185,10 @@ class SettingsScreen extends StatelessWidget {
               return [
                 const SizedBox(
                   width: 100,
-                )
+                ),
+                const SizedBox(
+                  width: 100,
+                ),
               ];
             },
             borderRadius: BorderRadius.circular(AppConstants.smallRadius),

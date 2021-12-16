@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shake/shake.dart';
@@ -85,43 +86,40 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, RouteA
         return previous != current;
       },
       builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: BackgroundWidget(
-            child: Stack(
-              children: [
-                state.tab == AppTab.favorites ? const FavoritesList() : const ResultsList(),
-                CustomAppBar(
-                  title: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      state.tab.fromEnum(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
+        return BackgroundWidget(
+          child: Stack(
+            children: [
+              state.tab == AppTab.favorites ? const FavoritesList() : const ResultsList(),
+              CustomAppBar(
+                title: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    state.tab.fromEnum(),
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: BlurWidget(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(AppConstants.smallRadius),
-                      topLeft: Radius.circular(AppConstants.smallRadius),
-                    ),
-                    top: false,
-                    child: Column(
-                      children: const [
-                        KeyboardArea(
-                          child: SearchBar(),
-                        ),
-                        CustomBottomBar(),
-                      ],
-                    ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: BlurWidget(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(AppConstants.smallRadius),
+                    topLeft: Radius.circular(AppConstants.smallRadius),
+                  ),
+                  top: false,
+                  child: Column(
+                    children: const [
+                      KeyboardArea(
+                        child: SearchBar(),
+                      ),
+                      CustomBottomBar(),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

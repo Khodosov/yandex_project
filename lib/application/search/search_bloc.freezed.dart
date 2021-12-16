@@ -21,6 +21,12 @@ class _$SearchEventTearOff {
     return const _Init();
   }
 
+  _OnConnectivityChange onConnectivityChange({required bool connected}) {
+    return _OnConnectivityChange(
+      connected: connected,
+    );
+  }
+
   _SearchByFilter searchByFilter() {
     return const _SearchByFilter();
   }
@@ -54,6 +60,7 @@ mixin _$SearchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
@@ -64,6 +71,7 @@ mixin _$SearchEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -74,6 +82,7 @@ mixin _$SearchEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -85,6 +94,7 @@ mixin _$SearchEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
@@ -96,6 +106,7 @@ mixin _$SearchEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -106,6 +117,7 @@ mixin _$SearchEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -171,6 +183,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
@@ -184,6 +197,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -197,6 +211,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -214,6 +229,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
@@ -228,6 +244,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -241,6 +258,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -257,6 +275,173 @@ class _$_Init implements _Init {
 
 abstract class _Init implements SearchEvent {
   const factory _Init() = _$_Init;
+}
+
+/// @nodoc
+abstract class _$OnConnectivityChangeCopyWith<$Res> {
+  factory _$OnConnectivityChangeCopyWith(_OnConnectivityChange value,
+          $Res Function(_OnConnectivityChange) then) =
+      __$OnConnectivityChangeCopyWithImpl<$Res>;
+  $Res call({bool connected});
+}
+
+/// @nodoc
+class __$OnConnectivityChangeCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res>
+    implements _$OnConnectivityChangeCopyWith<$Res> {
+  __$OnConnectivityChangeCopyWithImpl(
+      _OnConnectivityChange _value, $Res Function(_OnConnectivityChange) _then)
+      : super(_value, (v) => _then(v as _OnConnectivityChange));
+
+  @override
+  _OnConnectivityChange get _value => super._value as _OnConnectivityChange;
+
+  @override
+  $Res call({
+    Object? connected = freezed,
+  }) {
+    return _then(_OnConnectivityChange(
+      connected: connected == freezed
+          ? _value.connected
+          : connected // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_OnConnectivityChange implements _OnConnectivityChange {
+  const _$_OnConnectivityChange({required this.connected});
+
+  @override
+  final bool connected;
+
+  @override
+  String toString() {
+    return 'SearchEvent.onConnectivityChange(connected: $connected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _OnConnectivityChange &&
+            (identical(other.connected, connected) ||
+                other.connected == connected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, connected);
+
+  @JsonKey(ignore: true)
+  @override
+  _$OnConnectivityChangeCopyWith<_OnConnectivityChange> get copyWith =>
+      __$OnConnectivityChangeCopyWithImpl<_OnConnectivityChange>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
+    required TResult Function() randomCocktail,
+    required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
+  }) {
+    return onConnectivityChange(connected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+  }) {
+    return onConnectivityChange?.call(connected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (onConnectivityChange != null) {
+      return onConnectivityChange(connected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
+    required TResult Function(_SearchByFilter value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
+    required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
+  }) {
+    return onConnectivityChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
+    TResult Function(_SearchByFilter value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+  }) {
+    return onConnectivityChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
+    TResult Function(_SearchByFilter value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (onConnectivityChange != null) {
+      return onConnectivityChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnConnectivityChange implements SearchEvent {
+  const factory _OnConnectivityChange({required bool connected}) =
+      _$_OnConnectivityChange;
+
+  bool get connected;
+  @JsonKey(ignore: true)
+  _$OnConnectivityChangeCopyWith<_OnConnectivityChange> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -301,6 +486,7 @@ class _$_SearchByFilter implements _SearchByFilter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
@@ -314,6 +500,7 @@ class _$_SearchByFilter implements _SearchByFilter {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -327,6 +514,7 @@ class _$_SearchByFilter implements _SearchByFilter {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -344,6 +532,7 @@ class _$_SearchByFilter implements _SearchByFilter {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
@@ -358,6 +547,7 @@ class _$_SearchByFilter implements _SearchByFilter {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -371,6 +561,7 @@ class _$_SearchByFilter implements _SearchByFilter {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -462,6 +653,7 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
@@ -475,6 +667,7 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -488,6 +681,7 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -505,6 +699,7 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
@@ -519,6 +714,7 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -532,6 +728,7 @@ class _$_UpdateFilter implements _UpdateFilter {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -597,6 +794,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
@@ -610,6 +808,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -623,6 +822,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -640,6 +840,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
@@ -654,6 +855,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -667,6 +869,7 @@ class _$_RandomCocktail implements _RandomCocktail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -728,6 +931,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
@@ -741,6 +945,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -754,6 +959,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -771,6 +977,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
@@ -785,6 +992,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -798,6 +1006,7 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -881,6 +1090,7 @@ class _$_AddToFavorites implements _AddToFavorites {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
@@ -894,6 +1104,7 @@ class _$_AddToFavorites implements _AddToFavorites {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -907,6 +1118,7 @@ class _$_AddToFavorites implements _AddToFavorites {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
@@ -924,6 +1136,7 @@ class _$_AddToFavorites implements _AddToFavorites {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
@@ -938,6 +1151,7 @@ class _$_AddToFavorites implements _AddToFavorites {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
@@ -951,6 +1165,7 @@ class _$_AddToFavorites implements _AddToFavorites {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,

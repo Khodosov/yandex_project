@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/navigation/navigation_bloc.dart';
@@ -22,8 +23,7 @@ class CustomBottomBar extends StatelessWidget {
             height: constraint.maxWidth / 5.5,
             child: Card(
               elevation: 5,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
               margin: const EdgeInsets.all(8),
               // color: Colors.white,
               child: Row(
@@ -32,23 +32,19 @@ class CustomBottomBar extends StatelessWidget {
                   tabIcon(
                     selected: state.tab == AppTab.favorites,
                     onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(
-                          NavigationEvent.changeTab(
-                              tab: AppTab.favorites, context: context));
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvent.changeTab(tab: AppTab.favorites, context: context));
                     },
                     icon: Icons.favorite,
                     context: context,
                   ),
                   tabIcon(
                     selected: state.tab == AppTab.random,
-                    onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(
-                          NavigationEvent.changeTab(
-                              tab: AppTab.random, context: context));
-                      BlocProvider.of<SearchBloc>(context)
-                          .add(const SearchEvent.updateFilter(filter: Filter()));
-                      BlocProvider.of<SearchBloc>(context)
-                          .add(const SearchEvent.randomSelectionCocktail());
+                    onTap: () async {
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvent.changeTab(tab: AppTab.random, context: context));
+                      BlocProvider.of<SearchBloc>(context).add(const SearchEvent.updateFilter(filter: Filter()));
+                      BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomSelectionCocktail());
                     },
                     icon: Icons.casino,
                     context: context,
@@ -65,10 +61,9 @@ class CustomBottomBar extends StatelessWidget {
                   // ),
                   tabIcon(
                     selected: state.tab == AppTab.search,
-                    onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(
-                          NavigationEvent.changeTab(
-                              tab: AppTab.search, context: context));
+                    onTap: () async {
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
                     },
                     icon: Icons.search,
                     context: context,
@@ -76,9 +71,8 @@ class CustomBottomBar extends StatelessWidget {
                   tabIcon(
                     selected: state.tab == AppTab.settings,
                     onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(
-                          NavigationEvent.changeTab(
-                              tab: AppTab.settings, context: context));
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvent.changeTab(tab: AppTab.settings, context: context));
                     },
                     icon: Icons.settings,
                     context: context,
@@ -101,17 +95,14 @@ class CustomBottomBar extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
-        color:
-            !selected ? Colors.transparent : Theme.of(context).iconTheme.color,
+        color: !selected ? Colors.transparent : Theme.of(context).iconTheme.color,
         borderRadius: BorderRadius.circular(AppConstants.smallRadius),
       ),
       child: IconButton(
         onPressed: onTap,
         icon: Icon(
           icon,
-          color: selected
-              ? Theme.of(context).cardColor
-              : Theme.of(context).iconTheme.color,
+          color: selected ? Theme.of(context).cardColor : Theme.of(context).iconTheme.color,
         ),
       ),
     );

@@ -20,7 +20,7 @@ class DrinkTitleWidget extends StatelessWidget {
         return previous.favorites != current.favorites;
       },
       builder: (context, state) {
-        final isFavor = state.favorites.contains(drink);
+        final isFavor = state.favorites.map((e) => e.id).contains(drink.id);
         return Material(
           color: Colors.transparent,
           child: SingleChildScrollView(

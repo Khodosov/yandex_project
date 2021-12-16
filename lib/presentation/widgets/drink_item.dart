@@ -76,18 +76,22 @@ class DrinkItem extends StatelessWidget {
                         bottom: -10,
                         child: BlurWidget(
                           borderRadius: const BorderRadius.all(Radius.circular(0)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: constraint.maxWidth,
-                              child: Hero(
-                                transitionOnUserGestures: true,
-                                tag: drink.id,
-                                child: DrinkTitleWidget(
-                                  drink: drink,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: constraint.maxWidth,
+                                  child: Hero(
+                                    transitionOnUserGestures: true,
+                                    tag: drink.id,
+                                    child: DrinkTitleWidget(
+                                      drink: drink,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ),
@@ -95,10 +99,13 @@ class DrinkItem extends StatelessWidget {
                   );
                 },
               ),
-              SingleChildScrollView(
-                child: ListTile(
-                  title: const Text('Ingredients'),
-                  subtitle: Text(drink.ingredients.join(', '), overflow: TextOverflow.ellipsis,),
+              Flexible(
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: ListTile(
+                    title: const Text('Ingredients'),
+                    subtitle: Text(drink.ingredients.join(', '), overflow: TextOverflow.ellipsis,),
+                  ),
                 ),
               ),
               const SizedBox(

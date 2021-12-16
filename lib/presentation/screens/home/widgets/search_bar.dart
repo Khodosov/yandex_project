@@ -1,10 +1,10 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/navigation/navigation_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/general/enums.dart';
-import 'package:yandex_project/domain/models/filter/filter.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/filters_widget.dart';
 
 class SearchBar extends StatefulWidget {
@@ -33,37 +33,44 @@ class _SearchBarState extends State<SearchBar> {
         return previous.tab != current.tab;
       },
       builder: (context, state) {
-        return GestureDetector(
-          onPanUpdate: (details) {
-            if (details.delta.dy > 0) {
-              BlocProvider.of<NavigationBloc>(context).add(
-                NavigationEvent.changeTab(tab: AppTab.search, context: context),
-              );
-              setState(() {
-                rolled = true;
-              });
-            }
-            if (details.delta.dy < 0) {
-              BlocProvider.of<NavigationBloc>(context)
-                  .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
-              setState(() {
-                rolled = false;
-              });
-            }
+        return BlocBuilder<SearchBloc, SearchState>(
+          buildWhen: (previous, current){
+            return previous.isConnected != current.isConnected;
           },
-          behavior: HitTestBehavior.translucent,
-          child: AnimatedCrossFade(
-            duration: const Duration(milliseconds: 300),
-            crossFadeState: !rolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-            firstChild: searchLine(context),
-            secondChild: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                searchLine(context),
-                const FilterWidget(),
-              ],
-            ),
-          ),
+          builder: (context, state) {
+            return GestureDetector(
+              onPanUpdate: (details) async {
+                if (details.delta.dy > 0) {
+                  BlocProvider.of<NavigationBloc>(context).add(
+                    NavigationEvent.changeTab(tab: AppTab.search, context: context),
+                  );
+                  setState(() {
+                    rolled = true;
+                  });
+                }
+                if (details.delta.dy < 0) {
+                  BlocProvider.of<NavigationBloc>(context)
+                      .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
+                  setState(() {
+                    rolled = false;
+                  });
+                }
+              },
+              behavior: HitTestBehavior.translucent,
+              child: AnimatedCrossFade(
+                duration: const Duration(milliseconds: 300),
+                crossFadeState: !rolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                firstChild: state.isConnected ? searchLine(context) : const SizedBox.shrink(),
+                secondChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    state.isConnected ? searchLine(context) : const SizedBox.shrink(),
+                    const FilterWidget(),
+                  ],
+                ),
+              ),
+            );
+          }
         );
       },
     );
@@ -80,9 +87,22 @@ class _SearchBarState extends State<SearchBar> {
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
           child: TextField(
-            onTap: () {
-              BlocProvider.of<NavigationBloc>(context)
-                  .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
+            onTap: () async {
+              final connection = await Connectivity().checkConnectivity();
+              if (connection != ConnectivityResult.none) {
+                BlocProvider.of<NavigationBloc>(context)
+                    .add(NavigationEvent.changeTab(tab: AppTab.search, context: context));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                    ),
+                    duration: const Duration(milliseconds: 800),
+                    content: const Text('No internet connection.'),
+                  ),
+                );
+              }
             },
             cursorColor: Theme.of(context).iconTheme.color,
             cursorHeight: 13,
@@ -95,7 +115,7 @@ class _SearchBarState extends State<SearchBar> {
                   color: Theme.of(context).iconTheme.color,
                 ),
                 border: InputBorder.none),
-            onChanged: (text) {
+            onChanged: (text) async {
               final filter = context.read<SearchBloc>().state.filter;
               BlocProvider.of<SearchBloc>(context).add(
                 SearchEvent.updateFilter(
@@ -104,8 +124,7 @@ class _SearchBarState extends State<SearchBar> {
                   ),
                 ),
               );
-              BlocProvider.of<SearchBloc>(context).add(const SearchEvent.searchByFilter(),
-              );
+              BlocProvider.of<SearchBloc>(context).add(const SearchEvent.searchByFilter());
             },
           ),
         ),

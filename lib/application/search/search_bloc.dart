@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:yandex_project/application/services/application_db.dart';
+import 'package:yandex_project/application/services/connectivity_ensure.dart';
 import 'package:yandex_project/domain/exception/failures.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
@@ -19,9 +22,28 @@ part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final AppApisService apiCall;
   final AppDBService dataBase;
+  final ConnectivityEnsure connectivityEnsure;
+  StreamSubscription? _subscription;
 
-  SearchBloc({required this.apiCall, required this.dataBase})
-      : super(SearchState.initial());
+  SearchBloc({
+    required this.apiCall,
+    required this.dataBase,
+    required this.connectivityEnsure,
+  }) : super(SearchState.initial(true)) {
+    init();
+  }
+
+  void init() async {
+    _subscription = connectivityEnsure.isConnectedStream.listen((event) {
+      add(SearchEvent.onConnectivityChange(connected: event));
+    });
+  }
+
+  @override
+  Future<void> close() {
+    _subscription?.cancel();
+    return super.close();
+  }
 
   @override
   Stream<SearchState> mapEventToState(
@@ -34,6 +56,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         yield state.copyWith(
           ingredients: ingredients,
           favorites: favorites,
+        );
+      },
+      onConnectivityChange: (e) async* {
+        yield state.copyWith(
+          isConnected: e.connected,
         );
       },
       updateFilter: (e) async* {
@@ -88,6 +115,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
               }
             },
           );
+          print('NEW STATE $filtered');
           yield state.copyWith(
             drinks: right(filtered),
             isRefreshing: false,

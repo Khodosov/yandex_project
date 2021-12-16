@@ -40,34 +40,12 @@ class _ResultsListState extends State<ResultsList> {
       },
       builder: (context, state) {
         final results = state.drinks.fold(
-          (l) {
-            String error = 'Error';
-            if (l == const Failure.badConnection()){
-              error = 'Bad connection';
-            }
-            if (l == const Failure.serverError()){
-              error = 'Server Error';
-            }
-            Future.delayed(
-              const Duration(milliseconds: 500),
-              () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppConstants.smallRadius),
-                    ),
-                    duration: const Duration(milliseconds: 800),
-                    content: Text(error),
-                  ),
-                );
-              },
-            );
-          },
+          (l) {},
           (r) {
             return r;
           },
         );
-
+        print(results!.isNotEmpty);
         if (!state.isRefreshing) {
           return SafeArea(
             child: Padding(
@@ -84,7 +62,7 @@ class _ResultsListState extends State<ResultsList> {
                               flex: 1,
                             ),
                             Flexible(
-                              flex: 17,
+                              flex: 21,
                               child: PageView.builder(
                                 controller: controller,
                                 padEnds: results.length == 1 ? true : false,
@@ -99,7 +77,7 @@ class _ResultsListState extends State<ResultsList> {
                             ),
                           ],
                         )
-                      : const SizedBox.shrink()
+                      : const NotFoundWidget()
                   : const NotFoundWidget(),
             ),
           );
