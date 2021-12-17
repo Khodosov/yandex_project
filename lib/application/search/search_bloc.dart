@@ -77,13 +77,13 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           isRefreshing: true,
         );
         final nameCheck = state.filter.name != null;
-        final ingredientsCheck = state.filter.ingredients != null;
+        final ingredientsCheck = state.filter.ingredients?.isNotEmpty ?? false;
         // final typeCheck = state.filter.drinkType != null;
         late Either<Failure, List<Drink>> drinks;
         drinks = nameCheck
             ? await apiCall.searchByName(state.filter.name!)
             : ingredientsCheck
-                ? await apiCall.searchByName('a')
+                ? await apiCall.searchByName(state.filter.ingredients!.first.name[0].toLowerCase())
                 : await apiCall.searchByName('s');
         if (drinks.isRight()) {
           final List<Drink> filtered = [];

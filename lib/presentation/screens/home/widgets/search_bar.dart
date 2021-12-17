@@ -24,9 +24,9 @@ class SearchBar extends StatefulWidget {
 class _SearchBarState extends State<SearchBar> {
   bool rolled = true;
   final TextEditingController controller = TextEditingController();
-  
+
   @override
-  void dispose(){
+  void dispose() {
     controller.dispose();
     super.dispose();
   }
