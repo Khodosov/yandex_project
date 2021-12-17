@@ -1,0 +1,60 @@
+name: Flutter CI
+
+# This workflow is triggered on pushes to the repository.
+
+on: [push]
+
+jobs:
+  analyze:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        flutter: [ '2.8.0' ]
+        include:
+          - os: ubuntu-latest
+            build: apk
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ matrix.flutter }}
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter format --set-exit-if-changed .
+  build:
+    needs: analyze
+    name: Build ${{ matrix.target }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ 'ubuntu-latest' ]
+        flutter: [ '2.8.0' ]
+        include:
+          - os: ubuntu-latest
+            target: android
+            build: apk
+            path: 'build/app/outputs/apk/release/app-release.apk'
+          - os: macos-latest
+            target: iOS
+            build: 'ios --no-codesign'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ matrix.flutter }}
+      - run: flutter build ${{ matrix.build }}
+      - uses: actions/upload-artifact@v1
+        if: ${{ matrix.target == 'android' }}
+        with:
+          name: release-${{ matrix.build }}
+          path: build/app/outputs/apk/release/app-release.apk

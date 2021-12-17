@@ -10,14 +10,15 @@ class BackgroundWidget extends StatelessWidget {
     return Material(
       child: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            Theme.of(context).scaffoldBackgroundColor,
-            Colors.deepOrange,
-          ],
-        )),
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Theme.of(context).scaffoldBackgroundColor,
+              Colors.deepOrange,
+            ],
+          ),
+        ),
         child: child,
       ),
     );
