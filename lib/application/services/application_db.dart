@@ -14,7 +14,6 @@ class AppDBService {
     Hive.registerAdapter(DrinkAdapter());
     Hive.registerAdapter(PreferencesDBAdapter());
     Hive.registerAdapter(DrinkTypeAdapter());
-
   }
 
   // этот метод отрабатывает при старте, тебе он скорее всего не нужен будет
@@ -39,20 +38,28 @@ class AppDBService {
 
   //кладем весь список целиком
   Future<void> putFavoriteList(List<Drink> favoriteList) async {
-    final favoriteBox = await Hive.openBox<List<Drink>>('Favorites');
-    favoriteBox.put('list', favoriteList);
+    final favoriteBox = await Hive.openBox<Drink>('Favorites');
+    final map = <int, Drink>{
+      for (final drink in favoriteList) drink.id: drink,
+    };
+    favoriteBox.putAll(map);
   }
 
   //получаем так же весь список целиком
   Future<List<Drink>> getFavoriteList() async {
     try {
-      final favoriteBox = await Hive.openBox<List<Drink>>('Favorites');
+      final favoriteBox = await Hive.openBox<Drink>('Favorites');
 
-      List<Drink>? list = favoriteBox.get('list');
-      return (list == null) ? <Drink>[] : list;
+      List<Drink> list = favoriteBox.values.toList();
+      return list;
     } catch (error) {
       return <Drink>[];
     }
+  }
+
+  Future<void> removeFavorite({required int id}) async {
+    final favoriteBox = await Hive.openBox<Drink>('Favorites');
+    favoriteBox.delete(id);
   }
 
   /// Tested. Seems to be good enough
@@ -62,6 +69,7 @@ class AppDBService {
 
     preferencesDBBox.put('settings', PreferencesDB.toDB(preferenceState));
   }
+
   /// Tested. Seems to be good enough
   Future<PreferencesState> getSettings() async {
     try {

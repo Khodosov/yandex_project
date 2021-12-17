@@ -54,7 +54,7 @@ class SettingsScreen extends StatelessWidget {
 
   Widget brightness(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8.0, right: 25, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -73,53 +73,85 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           ),
-          PopupMenuButton<ThemeMode>(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
-            initialValue: context.read<PreferencesBloc>().state.themeMode,
-            onSelected: (value) {
-              BlocProvider.of<PreferencesBloc>(context).add(PreferencesEvent.changeTheme(themeMode: value));
-            },
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) {
+          DropdownButton<ThemeMode>(
+            underline: const SizedBox.shrink(),
+            selectedItemBuilder: (context) {
               return [
-                PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.dark,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.dark_mode),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text('Dark mode'),
-                    ],
-                  ),
+                const SizedBox(
+                  width: 100,
                 ),
-                PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.light,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.light_mode),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text('Light mode'),
-                    ],
-                  ),
+                const SizedBox(
+                  width: 100,
                 ),
-                PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.system,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.smartphone),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text('System'),
-                    ],
-                  ),
-                ),
+                const SizedBox(
+                  width: 100,
+                )
               ];
             },
+            borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+            value: context.read<PreferencesBloc>().state.themeMode,
+            onChanged: (value) {
+              BlocProvider.of<PreferencesBloc>(context)
+                  .add(PreferencesEvent.changeTheme(themeMode: value ?? ThemeMode.system));
+            },
+            icon: const Icon(Icons.more_vert),
+            items: [
+              DropdownMenuItem<ThemeMode>(
+                value: ThemeMode.dark,
+                child: Row(
+                  children: [
+                    Icon(Icons.dark_mode,
+                        color: context.read<PreferencesBloc>().state.themeMode == ThemeMode.dark ? Colors.grey : null),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Dark mode',
+                      style: TextStyle(
+                          color:
+                              context.read<PreferencesBloc>().state.themeMode == ThemeMode.dark ? Colors.grey : null),
+                    ),
+                  ],
+                ),
+              ),
+              DropdownMenuItem<ThemeMode>(
+                value: ThemeMode.light,
+                child: Row(
+                  children: [
+                    Icon(Icons.light_mode,
+                        color: context.read<PreferencesBloc>().state.themeMode == ThemeMode.light ? Colors.grey : null),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Light mode',
+                      style: TextStyle(
+                          color:
+                              context.read<PreferencesBloc>().state.themeMode == ThemeMode.light ? Colors.grey : null),
+                    ),
+                  ],
+                ),
+              ),
+              DropdownMenuItem<ThemeMode>(
+                value: ThemeMode.system,
+                child: Row(
+                  children: [
+                    Icon(Icons.smartphone,
+                        color:
+                            context.read<PreferencesBloc>().state.themeMode == ThemeMode.system ? Colors.grey : null),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'System',
+                      style: TextStyle(
+                          color:
+                              context.read<PreferencesBloc>().state.themeMode == ThemeMode.system ? Colors.grey : null),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -128,7 +160,7 @@ class SettingsScreen extends StatelessWidget {
 
   Widget appMode(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8.0, right: 25, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -147,13 +179,24 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           ),
-          PopupMenuButton<bool>(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
-            initialValue: context.read<PreferencesBloc>().state.nonAlcoholicMode,
-            onSelected: (value) {
-              BlocProvider.of<PreferencesBloc>(context).add(PreferencesEvent.changeSearchMode(mode: value));
+          DropdownButton<bool>(
+            underline: const SizedBox.shrink(),
+            selectedItemBuilder: (context) {
+              return [
+                const SizedBox(
+                  width: 100,
+                ),
+                const SizedBox(
+                  width: 100,
+                ),
+              ];
+            },
+            borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+            value: context.read<PreferencesBloc>().state.nonAlcoholicMode,
+            onChanged: (value) {
+              BlocProvider.of<PreferencesBloc>(context).add(PreferencesEvent.changeSearchMode(mode: value ?? false));
               final filter = context.read<SearchBloc>().state.filter;
-              if (value) {
+              if (value ?? false) {
                 BlocProvider.of<SearchBloc>(context)
                     .add(SearchEvent.updateFilter(filter: filter.copyWith(drinkType: DrinkType.values)));
               } else {
@@ -162,37 +205,70 @@ class SettingsScreen extends StatelessWidget {
               }
             },
             icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) {
-              return [
-                PopupMenuItem<bool>(
-                  value: false,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.local_bar),
-                      SizedBox(
-                        width: 5,
+            items: [
+              DropdownMenuItem<bool>(
+                value: false,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.local_bar,
+                      color: !context.read<PreferencesBloc>().state.nonAlcoholicMode ? Colors.grey : null,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Alcohol',
+                      style: TextStyle(
+                        color: !context.read<PreferencesBloc>().state.nonAlcoholicMode ? Colors.grey : null,
                       ),
-                      Text('Alcohol'),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                PopupMenuItem<bool>(
-                  value: true,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.no_drinks),
-                      SizedBox(
-                        width: 5,
+              ),
+              DropdownMenuItem<bool>(
+                value: true,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.no_drinks,
+                      color: context.read<PreferencesBloc>().state.nonAlcoholicMode ? Colors.grey : null,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Alcohol free',
+                      style: TextStyle(
+                        color: context.read<PreferencesBloc>().state.nonAlcoholicMode ? Colors.grey : null,
                       ),
-                      Text('Alcohol free'),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ];
-            },
+              ),
+            ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class CustomPopupMenuItem<T> extends PopupMenuItem<T> {
+  const CustomPopupMenuItem({Key? key, required Widget child, required T value})
+      : super(key: key, child: child, value: value);
+
+  @override
+  PopupMenuItemState<T, PopupMenuItem<T>> createState() => CustomPopupMenuItemState<T, PopupMenuItem<T>>();
+}
+
+class CustomPopupMenuItemState<T, W extends PopupMenuItem<T>> extends PopupMenuItemState<T, W> {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+      clipBehavior: Clip.antiAlias,
+      child: super.build(context),
     );
   }
 }

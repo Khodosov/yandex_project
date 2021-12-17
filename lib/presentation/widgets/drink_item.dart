@@ -23,7 +23,6 @@ class DrinkItem extends StatelessWidget {
         return previous.favorites != current.favorites;
       },
       builder: (context, state) {
-        final isFavor = state.favorites.contains(drink);
         return Card(
           elevation: 4,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.smallRadius)),
@@ -43,43 +42,56 @@ class DrinkItem extends StatelessWidget {
                         tag: drink.name,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(AppConstants.smallRadius),
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: drink.thumb ?? 'http://via.placeholder.com/350x150',
-                            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                              child: SizedBox(
-                                height: constraint.maxWidth,
-                                width: constraint.maxWidth,
-                                child: Center(
-                                  child: CircularProgressIndicator(
-                                    value: downloadProgress.progress,
-                                    color: Theme.of(context).iconTheme.color,
+                          child: Material(
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.pushNamed(context, '/drink', arguments: drink);
+                              },
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: drink.thumb ?? 'http://via.placeholder.com/350x150',
+                                progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                  child: SizedBox(
+                                    height: constraint.maxWidth,
+                                    width: constraint.maxWidth,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        value: downloadProgress.progress,
+                                        color: Theme.of(context).iconTheme.color,
+                                      ),
+                                    ),
                                   ),
                                 ),
+                                errorWidget: (context, url, error) {
+                                  return const Icon(Icons.error_outline);
+                                },
                               ),
                             ),
-                            errorWidget: (context, url, error) {
-                              return const Icon(Icons.error_outline);
-                            },
                           ),
                         ),
                       ),
                       Positioned(
+                        left: 0,
+                        right: 0,
                         bottom: -10,
                         child: BlurWidget(
                           borderRadius: const BorderRadius.all(Radius.circular(0)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: constraint.maxWidth,
-                              child: Hero(
-                                transitionOnUserGestures: true,
-                                tag: drink.id,
-                                child: DrinkTitleWidget(
-                                  drink: drink,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: constraint.maxWidth,
+                                  child: Hero(
+                                    transitionOnUserGestures: true,
+                                    tag: drink.id,
+                                    child: DrinkTitleWidget(
+                                      drink: drink,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ),
@@ -87,42 +99,14 @@ class DrinkItem extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Expanded(
+              Flexible(
                 child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
                   child: ListTile(
                     title: const Text('Ingredients'),
-                    subtitle: Text(
-                      drink.ingredients.join(', '),
-                      overflow: TextOverflow.visible,
-                    ),
+                    subtitle: Text(drink.ingredients.join(', '), overflow: TextOverflow.ellipsis,),
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    iconSize: 35,
-                    onPressed: () {
-                      BlocProvider.of<SearchBloc>(context).add(SearchEvent.addToFavorites(drink: drink));
-                    },
-                    icon: Icon(
-                      !isFavor ? Icons.favorite_border : Icons.favorite,
-                    ),
-                  ),
-                  IconButton(
-                    iconSize: 35,
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/drink', arguments: drink);
-                    },
-                    icon: const Icon(
-                      Icons.info_outline,
-                    ),
-                  ),
-                ],
               ),
               const SizedBox(
                 height: 5,

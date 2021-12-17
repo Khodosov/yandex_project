@@ -15,7 +15,7 @@ class ResultsList extends StatefulWidget {
 
 class _ResultsListState extends State<ResultsList> {
   final controller = PageController(
-    viewportFraction: 1, // 0.9,
+    viewportFraction: 0.94, // 0.9,
   );
 
   @override
@@ -34,11 +34,11 @@ class _ResultsListState extends State<ResultsList> {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(
       buildWhen: (previous, current) {
-        return previous != current;
+        return previous.drinks != current.drinks;
       },
       builder: (context, state) {
         final results = state.drinks.fold(
-          (l) => null,
+          (l) {},
           (r) {
             return r;
           },
@@ -47,26 +47,37 @@ class _ResultsListState extends State<ResultsList> {
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 130, top: 40),
-              child: state.drinks.isRight() ?
-                  results!.isNotEmpty
-                  ? Column(
-                      children: [
-                        PageDotsWidget(
-                          pageController: controller,
-                          pageCount: results.length,
-                        ),
-                        Expanded(
-                          child: PageView.builder(
-                            controller: controller,
-                            padEnds: results.length == 1 ? true : false,
-                            itemCount: results.length,
-                            itemBuilder: (context, index) {
-                              return DrinkItem(drink: results[index]);
-                            },
-                          ),
-                        ),
-                      ],
-                    ) : const SizedBox.shrink()
+              child: state.drinks.isRight()
+                  ? results!.isNotEmpty
+                      ? Column(
+                          children: [
+                            const Spacer(
+                              flex: 1,
+                            ),
+                            PageDotsWidget(
+                              pageController: controller,
+                              pageCount: results.length,
+                            ),
+                            const Spacer(
+                              flex: 1,
+                            ),
+                            Flexible(
+                              flex: 42,
+                              child: PageView.builder(
+                                controller: controller,
+                                padEnds: results.length == 1 ? true : false,
+                                itemCount: results.length,
+                                itemBuilder: (context, index) {
+                                  return DrinkItem(drink: results[index]);
+                                },
+                              ),
+                            ),
+                            const Spacer(
+                              flex: 1,
+                            ),
+                          ],
+                        )
+                      : const NotFoundWidget()
                   : const NotFoundWidget(),
             ),
           );

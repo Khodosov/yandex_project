@@ -1,6 +1,7 @@
 part of 'search_bloc.dart';
 
 class SearchState with EquatableMixin {
+  final bool isConnected;
   final Either<Failure, List<Drink>> drinks;
   final bool isRefreshing;
   final List<Drink> favorites;
@@ -9,6 +10,7 @@ class SearchState with EquatableMixin {
   final List<Ingredient> ingredients;
 
   const SearchState({
+    required this.isConnected,
     required this.history,
     required this.drinks,
     required this.isRefreshing,
@@ -17,7 +19,7 @@ class SearchState with EquatableMixin {
     required this.ingredients,
   });
 
-  factory SearchState.initial() => SearchState(
+  factory SearchState.initial(bool isConnected) => SearchState(
         history: <String>[],
         drinks: right(<Drink>[]),
         isRefreshing: false,
@@ -26,6 +28,7 @@ class SearchState with EquatableMixin {
           drinkType: DrinkType.values,
         ),
         ingredients: [],
+        isConnected: isConnected,
       );
 
   SearchState copyWith({
@@ -35,8 +38,10 @@ class SearchState with EquatableMixin {
     List<String>? history,
     Filter? filter,
     List<Ingredient>? ingredients,
+    bool? isConnected,
   }) {
     return SearchState(
+      isConnected: isConnected ?? this.isConnected,
       ingredients: ingredients ?? this.ingredients,
       filter: filter ?? this.filter,
       favorites: favorites ?? this.favorites,
@@ -48,6 +53,7 @@ class SearchState with EquatableMixin {
 
   @override
   List<Object?> get props => [
+        isConnected,
         drinks,
         isRefreshing,
         history,

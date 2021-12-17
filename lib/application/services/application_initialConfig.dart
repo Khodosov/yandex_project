@@ -8,10 +8,8 @@ Future<void> onStartApp() async {
   await AppDBService().initHiveOptions();
 
   List<Ingredient> ingredientList = await AppDBService().getIngredientList();
-  // print('onStart: ${ingredientList.length}');
   if (ingredientList.isEmpty) {
     ingredientList = await AppApisService().listIngredients();
-    // print('fetch: ${ingredientList.length}');
     AppDBService().putIngredientList(ingredientList);
   }
 }

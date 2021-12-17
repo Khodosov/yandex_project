@@ -12,13 +12,13 @@ part 'preferences_bloc.freezed.dart';
 part 'preferences_state.dart';
 
 class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
-  PreferencesBloc() : super(PreferencesState.initial());
+  final AppDBService dataBase;
+  PreferencesBloc({required this.dataBase}) : super(PreferencesState.initial());
 
   @override
   Stream<PreferencesState> mapEventToState(
     PreferencesEvent event,
   ) async* {
-    final dataBase = AppDBService();
 
     yield* event.map(
       ///
