@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yandex_project/presentation/widgets/background_widget.dart';
 
 class NotFoundWidget extends StatelessWidget {
   const NotFoundWidget({Key? key}) : super(key: key);

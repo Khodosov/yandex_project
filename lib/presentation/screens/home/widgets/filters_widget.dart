@@ -4,7 +4,6 @@ import 'package:yandex_project/application/search/search_bloc.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
-import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 import 'package:yandex_project/presentation/screens/home/widgets/ingredients_filter.dart';
 
 class FilterWidget extends StatelessWidget {
