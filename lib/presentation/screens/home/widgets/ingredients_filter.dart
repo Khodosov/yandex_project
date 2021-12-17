@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
+import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
 import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
 
-class IngredientsFilter extends StatefulWidget {
+class IngredientsFilter extends StatelessWidget {
   final List<Ingredient> ingredients;
 
   const IngredientsFilter({
     Key? key,
     required this.ingredients,
   }) : super(key: key);
-
-  @override
-  _IngredientsFilterState createState() => _IngredientsFilterState();
-}
-
-class _IngredientsFilterState extends State<IngredientsFilter> {
-  bool rolled = true;
 
   void onFilterUpdate(BuildContext context, Filter filter) {
     BlocProvider.of<SearchBloc>(context).add(SearchEvent.updateFilter(filter: filter));
@@ -30,15 +24,29 @@ class _IngredientsFilterState extends State<IngredientsFilter> {
       builder: (context, state) {
         final children = <Widget>[
           ListTile(
+            trailing: Material(
+              borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+              color: Colors.grey,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Clear'),
+                ),
+                onTap: () {
+                  onFilterUpdate(
+                    context,
+                    state.filter.copyWith(
+                      ingredients: [],
+                    ),
+                  );
+                },
+              ),
+            ),
             title: const Text('Ingredients'),
-            onTap: (){
-              setState(() {
-                rolled = !rolled;
-              });
-            },
           ),
         ];
-        for (final ingredient in widget.ingredients) {
+        for (final ingredient in ingredients) {
           children.add(
             CheckboxListTile(
               title: Text(ingredient.name),
@@ -60,13 +68,8 @@ class _IngredientsFilterState extends State<IngredientsFilter> {
             ),
           );
         }
-        return AnimatedCrossFade(
-          firstChild: children.first,
-          secondChild: Column(
-            children: children,
-          ),
-          crossFadeState: rolled ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-          duration: const Duration(milliseconds: 400),
+        return Column(
+          children: children,
         );
       },
     );

@@ -6,26 +6,24 @@ class NotFoundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              r'\(^Д^)/',
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width / 4,
-              ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            r'\(^Д^)/',
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width / 4,
             ),
-            const SizedBox(
-              height: 40,
-            ),
-            Text(
-              'Nothing found',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          Text(
+            'Nothing found',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ],
       ),
     );
   }

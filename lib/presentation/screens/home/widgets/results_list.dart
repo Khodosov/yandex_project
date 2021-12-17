@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
-import 'package:yandex_project/constants/constants.dart';
-import 'package:yandex_project/domain/exception/failures.dart';
 import 'package:yandex_project/presentation/widgets/drink_item.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:yandex_project/presentation/widgets/not_found_widget.dart';
@@ -45,7 +43,6 @@ class _ResultsListState extends State<ResultsList> {
             return r;
           },
         );
-        print(results!.isNotEmpty);
         if (!state.isRefreshing) {
           return SafeArea(
             child: Padding(

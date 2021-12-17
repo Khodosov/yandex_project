@@ -115,7 +115,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
               }
             },
           );
-          print('NEW STATE $filtered');
           yield state.copyWith(
             drinks: right(filtered),
             isRefreshing: false,

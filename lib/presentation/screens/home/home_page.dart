@@ -1,4 +1,3 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shake/shake.dart';
@@ -50,13 +49,20 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, RouteA
     BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomSelectionCocktail());
     shakeDetector = ShakeDetector.waitForStart(
       onPhoneShake: () async {
-        if (isResumed && isCurrent) {
-          if ((await Vibration.hasCustomVibrationsSupport() ?? false) &&
-              (await Vibration.hasAmplitudeControl() ?? false)) {
-            Vibration.vibrate(pattern: [0, 10, 20, 10], intensities: [255, 255]);
+        final connected = context.read<SearchBloc>().state.isConnected;
+
+        if (connected) {
+          if (isResumed && isCurrent) {
+            if ((await Vibration.hasCustomVibrationsSupport() ?? false) &&
+                (await Vibration.hasAmplitudeControl() ?? false)) {
+              Vibration.vibrate(pattern: [0, 10, 20, 10], intensities: [255, 255]);
+            }
+            BlocProvider.of<NavigationBloc>(context)
+                .add(NavigationEvent.changeTab(tab: AppTab.random, context: context));
+            BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
           }
-          BlocProvider.of<NavigationBloc>(context).add(NavigationEvent.changeTab(tab: AppTab.random, context: context));
-          BlocProvider.of<SearchBloc>(context).add(const SearchEvent.randomCocktail());
+        } else {
+          AppConstants.badConnection(context);
         }
       },
     )..startListening();
@@ -103,20 +109,29 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, RouteA
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: BlurWidget(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(AppConstants.smallRadius),
-                    topLeft: Radius.circular(AppConstants.smallRadius),
-                  ),
-                  top: false,
-                  child: Column(
-                    children: const [
-                      KeyboardArea(
-                        child: SearchBar(),
+                child: BlocBuilder<SearchBloc, SearchState>(
+                  buildWhen: (previous, current) {
+                    return previous.isConnected != current.isConnected;
+                  },
+                  builder: (context, state) {
+                    return BlurWidget(
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(AppConstants.smallRadius),
+                        topLeft: Radius.circular(AppConstants.smallRadius),
                       ),
-                      CustomBottomBar(),
-                    ],
-                  ),
+                      top: false,
+                      child: Column(
+                        children: [
+                          KeyboardArea(
+                            child: SearchBar(
+                              enabled: state.isConnected,
+                            ),
+                          ),
+                          const CustomBottomBar(),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
