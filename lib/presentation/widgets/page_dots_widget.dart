@@ -49,7 +49,7 @@ class _PageDotsWidgetState extends State<PageDotsWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5.0, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 5.0, left: 0, right: 0),
       child: SingleChildScrollView(
         controller: scrollController,
         scrollDirection: Axis.horizontal,

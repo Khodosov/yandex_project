@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +23,13 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   bool rolled = true;
+  final TextEditingController controller = TextEditingController();
+  
+  @override
+  void dispose(){
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +71,11 @@ class _SearchBarState extends State<SearchBar> {
             child: AnimatedCrossFade(
               duration: const Duration(milliseconds: 300),
               crossFadeState: !rolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-              firstChild: searchLine(context, widget.enabled),
+              firstChild: searchLine(context, widget.enabled, controller),
               secondChild: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  searchLine(context, widget.enabled),
+                  searchLine(context, widget.enabled, controller),
                   const FilterWidget(),
                 ],
               ),
@@ -77,7 +86,7 @@ class _SearchBarState extends State<SearchBar> {
     );
   }
 
-  Widget searchLine(BuildContext context, bool enabled) {
+  Widget searchLine(BuildContext context, bool enabled, TextEditingController controller) {
     return Card(
       color: !enabled ? Colors.grey.shade600 : null,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.bigRadius)),
@@ -89,6 +98,7 @@ class _SearchBarState extends State<SearchBar> {
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
           child: TextField(
+            controller: controller,
             onTap: () async {
               final connection = await Connectivity().checkConnectivity();
               if (connection != ConnectivityResult.none) {
@@ -117,12 +127,12 @@ class _SearchBarState extends State<SearchBar> {
                   color: Theme.of(context).iconTheme.color,
                 ),
                 border: InputBorder.none),
-            onChanged: (text) async {
+            onChanged: (_) async {
               final filter = context.read<SearchBloc>().state.filter;
               BlocProvider.of<SearchBloc>(context).add(
                 SearchEvent.updateFilter(
                   filter: filter.copyWith(
-                    name: text,
+                    name: controller.text,
                   ),
                 ),
               );

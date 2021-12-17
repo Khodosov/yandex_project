@@ -51,6 +51,9 @@ class _ResultsListState extends State<ResultsList> {
                   ? results!.isNotEmpty
                       ? Column(
                           children: [
+                            const Spacer(
+                              flex: 1,
+                            ),
                             PageDotsWidget(
                               pageController: controller,
                               pageCount: results.length,
@@ -59,7 +62,7 @@ class _ResultsListState extends State<ResultsList> {
                               flex: 1,
                             ),
                             Flexible(
-                              flex: 21,
+                              flex: 42,
                               child: PageView.builder(
                                 controller: controller,
                                 padEnds: results.length == 1 ? true : false,

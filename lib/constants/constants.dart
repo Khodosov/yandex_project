@@ -31,7 +31,13 @@ class AppConstants {
     ),
   );
 
+  static bool isBadConnectionShown = false;
+
   static badConnection(BuildContext context) {
+    if (isBadConnectionShown) {
+      return;
+    }
+    isBadConnectionShown = true;
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -54,6 +60,6 @@ class AppConstants {
           ),
         );
       },
-    );
+    ).whenComplete(() => isBadConnectionShown = false);
   }
 }
