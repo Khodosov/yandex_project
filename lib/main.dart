@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yandex_project/application/di.dart';
 import 'package:yandex_project/application/navigation/navigation_bloc.dart';
-import 'package:yandex_project/application/services/connectivity_ensure.dart';
 import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/presentation/screens/drink_info/drink_info_screen.dart';
 import 'package:yandex_project/presentation/screens/home/home_page.dart';
@@ -12,8 +12,10 @@ import 'application/search/search_bloc.dart';
 import 'application/services/application_apis.dart';
 import 'application/services/application_db.dart';
 import 'application/services/application_initialConfig.dart';
+import 'application/services/connectivity_ensure.dart';
 
 void main() async {
+  initLocator();
   await onStartApp().then((value) => runApp(const App()));
 }
 
@@ -22,22 +24,18 @@ class App extends StatelessWidget {
 
   static final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
 
-  static final dataBase = AppDBService();
-  static final apiCall = AppApisService();
-  static final connectivityEnsure = ConnectivityEnsure();
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PreferencesBloc>(
-          create: (_) => PreferencesBloc(dataBase: dataBase)..add(const PreferencesEvent.init()),
+          create: (_) => PreferencesBloc(dataBase: locator<AppDBService>())..add(const PreferencesEvent.init()),
         ),
         BlocProvider<SearchBloc>(
           create: (_) => SearchBloc(
-            dataBase: dataBase,
-            apiCall: apiCall,
-            connectivityEnsure: connectivityEnsure,
+            dataBase: locator<AppDBService>(),
+            apiCall: locator<AppApisService>(),
+            connectivityEnsure: locator<ConnectivityEnsure>(),
           )..add(const SearchEvent.init()),
         ),
         BlocProvider<NavigationBloc>(
