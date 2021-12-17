@@ -38,30 +38,33 @@ class _FavoritesListState extends State<FavoritesList> {
               padding: const EdgeInsets.only(bottom: 130, top: 40),
               child: state.favorites.isNotEmpty
                   ? Column(
-                children: [
-                  PageDotsWidget(
-                    pageController: controller,
-                    pageCount: state.favorites.length,
-                  ),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  Flexible(
-                    flex: 17,
-                    child: PageView.builder(
-                      controller: controller,
-                      padEnds: state.favorites.length == 1 ? true : false,
-                      itemCount: state.favorites.length,
-                      itemBuilder: (context, index) {
-                        return DrinkItem(drink: state.favorites[index]);
-                      },
-                    ),
-                  ),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                ],
-              )
+                      children: [
+                        const Spacer(
+                          flex: 1,
+                        ),
+                        PageDotsWidget(
+                          pageController: controller,
+                          pageCount: state.favorites.length,
+                        ),
+                        const Spacer(
+                          flex: 1,
+                        ),
+                        Flexible(
+                          flex: 42,
+                          child: PageView.builder(
+                            controller: controller,
+                            padEnds: state.favorites.length == 1 ? true : false,
+                            itemCount: state.favorites.length,
+                            itemBuilder: (context, index) {
+                              return DrinkItem(drink: state.favorites[index]);
+                            },
+                          ),
+                        ),
+                        const Spacer(
+                          flex: 1,
+                        ),
+                      ],
+                    )
                   : const NotFoundWidget(),
             ),
           );
