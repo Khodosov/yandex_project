@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:yandex_project/constants/api_key.dart';
 import 'package:yandex_project/domain/exception/custom_exception.dart';
 import 'package:yandex_project/domain/exception/failures.dart';
-import 'package:yandex_project/domain/exception/request_exception.dart';
 import 'package:yandex_project/domain/models/drink/drink.dart';
 import 'package:yandex_project/domain/models/drink/drink_dto.dart';
 import 'package:yandex_project/domain/models/ingredient/ingredient.dart';
