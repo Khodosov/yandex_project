@@ -49,111 +49,120 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Stream<SearchState> mapEventToState(
     SearchEvent event,
   ) async* {
-    yield* event.map(
-      init: (e) async* {
-        final ingredients = await dataBase.getIngredientList();
-        final favorites = await dataBase.getFavoriteList();
-        yield state.copyWith(
-          ingredients: ingredients,
-          favorites: favorites,
-        );
-      },
-      onConnectivityChange: (e) async* {
-        yield state.copyWith(
-          isConnected: e.connected,
-        );
-      },
-      updateFilter: (e) async* {
-        yield state.copyWith(
-          filter: e.filter,
-        );
-      },
+    yield* event.map(init: (e) async* {
+      final ingredients = await dataBase.getIngredientList();
+      final favorites = await dataBase.getFavoriteList();
+      yield state.copyWith(
+        ingredients: ingredients,
+        favorites: favorites,
+      );
+    }, onConnectivityChange: (e) async* {
+      yield state.copyWith(
+        isConnected: e.connected,
+      );
+    }, updateFilter: (e) async* {
+      yield state.copyWith(
+        filter: e.filter,
+      );
+    },
 
-      ///
-      /// Big method for all search calls
-      ///
-      searchByFilter: (e) async* {
-        yield state.copyWith(
-          isRefreshing: true,
-        );
-        final nameCheck = state.filter.name != null;
-        final ingredientsCheck = state.filter.ingredients?.isNotEmpty ?? false;
-        // final typeCheck = state.filter.drinkType != null;
-        late Either<Failure, List<Drink>> drinks;
-        drinks = nameCheck
-            ? await apiCall.searchByName(state.filter.name!)
-            : ingredientsCheck
-                ? await apiCall.searchByName(state.filter.ingredients!.first.name[0].toLowerCase())
-                : await apiCall.searchByName('s');
-        if (drinks.isRight()) {
-          final List<Drink> filtered = [];
-          drinks.fold(
-            (l) => null,
-            (r) {
-              for (final drink in r) {
-                List<String>? ingredients = [];
-                if (state.filter.ingredients == null) {
-                  ingredients = null;
-                } else {
-                  for (Ingredient ing in state.filter.ingredients!) {
-                    ingredients.add(ing.name.toString());
-                  }
+        ///
+        /// Big method for all search calls
+        ///
+        searchByFilter: (e) async* {
+      yield state.copyWith(
+        isRefreshing: true,
+      );
+      final nameCheck = state.filter.name != null;
+      final ingredientsCheck = state.filter.ingredients?.isNotEmpty ?? false;
+      // final typeCheck = state.filter.drinkType != null;
+      late Either<Failure, List<Drink>> drinks;
+      drinks = nameCheck
+          ? await apiCall.searchByName(state.filter.name!)
+          : ingredientsCheck
+              ? await apiCall.searchByName(state.filter.ingredients!.first.name[0].toLowerCase())
+              : await apiCall.searchByName('s');
+      if (drinks.isRight()) {
+        final List<Drink> filtered = [];
+        drinks.fold(
+          (l) => null,
+          (r) {
+            for (final drink in r) {
+              List<String>? ingredients = [];
+              if (state.filter.ingredients == null) {
+                ingredients = null;
+              } else {
+                for (Ingredient ing in state.filter.ingredients!) {
+                  ingredients.add(ing.name.toString());
                 }
-                if (ingredients == null) {
-                  if (state.filter.drinkType?.contains(drink.alcoholic) ??
-                      true) {
+              }
+              if (ingredients == null) {
+                if (state.filter.drinkType?.contains(drink.alcoholic) ?? true) {
+                  filtered.add(drink);
+                }
+              } else {
+                if (drink.ingredients.toSet().containsAll(ingredients)) {
+                  if (state.filter.drinkType?.contains(drink.alcoholic) ?? true) {
                     filtered.add(drink);
-                  }
-                } else {
-                  if (drink.ingredients.toSet().containsAll(ingredients)) {
-                    if (state.filter.drinkType?.contains(drink.alcoholic) ??
-                        true) {
-                      filtered.add(drink);
-                    }
                   }
                 }
               }
-            },
-          );
-          yield state.copyWith(
-            drinks: right(filtered),
-            isRefreshing: false,
-          );
-        }
-      },
-      addToFavorites: (e) async* {
-        dataBase.removeFavorite(id: e.drink.id);
-        final List<Drink> old = List.from(state.favorites);
-        if (old.contains(e.drink)) {
-          old.remove(e.drink);
-        } else {
-          old.add(e.drink);
-        }
-        dataBase.putFavoriteList(old);
-        yield state.copyWith(
-          favorites: old,
+            }
+          },
         );
-      },
-      randomCocktail: (e) async* {
         yield state.copyWith(
-          isRefreshing: true,
-        );
-        final newDrink = await apiCall.randomCocktail();
-        yield state.copyWith(
-          drinks: newDrink,
+          drinks: right(filtered),
           isRefreshing: false,
         );
-      },
-      randomSelectionCocktail: (e) async* {
-        yield state.copyWith(
-          isRefreshing: true,
-        );
-        final newDrinks = await apiCall.randomSelectionCocktail();
-        yield state.copyWith(
-          drinks: newDrinks,
-          isRefreshing: false,
-        );
-      },
-    );
+      }
+    }, addToFavorites: (e) async* {
+      dataBase.removeFavorite(id: e.drink.id);
+      final List<Drink> old = List.from(state.favorites);
+      if (old.contains(e.drink)) {
+        old.remove(e.drink);
+      } else {
+        old.add(e.drink);
+      }
+      dataBase.putFavoriteList(old);
+      yield state.copyWith(
+        favorites: old,
+      );
+    }, randomCocktail: (e) async* {
+      yield state.copyWith(
+        isRefreshing: true,
+      );
+      final newDrink = await apiCall.randomCocktail();
+      yield state.copyWith(
+        drinks: newDrink,
+        isRefreshing: false,
+      );
+    }, randomSelectionCocktail: (e) async* {
+      yield state.copyWith(
+        isRefreshing: true,
+      );
+      final newDrinks = await apiCall.randomSelectionCocktail();
+      yield state.copyWith(
+        drinks: newDrinks,
+        isRefreshing: false,
+      );
+    }, popularCocktails: (e) async* {
+      yield state.copyWith(
+        isRefreshing: true,
+      );
+      final newDrinks = await apiCall.popularCocktails();
+      yield state.copyWith(
+        drinks: newDrinks,
+        isRefreshing: false,
+      );
+    }, latestCocktails: (e) async* {
+      yield state.copyWith(
+        isRefreshing: true,
+      );
+      final newDrinks = await apiCall.latestCocktails();
+      yield state.copyWith(
+        drinks: newDrinks,
+        isRefreshing: false,
+      );
+    });
   }
 }

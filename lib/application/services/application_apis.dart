@@ -131,9 +131,43 @@ class AppApisService {
       return left(const Failure.serverError());
     }
   }
+  ///
+  /// Popular
+  ///
+  Future<Either<Failure, List<Drink>>> popularCocktails() async {
+    try {
+      var data = await getIpJson('popular.php', {});
+      late final Either<Failure, List<Drink>> result;
+      data.fold((l) {
+        result = left(l);
+      }, (r) {
+        result = right(List.of(r?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
+      });
+      return result;
+    } catch (err) {
+      // Check error type end return corresponding
+      return left(const Failure.serverError());
+    }
+  }
 
-  var baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
-
+  ///
+  /// Latest
+  ///
+  Future<Either<Failure, List<Drink>>> latestCocktails() async {
+    try {
+      var data = await getIpJson('latest.php', {});
+      late final Either<Failure, List<Drink>> result;
+      data.fold((l) {
+        result = left(l);
+      }, (r) {
+        result = right(List.of(r?['drinks']).map((e) => Drink.fromDTO(DrinkDTO.fromJson(e))).toList());
+      });
+      return result;
+    } catch (err) {
+      // Check error type end return corresponding
+      return left(const Failure.serverError());
+    }
+  }
   ///ingredients
   Future<List<Ingredient>> listIngredients() async {
     try {

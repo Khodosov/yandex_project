@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yandex_project/application/search/search_bloc.dart';
+import 'package:yandex_project/constants/constants.dart';
 import 'package:yandex_project/domain/general/enums.dart';
 import 'package:yandex_project/domain/models/filter/filter.dart';
 import 'package:yandex_project/application/preferences/preferences_bloc.dart';
@@ -29,6 +30,78 @@ class FilterWidget extends StatelessWidget {
           /// Preparing filter items
           ///
           final filters = <Widget>[];
+          ///
+          /// Show popular list
+          ///
+          filters.add(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Material(
+                      color: Colors.orange.shade700,
+                      borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                        onTap: (){
+                          BlocProvider.of<SearchBloc>(context).add(const SearchEvent.popularCocktails());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:const  [
+                              Icon(Icons.star),
+                              Padding(
+                                padding: EdgeInsets.only(left: 8.0, right: 8),
+                                child: Text('Popular'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Material(
+                      color: Colors.orange.shade700,
+                      borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                        onTap: (){
+                          BlocProvider.of<SearchBloc>(context).add(const SearchEvent.latestCocktails());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 18),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:const  [
+                              Icon(Icons.schedule),
+                              Padding(
+                                padding: EdgeInsets.only(left: 8.0, right: 8),
+                                child: Text('Latest'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+          ///
+          /// Show latest
+          ///
+
+          filters.add(const Divider(endIndent: 20, indent: 20,));
           filters.add(
             Padding(
               padding: const EdgeInsets.only(
@@ -64,7 +137,7 @@ class FilterWidget extends StatelessWidget {
                         );
                       }
                     },
-                    selectedColor: Colors.amber,
+                    selectedColor: Colors.orange.shade700,
                   ),
                   InputChip(
                     label: const Text('Non alcoholic'),
@@ -90,7 +163,7 @@ class FilterWidget extends StatelessWidget {
                         );
                       }
                     },
-                    selectedColor: Colors.amber,
+                    selectedColor: Colors.orange.shade700,
                   ),
                   InputChip(
                     isEnabled: alcoholicMode,
@@ -117,7 +190,7 @@ class FilterWidget extends StatelessWidget {
                         );
                       }
                     },
-                    selectedColor: Colors.amber,
+                    selectedColor: Colors.orange.shade700,
                   ),
                 ],
               ),
@@ -130,7 +203,7 @@ class FilterWidget extends StatelessWidget {
             builder: (context, constraints) {
               return SizedBox(
                 width: constraints.maxWidth,
-                height: constraints.maxWidth / 1.5,
+                height: constraints.maxWidth / 1.3,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SingleChildScrollView(
