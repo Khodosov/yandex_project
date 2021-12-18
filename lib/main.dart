@@ -12,7 +12,7 @@ import 'application/search/search_bloc.dart';
 import 'application/services/application_initialConfig.dart';
 
 void main() async {
-  Locator().initLocator();
+  Locator.initLocator();
   await onStartApp().then((value) => runApp(const App()));
 }
 
