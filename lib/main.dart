@@ -15,7 +15,7 @@ import 'application/services/application_initialConfig.dart';
 import 'application/services/connectivity_ensure.dart';
 
 void main() async {
-  initLocator();
+  Locator().initLocator();
   await onStartApp().then((value) => runApp(const App()));
 }
 
@@ -29,13 +29,13 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PreferencesBloc>(
-          create: (_) => PreferencesBloc(dataBase: locator<AppDBService>())..add(const PreferencesEvent.init()),
+          create: (_) => PreferencesBloc(dataBase: _locator<AppDBService>())..add(const PreferencesEvent.init()),
         ),
         BlocProvider<SearchBloc>(
           create: (_) => SearchBloc(
-            dataBase: locator<AppDBService>(),
-            apiCall: locator<AppApisService>(),
-            connectivityEnsure: locator<ConnectivityEnsure>(),
+            dataBase: _locator<AppDBService>(),
+            apiCall: _locator<AppApisService>(),
+            connectivityEnsure: Locator.connectivity,
           )..add(const SearchEvent.init()),
         ),
         BlocProvider<NavigationBloc>(
