@@ -29,12 +29,12 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PreferencesBloc>(
-          create: (_) => PreferencesBloc(dataBase: _locator<AppDBService>())..add(const PreferencesEvent.init()),
+          create: (_) => PreferencesBloc(dataBase: Locator.dataBase)..add(const PreferencesEvent.init()),
         ),
         BlocProvider<SearchBloc>(
           create: (_) => SearchBloc(
-            dataBase: _locator<AppDBService>(),
-            apiCall: _locator<AppApisService>(),
+            dataBase: Locator.dataBase,
+            apiCall: Locator.network,
             connectivityEnsure: Locator.connectivity,
           )..add(const SearchEvent.init()),
         ),

@@ -12,6 +12,8 @@ class Locator {
   }
 
   static ConnectivityEnsure get connectivity => _locator<ConnectivityEnsure>();
+  static AppDBService get dataBase => _locator<AppDBService>();
+  static AppApisService get network => _locator<AppApisService>();
 
 }
 
