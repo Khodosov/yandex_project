@@ -41,6 +41,14 @@ class _$SearchEventTearOff {
     return const _RandomCocktail();
   }
 
+  _PopularCocktails popularCocktails() {
+    return const _PopularCocktails();
+  }
+
+  _LatestCocktails latestCocktails() {
+    return const _LatestCocktails();
+  }
+
   _RandomSelectionCocktail randomSelectionCocktail() {
     return const _RandomSelectionCocktail();
   }
@@ -64,6 +72,8 @@ mixin _$SearchEvent {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) =>
@@ -75,6 +85,8 @@ mixin _$SearchEvent {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) =>
@@ -86,6 +98,8 @@ mixin _$SearchEvent {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -98,6 +112,8 @@ mixin _$SearchEvent {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -110,6 +126,8 @@ mixin _$SearchEvent {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) =>
@@ -121,6 +139,8 @@ mixin _$SearchEvent {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
@@ -187,6 +207,8 @@ class _$_Init implements _Init {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
@@ -201,6 +223,8 @@ class _$_Init implements _Init {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
@@ -215,6 +239,8 @@ class _$_Init implements _Init {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -233,6 +259,8 @@ class _$_Init implements _Init {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -248,6 +276,8 @@ class _$_Init implements _Init {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
@@ -262,6 +292,8 @@ class _$_Init implements _Init {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
@@ -348,6 +380,8 @@ class _$_OnConnectivityChange implements _OnConnectivityChange {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
@@ -362,6 +396,8 @@ class _$_OnConnectivityChange implements _OnConnectivityChange {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
@@ -376,6 +412,8 @@ class _$_OnConnectivityChange implements _OnConnectivityChange {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -394,6 +432,8 @@ class _$_OnConnectivityChange implements _OnConnectivityChange {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -409,6 +449,8 @@ class _$_OnConnectivityChange implements _OnConnectivityChange {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
@@ -423,6 +465,8 @@ class _$_OnConnectivityChange implements _OnConnectivityChange {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
@@ -490,6 +534,8 @@ class _$_SearchByFilter implements _SearchByFilter {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
@@ -504,6 +550,8 @@ class _$_SearchByFilter implements _SearchByFilter {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
@@ -518,6 +566,8 @@ class _$_SearchByFilter implements _SearchByFilter {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -536,6 +586,8 @@ class _$_SearchByFilter implements _SearchByFilter {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -551,6 +603,8 @@ class _$_SearchByFilter implements _SearchByFilter {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
@@ -565,6 +619,8 @@ class _$_SearchByFilter implements _SearchByFilter {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
@@ -657,6 +713,8 @@ class _$_UpdateFilter implements _UpdateFilter {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
@@ -671,6 +729,8 @@ class _$_UpdateFilter implements _UpdateFilter {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
@@ -685,6 +745,8 @@ class _$_UpdateFilter implements _UpdateFilter {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -703,6 +765,8 @@ class _$_UpdateFilter implements _UpdateFilter {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -718,6 +782,8 @@ class _$_UpdateFilter implements _UpdateFilter {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
@@ -732,6 +798,8 @@ class _$_UpdateFilter implements _UpdateFilter {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
@@ -798,6 +866,8 @@ class _$_RandomCocktail implements _RandomCocktail {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
@@ -812,6 +882,8 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
@@ -826,6 +898,8 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -844,6 +918,8 @@ class _$_RandomCocktail implements _RandomCocktail {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -859,6 +935,8 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
@@ -873,6 +951,8 @@ class _$_RandomCocktail implements _RandomCocktail {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
@@ -886,6 +966,302 @@ class _$_RandomCocktail implements _RandomCocktail {
 
 abstract class _RandomCocktail implements SearchEvent {
   const factory _RandomCocktail() = _$_RandomCocktail;
+}
+
+/// @nodoc
+abstract class _$PopularCocktailsCopyWith<$Res> {
+  factory _$PopularCocktailsCopyWith(
+          _PopularCocktails value, $Res Function(_PopularCocktails) then) =
+      __$PopularCocktailsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$PopularCocktailsCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res>
+    implements _$PopularCocktailsCopyWith<$Res> {
+  __$PopularCocktailsCopyWithImpl(
+      _PopularCocktails _value, $Res Function(_PopularCocktails) _then)
+      : super(_value, (v) => _then(v as _PopularCocktails));
+
+  @override
+  _PopularCocktails get _value => super._value as _PopularCocktails;
+}
+
+/// @nodoc
+
+class _$_PopularCocktails implements _PopularCocktails {
+  const _$_PopularCocktails();
+
+  @override
+  String toString() {
+    return 'SearchEvent.popularCocktails()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _PopularCocktails);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
+    required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
+    required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
+  }) {
+    return popularCocktails();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+  }) {
+    return popularCocktails?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (popularCocktails != null) {
+      return popularCocktails();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
+    required TResult Function(_SearchByFilter value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
+    required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
+  }) {
+    return popularCocktails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
+    TResult Function(_SearchByFilter value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+  }) {
+    return popularCocktails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
+    TResult Function(_SearchByFilter value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (popularCocktails != null) {
+      return popularCocktails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PopularCocktails implements SearchEvent {
+  const factory _PopularCocktails() = _$_PopularCocktails;
+}
+
+/// @nodoc
+abstract class _$LatestCocktailsCopyWith<$Res> {
+  factory _$LatestCocktailsCopyWith(
+          _LatestCocktails value, $Res Function(_LatestCocktails) then) =
+      __$LatestCocktailsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LatestCocktailsCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res>
+    implements _$LatestCocktailsCopyWith<$Res> {
+  __$LatestCocktailsCopyWithImpl(
+      _LatestCocktails _value, $Res Function(_LatestCocktails) _then)
+      : super(_value, (v) => _then(v as _LatestCocktails));
+
+  @override
+  _LatestCocktails get _value => super._value as _LatestCocktails;
+}
+
+/// @nodoc
+
+class _$_LatestCocktails implements _LatestCocktails {
+  const _$_LatestCocktails();
+
+  @override
+  String toString() {
+    return 'SearchEvent.latestCocktails()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _LatestCocktails);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(bool connected) onConnectivityChange,
+    required TResult Function() searchByFilter,
+    required TResult Function(Filter filter) updateFilter,
+    required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
+    required TResult Function() randomSelectionCocktail,
+    required TResult Function(Drink drink) addToFavorites,
+  }) {
+    return latestCocktails();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+  }) {
+    return latestCocktails?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool connected)? onConnectivityChange,
+    TResult Function()? searchByFilter,
+    TResult Function(Filter filter)? updateFilter,
+    TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
+    TResult Function()? randomSelectionCocktail,
+    TResult Function(Drink drink)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (latestCocktails != null) {
+      return latestCocktails();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_OnConnectivityChange value) onConnectivityChange,
+    required TResult Function(_SearchByFilter value) searchByFilter,
+    required TResult Function(_UpdateFilter value) updateFilter,
+    required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
+    required TResult Function(_RandomSelectionCocktail value)
+        randomSelectionCocktail,
+    required TResult Function(_AddToFavorites value) addToFavorites,
+  }) {
+    return latestCocktails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
+    TResult Function(_SearchByFilter value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+  }) {
+    return latestCocktails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_OnConnectivityChange value)? onConnectivityChange,
+    TResult Function(_SearchByFilter value)? searchByFilter,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
+    TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
+    TResult Function(_AddToFavorites value)? addToFavorites,
+    required TResult orElse(),
+  }) {
+    if (latestCocktails != null) {
+      return latestCocktails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LatestCocktails implements SearchEvent {
+  const factory _LatestCocktails() = _$_LatestCocktails;
 }
 
 /// @nodoc
@@ -935,6 +1311,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
@@ -949,6 +1327,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
@@ -963,6 +1343,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -981,6 +1363,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -996,6 +1380,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
@@ -1010,6 +1396,8 @@ class _$_RandomSelectionCocktail implements _RandomSelectionCocktail {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
@@ -1094,6 +1482,8 @@ class _$_AddToFavorites implements _AddToFavorites {
     required TResult Function() searchByFilter,
     required TResult Function(Filter filter) updateFilter,
     required TResult Function() randomCocktail,
+    required TResult Function() popularCocktails,
+    required TResult Function() latestCocktails,
     required TResult Function() randomSelectionCocktail,
     required TResult Function(Drink drink) addToFavorites,
   }) {
@@ -1108,6 +1498,8 @@ class _$_AddToFavorites implements _AddToFavorites {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
   }) {
@@ -1122,6 +1514,8 @@ class _$_AddToFavorites implements _AddToFavorites {
     TResult Function()? searchByFilter,
     TResult Function(Filter filter)? updateFilter,
     TResult Function()? randomCocktail,
+    TResult Function()? popularCocktails,
+    TResult Function()? latestCocktails,
     TResult Function()? randomSelectionCocktail,
     TResult Function(Drink drink)? addToFavorites,
     required TResult orElse(),
@@ -1140,6 +1534,8 @@ class _$_AddToFavorites implements _AddToFavorites {
     required TResult Function(_SearchByFilter value) searchByFilter,
     required TResult Function(_UpdateFilter value) updateFilter,
     required TResult Function(_RandomCocktail value) randomCocktail,
+    required TResult Function(_PopularCocktails value) popularCocktails,
+    required TResult Function(_LatestCocktails value) latestCocktails,
     required TResult Function(_RandomSelectionCocktail value)
         randomSelectionCocktail,
     required TResult Function(_AddToFavorites value) addToFavorites,
@@ -1155,6 +1551,8 @@ class _$_AddToFavorites implements _AddToFavorites {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
   }) {
@@ -1169,6 +1567,8 @@ class _$_AddToFavorites implements _AddToFavorites {
     TResult Function(_SearchByFilter value)? searchByFilter,
     TResult Function(_UpdateFilter value)? updateFilter,
     TResult Function(_RandomCocktail value)? randomCocktail,
+    TResult Function(_PopularCocktails value)? popularCocktails,
+    TResult Function(_LatestCocktails value)? latestCocktails,
     TResult Function(_RandomSelectionCocktail value)? randomSelectionCocktail,
     TResult Function(_AddToFavorites value)? addToFavorites,
     required TResult orElse(),
