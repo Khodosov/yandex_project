@@ -9,10 +9,7 @@ import 'package:yandex_project/presentation/screens/settings/settings_screen.dar
 import 'application/preferences/preferences_bloc.dart';
 import 'application/search/search_bloc.dart';
 
-import 'application/services/application_apis.dart';
-import 'application/services/application_db.dart';
 import 'application/services/application_initialConfig.dart';
-import 'application/services/connectivity_ensure.dart';
 
 void main() async {
   Locator().initLocator();
